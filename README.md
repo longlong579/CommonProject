@@ -1,5 +1,4 @@
-# CommonProject
-基于Fragmention封装的项目 单Activity多Fragment 多Activity多Fragment  Retrofit2.0+RxJava 封装请求 拦截器处理 MVP模式
+# 基于Fragmention封装的项目 单Activity多Fragment 多Activity多Fragment  Retrofit2.0+RxJava 封装请求 拦截器处理 MVP模式 6.0权限
 
 *1：封装公共的Retrofit 请求方法 Json解析提前处理 错误Error信息 提前解析并统一做处理 避免在onSucess()方法中再次处理错误
 
