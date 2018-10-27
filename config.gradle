@@ -1,0 +1,86 @@
+ext {
+    appApplicationId="com.xhl.comproject"
+    appVersionName = '1.0.1'
+    appVersionCode = 1
+
+    appMinSdkVersion = 15
+    appTargetSdkVersion = 25
+
+    appCompileSdkVersion= 26         //SDK版本
+    appBuildToolsVersion = "27.0.3"  //编译版本
+
+    // 相关依赖库版本
+    supportVersion = '27.1.1'            //V7包版本
+    constrlayoutVersion='1.0.2'          //Constralayout版本
+
+    //Retrofit  RxJava
+    retrofitVersion = '2.1.0'
+    retrofit2RxjavaAdapterVersion = '2.1.0'
+    rxjavaVersion = '1.2.1'
+    rxBusVersion='1.0.2'
+
+    gsonVersion = '2.8.0'                //Gson解析
+
+    glideVersion = '4.7.1'               //图片下载库
+
+    //eventBUS
+    eventBusVersion='3.0.0'
+
+    //supportActivity supportFragment
+    fragmentationVersion='1.3.5'
+    //NavigationBar
+    navigationbarVersion='2.0.3'
+    //RTextView
+    RTextViewVersion='1.0.10'
+    //Material Design 扁平设计
+    materialDesignViewVersion='2.0.0'
+
+
+    //BRVAH版本 adapter
+    BASE_RECYCLERVIEW_HELPER_VERSION = '2.9.27'
+    //分割线
+    recycleviewDividerVersion='1.0.0'
+
+    CommonDialogFragmentVersion='2.0.0'
+
+    dbflowVersion = "4.0.4"
+
+    robolectricVersion = '3.1.4'
+
+    getuiVersion = '2.10.2.0'
+
+    daggerVersion = '2.11'
+
+    architecture_components_version = '1.0.0'
+
+    arout_compile_version = '1.1.4'
+
+    take_photo_version = "4.0.3"
+
+    alert_view_version = "1.0.3"
+
+
+    dependencies = [
+            //support
+            design      :       "com.android.support:design:$supportVersion",
+            appCompat_v7   :    "com.android.support:appcompat-v7:$supportVersion",
+            recyclerView_v7:    "com.android.support:recyclerview-v7:$supportVersion",
+
+            //kotlin
+            kotlin :           "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
+            anko_sdk:           "org.jetbrains.anko:anko-sdk15:$kotlin_version",
+            anko_common:        "org.jetbrains.anko:anko-common:$kotlin_version",
+
+            //retrofit
+            retrofit:                  "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            retrofit_convert_gson:     "com.squareup.retrofit2:converter-gson:$retrofitVersion",
+            retrofit_adapter_rxjava:   "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion",
+
+            //rxjava rxandroid
+            rxjava:     "io.reactivex:rxjava:$rxjavaVersion",
+            rxandroid:  "io.reactivex:rxandroid:$rxjavaVersion",
+
+    ]
+
+
+}
