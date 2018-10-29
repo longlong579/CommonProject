@@ -1,0 +1,115 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: "kotlin-android-extensions"
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion appCompileSdkVersion
+    defaultConfig {
+        minSdkVersion appMinSdkVersion
+        targetSdkVersion appTargetSdkVersion
+        versionCode appVersionCode
+        versionName appVersionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/common_release.kotlin_module'
+    }
+    buildToolsVersion '27.0.3'
+}
+
+
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+
+    // support
+    api "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
+    api "com.android.support:recyclerview-v7:$rootProject.ext.supportVersion"
+    api "com.android.support:design:$rootProject.ext.supportVersion"
+
+    // constraint
+    api "com.android.support.constraint:constraint-layout:$rootProject.ext.constrlayoutVersion"
+
+    // kotlin
+    api "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    api 'org.jetbrains.anko:anko-sdk15:0.9.1'
+    api 'org.jetbrains.anko:anko-common:0.9.1'
+
+    // retrofit
+    api "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
+    api "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
+    api "com.squareup.retrofit2:adapter-rxjava:$rootProject.ext.retrofit2RxjavaAdapterVersion"
+
+    // rxjava/rxandroid
+    api "io.reactivex:rxjava:$rootProject.ext.rxjavaVersion"
+    api "io.reactivex:rxandroid:$rootProject.ext.rxjavaVersion"
+    api "com.eightbitlab:rxbus:$rootProject.ext.rxBusVersion"
+
+    // eventbus
+    api "org.greenrobot:eventbus:$rootProject.ext.eventBusVersion"
+
+    //gson
+    api "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
+
+    // glide
+    api "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
+    kapt "com.github.bumptech.glide:compiler:${GLIDE_VERSION}"
+    api "jp.co.cyberagent.android.gpuimage:gpuimage-library:${GPUIMAGE_VERSION}"
+    api 'jp.wasabeef:glide-transformations:3.3.0'
+
+    //底部导航栏样式BottomNavigationBar
+    api "com.ashokvarma.android:bottom-navigation-bar:$rootProject.ext.navigationbarVersion"
+
+    // 修复 官方fragment的一些坑
+    api "me.yokeyword:fragmentation:$rootProject.ext.fragmentationVersion"
+    compile "me.yokeyword:fragmentation-swipeback:$rootProject.ext.fragmentationVersion"
+
+    //滑动回退
+
+    //RecyclerView 分割线
+    api "com.choices.divider:RecyclerView_Divider:$rootProject.ext.recycleviewDividerVersion"
+
+    // 增强recycler adapter
+    api "com.github.CymChad:BaseRecyclerViewAdapterHelper:$rootProject.ext.BASE_RECYCLERVIEW_HELPER_VERSION"
+
+    //CardView
+    api "com.android.support:cardview-v7:$rootProject.ext.supportVersion"
+
+    //android Material Design
+    api "net.qiujuer.genius:ui:$rootProject.ext.materialDesignViewVersion"
+
+    //扩展的TextView
+    api "com.ruffian.library:RTextView:$rootProject.ext.RTextViewVersion"
+
+    //沉浸式状态栏
+    api('com.github.niorgai:StatusBarCompat:2.1.4', {
+        exclude group: 'com.android.support'
+    })
+    api 'me.biubiubiu.justifytext:library:1.1'
+
+    //WheelView
+    api 'com.contrarywind:wheelview:4.0.8'
+
+    //data,option.区域选择滚轮
+    api 'com.contrarywind:Android-PickerView:4.1.6'
+    api 'com.lzy.widget:imagepicker:0.6.1'
+
+    //指定版本
+    api 'com.blankj:utilcode:1.20.0'
+
+    //最强工具类
+    api 'com.qiniu:qiniu-android-sdk:7.3.+'
+    api 'top.zibin:Luban:1.1.8'
+
+    //图片压缩
+    api project(':tdialog')
+}
