@@ -1,1 +1,1 @@
-include ':app',"common_net"
+include ':app', ':xhlutils',"common_net"

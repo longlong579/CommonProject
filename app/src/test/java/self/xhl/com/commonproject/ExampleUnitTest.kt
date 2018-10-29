@@ -1,4 +1,4 @@
-package mm.self.xhl.com.commonproject
+package self.xhl.com.commonproject
 
 import org.junit.Test
 

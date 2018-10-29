@@ -1,6 +1,4 @@
-package self.xhl.com.net.netchgbypro
-
-import self.xhl.com.net.netutil.MD5Util
+package self.xhl.com.net.netutil
 
 /**
  *

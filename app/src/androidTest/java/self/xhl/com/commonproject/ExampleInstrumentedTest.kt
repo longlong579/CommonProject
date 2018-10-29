@@ -1,4 +1,4 @@
-package mm.self.xhl.com.commonproject
+package self.xhl.com.commonproject
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("mm.self.xhl.com.commonproject", appContext.packageName)
+        assertEquals("self.xhl.com.commonproject", appContext.packageName)
     }
 }

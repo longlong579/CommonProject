@@ -24,7 +24,7 @@ import self.xhl.com.net.netutil.Base64Util;
 
 
 /**
- * @author bingo hl
+ * @author bingo xhl
  * @version 1.0.0
  */
 //只适用application/x-www-form-urlencoded 表单提交！ 其他项目 注意修改校验规则(SHA) 51，138行 在App中添加 无则不添加

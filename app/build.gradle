@@ -8,7 +8,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId
+        applicationId  "com.xhl.commproject"
         minSdkVersion appMinSdkVersion
 
         targetSdkVersion appTargetSdkVersion
@@ -19,6 +19,15 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'boolean', 'IS_DEBUG', 'false'
+            buildConfigField 'String', 'HOST', TEST_HOST
+        }
+        debug {
+            applicationIdSuffix ".debug" //包名后缀  第三方Appid 要重新申请
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'boolean', 'IS_DEBUG', 'true'
+            buildConfigField 'String', 'HOST', TEST_HOST
         }
     }
 }

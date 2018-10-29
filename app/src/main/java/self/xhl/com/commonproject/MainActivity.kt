@@ -1,4 +1,4 @@
-package mm.self.xhl.com.commonproject
+package self.xhl.com.commonproject
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
