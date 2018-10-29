@@ -5,9 +5,9 @@ package self.xhl.com.rx.subscriber;
  * @version 1.0.0
  */
 
-//一般不用改 将所有的异常转换为此异常类
+//不用改 将所有的异常转换为此异常类
 public class RxCompatException extends RuntimeException {
-    public static final int CODE_FOR_TEST = 0x998899;
+
     public static final int CODE_DEFAULT = 0x998833;
     public static final int CODE_SERVER_BUSY = 0x998832;
     public static final int CODE_NETWORK_TIMEOUT = 0x998833;
@@ -35,9 +35,6 @@ public class RxCompatException extends RuntimeException {
         this.mOriginMsg = originMsg;
     }
 
-    public RxCompatException(String message, String originMsg) {
-        this(CODE_FOR_TEST, message, originMsg);
-    }
     public RxCompatException(int code, String message, String originMsg) {
         super(message);
         this.code = code;

@@ -1,7 +1,6 @@
 package self.xhl.com.net.netchgbypro.converter;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.TypeAdapter;
@@ -10,7 +9,6 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
-
 import java.io.IOException;
 
 import self.xhl.com.net.netchgbypro.exception.YcExceptionHandler;
@@ -18,33 +16,6 @@ import self.xhl.com.net.netchgbypro.exception.YcExceptionHandler;
 /**
  * @author xhl  根据实际项目做相应的修改
  * @version 1.1.0
- */
-
-/*
-{
-	"stat": {
-		"cid": "a:f52876|t:409|s:1530604129684",
-		"code": 0,
-		"notificationList": [],
-		"stateList": [{
-			"code": 0,
-			"length": 52,
-			"msg": "成功"
-		}],
-		"systime": 1530604129979
-	},
-	"content": [{
-		"creditPrice": "960.39",
-		"notPayPrice": "-1000288.40"
-	}]
-}
-
-{
-    "success": false,
-    "code": "10500",
-    "message": "服务器繁忙，请稍候重试!"
-    "data":{}/ "data":"string"
-}
  */
 
 /*
@@ -84,6 +55,34 @@ public class YcRespTypeAdapterFactory implements TypeAdapterFactory {
     }
 }
 
+
+
+/*
+{
+	"stat": {
+		"cid": "a:f52876|t:409|s:1530604129684",
+		"code": 0,
+		"notificationList": [],
+		"stateList": [{
+			"code": 0,
+			"length": 52,
+			"msg": "成功"
+		}],
+		"systime": 1530604129979
+	},
+	"content": [{
+		"creditPrice": "960.39",
+		"notPayPrice": "-1000288.40"
+	}]
+}
+
+{
+    "success": false,
+    "code": "10500",
+    "message": "服务器繁忙，请稍候重试!"
+    "data":{}/ "data":"string"
+}
+ */
 //public class YcRespTypeAdapterFactory implements TypeAdapterFactory {
 //    public <T> TypeAdapter<T> create(Gson gson, final TypeToken<T> type) {
 //

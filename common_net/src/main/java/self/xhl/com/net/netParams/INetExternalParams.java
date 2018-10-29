@@ -24,7 +24,7 @@ public interface INetExternalParams {
     String getToken();
 
     @NonNull
-    String getTokenName();
+    String getTokenKey();
 
     @Nullable
     String sign();//SAH校验额外的

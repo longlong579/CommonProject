@@ -5,15 +5,18 @@ import android.util.Log;
 import com.eightbitlab.rxbus.Bus;
 import rx.Subscriber;
 import self.xhl.com.net.exception.BizException;
+import self.xhl.com.net.exception.TokenFailException;
+import self.xhl.com.net.netchgbypro.exception.RespCode2Msg;
 import self.xhl.com.net.netutil.ExceptionUtil;
 import self.xhl.com.net.exception.TickOutException;
 import self.xhl.com.rx.event.TickOutEvent;
+import self.xhl.com.rx.event.TokenFailEvent;
 
 /**
  * @author bingo xhl
  * @version 1.0.0
  */
-//无需修改（注意踢下线的判断 code值 以及踢下线的事件注册）自定义Subscriber 异常统一处理
+//按需修改（注意踢下线的判断 code值 以及踢下线的事件注册）自定义Subscriber 异常统一处理   比如添加Token过期处理
 public abstract class RxCompatSubscriber<T> extends Subscriber<T> {
     public static final String RXCOMPAT_SUBSCRIBER_TAG = RxCompatSubscriber.class.getSimpleName();
 
@@ -25,8 +28,14 @@ public abstract class RxCompatSubscriber<T> extends Subscriber<T> {
             // TODO: 16/01/2018 踢下线逻辑
 //            EventBus.getDefault().post(new KickoutEvent());
             Bus.INSTANCE.send(new TickOutEvent());
-            rxCompatException = new RxCompatException(RxCompatException.CODE_TICK_OUT, e.getMessage(),e.getMessage());
-        }else if (e instanceof BizException) {
+            rxCompatException = new RxCompatException(e, ((TickOutException) e).getDetailMsg());
+        }
+       else if(e instanceof TokenFailException)
+        {   // TODO:  Token失效
+            Bus.INSTANCE.send(new TokenFailEvent());
+            rxCompatException = new RxCompatException(e, ((TokenFailException) e).getDetailMsg());
+        }
+        else if (e instanceof BizException) {
             BizException bizException = (BizException) e;
             rxCompatException = new RxCompatException(bizException.getErrCode(), bizException.getMessage(), e.getLocalizedMessage());
         } else {

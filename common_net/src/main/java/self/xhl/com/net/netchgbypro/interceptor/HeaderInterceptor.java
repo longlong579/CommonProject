@@ -25,7 +25,7 @@ public class HeaderInterceptor implements Interceptor {
         for (Map.Entry<String, String> header : headers.entrySet()) {
             builder.header(header.getKey(), header.getValue());//.header()如果后面有相同的会覆盖
         }
-        builder.header(NetworkIniter.get().externalParams().getTokenName(),NetworkIniter.get().externalParams().getToken());
+        builder.header(NetworkIniter.get().externalParams().getTokenKey(),NetworkIniter.get().externalParams().getToken());
         return chain.proceed(builder.build());
     }
 }

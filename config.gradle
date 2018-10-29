@@ -19,27 +19,19 @@ ext {
     rxjavaVersion = '1.2.1'
     rxBusVersion='1.0.2'
 
+    eventBusVersion='3.0.0'  //eventBUS
     gsonVersion = '2.8.0'                //Gson解析
-
     glideVersion = '4.7.1'               //图片下载库
 
-    //eventBUS
-    eventBusVersion='3.0.0'
 
-    //supportActivity supportFragment
-    fragmentationVersion='1.3.5'
-    //NavigationBar
-    navigationbarVersion='2.0.3'
-    //RTextView
-    RTextViewVersion='1.0.10'
-    //Material Design 扁平设计
-    materialDesignViewVersion='2.0.0'
+    materialDesignViewVersion='2.0.0'    //Material Design 扁平设计
+    fragmentationVersion='1.3.5'//supportActivity supportFragment
+    navigationbarVersion='2.0.3'    //NavigationBar
+    RTextViewVersion='1.0.10'    //RTextView
+    BASE_RECYCLERVIEW_HELPER_VERSION = '2.9.27' //BRVAH版本 adapter
+    recycleviewDividerVersion='1.0.0'  //分割线
 
 
-    //BRVAH版本 adapter
-    BASE_RECYCLERVIEW_HELPER_VERSION = '2.9.27'
-    //分割线
-    recycleviewDividerVersion='1.0.0'
 
     CommonDialogFragmentVersion='2.0.0'
 
