@@ -1,0 +1,44 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion appCompileSdkVersion
+    defaultConfig {
+        minSdkVersion appMinSdkVersion
+        targetSdkVersion appTargetSdkVersion
+        versionCode appVersionCode
+        versionName appVersionName
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildToolsVersion appBuildToolsVersion
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    provided "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
+
+    // kotlin
+    provided "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    provided 'org.jetbrains.anko:anko-sdk15:0.9.1'
+    provided 'org.jetbrains.anko:anko-common:0.9.1'
+
+    // retrofit
+    provided "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
+    provided "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
+    provided "com.squareup.retrofit2:adapter-rxjava:$rootProject.ext.retrofit2RxjavaAdapterVersion"
+    // rxjava/rxandroid
+    provided "io.reactivex:rxjava:$rootProject.ext.rxjavaVersion"
+    provided "io.reactivex:rxandroid:$rootProject.ext.rxjavaVersion"
+
+    //gson
+    implementation "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
+    implementation "com.eightbitlab:rxbus:$rootProject.ext.rxBusVersion"
+}
