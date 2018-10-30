@@ -1,7 +1,10 @@
 package self.xhl.com.common.baseui.baseActivity
 
+import android.support.annotation.ColorRes
 import android.support.annotation.DrawableRes
 import android.support.annotation.LayoutRes
+import android.support.annotation.MenuRes
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.TextView
@@ -20,11 +23,31 @@ public abstract class ToolbarActivity : BaseActivity() {
     private var enableBack=true
     private var toolBarBackDrawableRes=R.drawable.abc_ic_ab_back_material
 
-    private var munuId=0
+    @MenuRes
+    private var  munuId=0
+    @ColorRes
+    private var titleColorRes=0
 
      override fun initWidget() {
         super.initWidget()
         initToolbar(window.decorView.findViewById(android.R.id.content))
+    }
+
+    fun build():ToolbarActivity
+    {
+        return this
+    }
+
+    //toolBar返回按钮  可以复写满足自己的需求
+    open fun initToolbarNav(toolbar: Toolbar) {
+        toolbar.setNavigationIcon(toolBarBackDrawableRes)
+        toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
+    }
+
+    // 复写 menue事件 满足自己的需求
+    open fun onMenuClick(menuId: Int) {
     }
 
     private fun initToolbar(root: View) {
@@ -35,17 +58,19 @@ public abstract class ToolbarActivity : BaseActivity() {
                 else -> toolbar as Toolbar
             }
             this.mToolbar = toolbar
-            setToolbarBackGround()//设置toolBar的颜色
             val centerTitle = toolbar.findViewById<View>(R.id.toolbar_center_title) as TextView
             when {
                 showCenterTitle -> {
                     toolbar.title = ""
                     centerTitle.text = toolbarNmae
                     centerTitle.visibility = View.VISIBLE
+                    //setToolBarTitleColor(titleColorRes)
+                    centerTitle.setTextColor(ContextCompat.getColor(this,titleColorRes))
                 }
                 else -> {
                     centerTitle.visibility = View.GONE
                     toolbar.title = toolbarNmae
+                    toolbar.setTitleTextColor(ContextCompat.getColor(this,titleColorRes))
                 }
             }
             if (enableBack) {
@@ -75,6 +100,16 @@ public abstract class ToolbarActivity : BaseActivity() {
     //默认toolBar名称
      fun setToolBarTitle(toolbarName: String): ToolbarActivity {
         this.toolbarNmae=toolbarName
+        return this
+    }
+
+    //默认Title颜色
+    fun setToolBarTitleColorRes(@ColorRes toolBarTitleColor: Int): ToolbarActivity {
+        this.titleColorRes=toolBarTitleColor
+        if(mToolbar!=null)
+        {
+
+        }
         return this
     }
 
@@ -108,23 +143,6 @@ public abstract class ToolbarActivity : BaseActivity() {
         return this
     }
 
-    //toolBar返回按钮  可以复写满足自己的需求
-    open fun initToolbarNav(toolbar: Toolbar) {
-        toolbar.setNavigationIcon(toolBarBackDrawableRes)
-        toolbar.setNavigationOnClickListener {
-            onBackPressed()
-        }
-    }
-
-
-    // 复写 menue事件 满足自己的需求
-    open fun onMenuClick(menuId: Int) {
-    }
-
-    fun build():ToolbarActivity
-    {
-        return this
-    }
 
     private fun initToolbarMenue(toolbar: Toolbar) {
         val menuId = munuId
