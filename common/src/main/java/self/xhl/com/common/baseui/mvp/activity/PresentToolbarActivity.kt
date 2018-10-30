@@ -1,12 +1,8 @@
 package self.xhl.com.common.baseui.mvp.activity
 
-import android.content.Context
 import android.widget.TextView
 import android.widget.Toast
 import com.timmy.tdialog.TDialog
-import kotlinx.android.synthetic.main.dialog_loading.*
-import self.xhl.com.common.R
-import self.xhl.com.common.app.BaseApp
 import self.xhl.com.common.baseui.baseActivity.ToolbarActivity
 import self.xhl.com.common.baseui.mvp.presenter.BaseContract
 import self.xhl.com.common.widget.LoadingDialog
@@ -39,7 +35,7 @@ public abstract class PresentToolbarActivity<Presenter : BaseContract.Presenter>
         if (mPlaceHolderView != null) {
             mPlaceHolderView!!.triggerError(str)
         } else {
-            Toast.makeText(BaseApp.instance, str, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -49,7 +45,7 @@ public abstract class PresentToolbarActivity<Presenter : BaseContract.Presenter>
         if (mPlaceHolderView != null) {
             mPlaceHolderView!!.triggerError(str)
         } else {
-            Toast.makeText(BaseApp.instance, str, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -1,16 +1,9 @@
 package self.xhl.com.common.baseui.baseActivity
 
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.view.Window
 import me.yokeyword.fragmentation.SupportActivity
-import qiu.niorgai.StatusBarCompat
-import self.xhl.com.common.R
-import self.xhl.com.common.utils.StatusBarUtil
 import self.xhl.com.common.widget.emptyview.PlaceHolderView
-import com.blankj.utilcode.util.BarUtils.getStatusBarHeight
-import android.widget.LinearLayout
-
 
 
 /**
@@ -37,6 +30,7 @@ public abstract class BaseActivity:SupportActivity()
             }
 
             initBefore()
+            initToolBar()
             initWidget()
             initData()
         } else {
@@ -74,7 +68,12 @@ public abstract class BaseActivity:SupportActivity()
     open fun initBefore() {
 
     }
+    /**
+     * 初始化控件调用之前
+     */
+    open fun initToolBar() {
 
+    }
     /**
      * 初始化控件
      */

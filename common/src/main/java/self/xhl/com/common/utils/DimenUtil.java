@@ -9,8 +9,6 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
-import self.xhl.com.common.app.BaseApp;
-
 
 /**
  * @author bingo
@@ -20,14 +18,14 @@ import self.xhl.com.common.app.BaseApp;
 
 public final class DimenUtil {
 
-    public static int getScreenWidth() {
-        final Resources resources = BaseApp.instance.getResources();
+    public static int getScreenWidth(Context context) {
+        final Resources resources = context.getResources();
         final DisplayMetrics dm = resources.getDisplayMetrics();
         return dm.widthPixels;
     }
 
-    public static int getScreenHeight() {
-        final Resources resources = BaseApp.instance.getResources();
+    public static int getScreenHeight(Context context) {
+        final Resources resources = context.getResources();
         final DisplayMetrics dm = resources.getDisplayMetrics();
         return dm.heightPixels;
     }

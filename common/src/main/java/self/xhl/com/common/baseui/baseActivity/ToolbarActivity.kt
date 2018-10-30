@@ -14,6 +14,7 @@ import self.xhl.com.common.R
 public abstract class ToolbarActivity : BaseActivity() {
     private var mToolbar: Toolbar? = null
     private var hasBar: Boolean = true
+    private var showCenterTitle=true
 
      override fun initWidget() {
         super.initWidget()
@@ -31,7 +32,7 @@ public abstract class ToolbarActivity : BaseActivity() {
             setToolbarBackGround()//设置toolBar的颜色
             val centerTitle = toolbar.findViewById<View>(R.id.toolbar_center_title) as TextView
             when {
-                showCenterTitle() -> {
+                showCenterTitle -> {
                     toolbar.title = ""
                     centerTitle.text = getToolBarTitle()
                     centerTitle.visibility = View.VISIBLE
@@ -54,13 +55,15 @@ public abstract class ToolbarActivity : BaseActivity() {
     }
 
     //默认有toolBar
-     fun setHasToolBar(flaHasBar: Boolean) {
+     fun setHasToolBar(flaHasBar: Boolean) :ToolbarActivity{
         hasBar=flaHasBar
+        return this
     }
 
     //默认标题居中
-    open fun showCenterTitle(): Boolean {
-        return true
+    fun showCenterTitle(showCenterTitle:Boolean): ToolbarActivity {
+        this.showCenterTitle=showCenterTitle
+        return this
     }
 
     //默认toolBar名称
@@ -113,5 +116,10 @@ public abstract class ToolbarActivity : BaseActivity() {
                 true
             }
         }
+    }
+
+    fun build():ToolbarActivity
+    {
+        return this
     }
 }

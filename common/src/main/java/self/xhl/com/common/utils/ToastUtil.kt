@@ -1,7 +1,7 @@
 package self.xhl.com.common.utils
 
+import android.content.Context
 import android.widget.Toast
-import self.xhl.com.common.app.BaseApp
 
 /**
 * @作者 xhl
@@ -12,9 +12,9 @@ class ToastUtil {
     companion object {
         var toast: Toast? = null
 
-        fun shortToast(retId: Int) {
+        fun shortToast(context:Context,retId: Int) {
             if (toast == null) {
-                toast = Toast.makeText(BaseApp.instance, retId, Toast.LENGTH_SHORT)
+                toast = Toast.makeText(context, retId, Toast.LENGTH_SHORT)
             } else {
                 toast!!.setText(retId)
                 toast!!.duration = Toast.LENGTH_SHORT
@@ -23,9 +23,9 @@ class ToastUtil {
         }
 
 
-        fun shortToast(hint: String) {
+        fun shortToast(context: Context,hint: String) {
             if (toast == null) {
-                toast = Toast.makeText(BaseApp.instance, hint, Toast.LENGTH_SHORT)
+                toast = Toast.makeText(context, hint, Toast.LENGTH_SHORT)
             } else {
                 toast!!.setText(hint)
                 toast!!.duration = Toast.LENGTH_SHORT
@@ -34,9 +34,9 @@ class ToastUtil {
         }
 
 
-        fun longToast(retId: Int) {
+        fun longToast(context: Context,retId: Int) {
             if (toast == null) {
-                toast = Toast.makeText(BaseApp.instance, retId, Toast.LENGTH_LONG)
+                toast = Toast.makeText(context, retId, Toast.LENGTH_LONG)
             } else {
                 toast!!.setText(retId)
                 toast!!.duration = Toast.LENGTH_LONG
@@ -45,9 +45,9 @@ class ToastUtil {
         }
 
 
-        fun longToast(hint: String) {
+        fun longToast(context: Context,hint: String) {
             if (toast == null) {
-                toast = Toast.makeText(BaseApp.instance, hint, Toast.LENGTH_LONG)
+                toast = Toast.makeText(context, hint, Toast.LENGTH_LONG)
             } else {
                 toast!!.setText(hint)
                 toast!!.duration = Toast.LENGTH_LONG

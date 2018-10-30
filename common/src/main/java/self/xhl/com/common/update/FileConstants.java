@@ -4,7 +4,6 @@ import android.os.Environment;
 
 import java.io.File;
 
-import self.xhl.com.common.app.BaseApp;
 
 /**
  * @author bingo
@@ -12,7 +11,7 @@ import self.xhl.com.common.app.BaseApp;
  */
 
 public final class FileConstants {
-    public static final File ROOT = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), BaseApp.instance.getPackageName());
+    public static final File ROOT = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "AppDownLoadpackage");
     public static final File IMG_USER_PIC_CACHE;
     public static final File TEMP_CACHE;
     public static final File FILE_APK;

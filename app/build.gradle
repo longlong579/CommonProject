@@ -40,7 +40,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation project(':common_net')
 
     // retrofit
     implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
@@ -51,4 +50,7 @@ dependencies {
     implementation "io.reactivex:rxjava:$rootProject.ext.rxjavaVersion"
     implementation "io.reactivex:rxandroid:$rootProject.ext.rxjavaVersion"
     implementation "com.eightbitlab:rxbus:$rootProject.ext.rxBusVersion"
+
+    implementation project(':common_net')
+    implementation project (':common')
 }

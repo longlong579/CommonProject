@@ -90,10 +90,15 @@ dependencies {
     //扩展的TextView
     api "com.ruffian.library:RTextView:$rootProject.ext.RTextViewVersion"
 
-    //沉浸式状态栏
-    api('com.github.niorgai:StatusBarCompat:2.1.4', {
+    //状态栏
+    api ('com.github.longlong579:StatusBarCompatUtil:1.1.0', { exclude group: 'com.android.support' })
+
+    //TDialog
+    api ('com.timmy.tdialog:tdialog:2.0.0', {
         exclude group: 'com.android.support'
     })
+
+    //换行Text
     api 'me.biubiubiu.justifytext:library:1.1'
 
     //WheelView
@@ -103,13 +108,14 @@ dependencies {
     api 'com.contrarywind:Android-PickerView:4.1.6'
     api 'com.lzy.widget:imagepicker:0.6.1'
 
-    //指定版本
+    //最强工具类
     api 'com.blankj:utilcode:1.20.0'
 
-    //最强工具类
+    //七牛
     api 'com.qiniu:qiniu-android-sdk:7.3.+'
+
     api 'top.zibin:Luban:1.1.8'
 
-    //图片压缩
-    api project(':tdialog')
+
+
 }

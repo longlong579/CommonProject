@@ -4,7 +4,6 @@ import android.content.Context
 import android.widget.TextView
 import android.widget.Toast
 import com.timmy.tdialog.TDialog
-import self.xhl.com.common.app.BaseApp
 import self.xhl.com.common.baseui.baseFragment.ToolbarFragment
 import self.xhl.com.common.baseui.mvp.presenter.BaseContract
 import self.xhl.com.common.widget.LoadingDialog
@@ -39,7 +38,7 @@ public abstract class PresenterFragment<Presenter : BaseContract.Presenter> : To
         if (mPlaceHolderView != null) {
             mPlaceHolderView!!.triggerError(str)
         } else {
-            Toast.makeText(BaseApp.instance, str, Toast.LENGTH_LONG).show()
+            Toast.makeText(context, str, Toast.LENGTH_LONG).show()
         }
     }
 
@@ -49,7 +48,7 @@ public abstract class PresenterFragment<Presenter : BaseContract.Presenter> : To
         if (mPlaceHolderView != null) {
             mPlaceHolderView!!.triggerError(str)
         } else {
-            Toast.makeText(BaseApp.instance, str, Toast.LENGTH_LONG).show()
+            Toast.makeText(context, str, Toast.LENGTH_LONG).show()
         }
     }
 

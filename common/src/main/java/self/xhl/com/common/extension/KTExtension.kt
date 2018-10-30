@@ -1,20 +1,18 @@
 package self.xhl.com.common.extension
 
-import android.widget.EditText
+import android.content.Context
 import android.widget.TextView
 import android.widget.Toast
 import com.blankj.utilcode.util.RegexUtils
-import self.xhl.com.common.app.BaseApp
-import java.io.File
 
 /**
  *
  * @author xhl
  * @version 1.0.0
  */
-fun Any.toast(msg: String?) {
+fun Any.toast(context: Context,msg: String?) {
     if (!msg.isNullOrBlank()) {
-        Toast.makeText(BaseApp.instance, msg, Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
 }
 
