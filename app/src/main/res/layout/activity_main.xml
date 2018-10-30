@@ -6,8 +6,5 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:fitsSystemWindows="true">
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:text="晚上"/>
+    <include layout="@layout/custom_toolbar" />
 </android.support.constraint.ConstraintLayout>

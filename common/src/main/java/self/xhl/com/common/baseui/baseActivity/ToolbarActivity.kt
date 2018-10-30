@@ -1,6 +1,7 @@
 package self.xhl.com.common.baseui.baseActivity
 
 import android.support.annotation.DrawableRes
+import android.support.annotation.LayoutRes
 import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.TextView
@@ -15,6 +16,11 @@ public abstract class ToolbarActivity : BaseActivity() {
     private var mToolbar: Toolbar? = null
     private var hasBar: Boolean = true
     private var showCenterTitle=true
+    private var toolbarNmae="ToolBar"
+    private var enableBack=true
+    private var toolBarBackDrawableRes=R.drawable.abc_ic_ab_back_material
+
+    private var munuId=0
 
      override fun initWidget() {
         super.initWidget()
@@ -34,15 +40,15 @@ public abstract class ToolbarActivity : BaseActivity() {
             when {
                 showCenterTitle -> {
                     toolbar.title = ""
-                    centerTitle.text = getToolBarTitle()
+                    centerTitle.text = toolbarNmae
                     centerTitle.visibility = View.VISIBLE
                 }
                 else -> {
                     centerTitle.visibility = View.GONE
-                    toolbar.title = getToolBarTitle()
+                    toolbar.title = toolbarNmae
                 }
             }
-            if (isEnableBack()) {
+            if (enableBack) {
                 initToolbarNav(toolbar)
             }
             initToolbarMenue(toolbar)
@@ -61,53 +67,67 @@ public abstract class ToolbarActivity : BaseActivity() {
     }
 
     //默认标题居中
-    fun showCenterTitle(showCenterTitle:Boolean): ToolbarActivity {
+    fun setShowCenterTitle(showCenterTitle:Boolean): ToolbarActivity {
         this.showCenterTitle=showCenterTitle
         return this
     }
 
     //默认toolBar名称
-    open fun getToolBarTitle(): String {
-        return "TooblBarTitle"
+     fun setToolBarTitle(toolbarName: String): ToolbarActivity {
+        this.toolbarNmae=toolbarName
+        return this
     }
 
     //默认可以返回
-    open fun isEnableBack(): Boolean {
-        return true
+     fun setEnableBack(isEnableBack:Boolean): ToolbarActivity {
+        enableBack=isEnableBack
+        return this
     }
 
-    //默认的返回图标
-    @DrawableRes
-    open fun getToolbarBackDrawable(): Int {
-        return R.drawable.abc_ic_ab_back_material
-    }
 
-    //默认用系统颜色
-    protected fun setToolbarBackGround(@DrawableRes resId: Int = 0) {
+    //默认用系统颜色 状态栏背景色
+     fun setToolbarBackGround(@DrawableRes resId: Int = 0):ToolbarActivity {
         if (resId != 0)
             mToolbar?.setBackgroundResource(resId)
+        return this
+    }
+
+
+    //默认的返回图标
+     fun setToolbarBackDrawable(@DrawableRes toolbarBackDrawableRes: Int): ToolbarActivity {
+        this.toolBarBackDrawableRes=toolbarBackDrawableRes
+        return this
+    }
+
+
+
+    // munuId>0有menue
+    fun setMenuId(@LayoutRes menuId: Int): ToolbarActivity //返回menuId 默认无menue
+    {
+        this.munuId=menuId
+        return this
     }
 
     //toolBar返回按钮  可以复写满足自己的需求
     open fun initToolbarNav(toolbar: Toolbar) {
-        toolbar.setNavigationIcon(getToolbarBackDrawable())
+        toolbar.setNavigationIcon(toolBarBackDrawableRes)
         toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
     }
 
-    //复写 >0有menue
-    open fun getMenuId(): Int //返回menuId 默认无menue
-    {
-        return 0
-    }
 
     // 复写 menue事件 满足自己的需求
     open fun onMenuClick(menuId: Int) {
     }
 
+    fun build():ToolbarActivity
+    {
+        return this
+    }
+
     private fun initToolbarMenue(toolbar: Toolbar) {
-        val menuId = getMenuId()
+        val menuId = munuId
         if (menuId != 0) {
             toolbar.inflateMenu(menuId)
             toolbar.setOnMenuItemClickListener { item ->
@@ -116,10 +136,5 @@ public abstract class ToolbarActivity : BaseActivity() {
                 true
             }
         }
-    }
-
-    fun build():ToolbarActivity
-    {
-        return this
     }
 }
