@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/custom_toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+
+        android:gravity="center_horizontal">
+
+        <View
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="50dp"
+
+            android:gravity="center_horizontal"
+            android:orientation="vertical"/>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="sss"
+
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:gravity="center"
+        android:text="sss"
+
+        android:textSize="16sp" />
+
+    <com.ruffian.library.RTextView
+        android:id="@+id/btnBack2Login"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        app:corner_radius="3dp"
+        android:textColor="@color/colorWhite"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:text="返回登录"/>
+    <TextView
+        android:id="@+id/text_tishi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="*3秒后自动返回登录页面"
+        android:textSize="12sp"
+
+        />
+
+</LinearLayout>

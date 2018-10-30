@@ -9,7 +9,6 @@ class MainActivity : PermissionBaseActivity() {
 
 
     override fun getContentLayoutId(): Int {
-        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         return R.layout.activity_main
     }
 
@@ -17,11 +16,11 @@ class MainActivity : PermissionBaseActivity() {
         super.initToolBarPre()
         StatusBarCompat.translucentStatusBar(this,true)
         StatusBarCompat.setStatusBarDarkFont(this,true)
-        build().setHasToolBar(true)
-                .setShowCenterTitle(true)
-                .setToolBarTitle("我是测试")
-                .setToolBarTitleColorRes(R.color.red_100)
-                .setEnableBack(true)
+        build().setHasToolBar(false)
+//                .setShowCenterTitle(true)
+//                .setToolBarTitle("我是测试")
+//                .setToolBarTitleColorRes(R.color.red_100)
+//                .setEnableBack(true)
     }
 
     override fun initWidget() {
@@ -36,6 +35,11 @@ class MainActivity : PermissionBaseActivity() {
                 toast("授权失败")
             }
         },PermissionUtil.PERMISSION_CAMERA,PermissionUtil.PERMISSION_READ_CONTACTS,PermissionUtil.PERMISSION_READ_EXTERNAL_STORAGE)
+
+         if(findFragment(LoginFragment::class.java)==null)
+         {
+             loadRootFragment(R.id.fl_container,LoginFragment.newInstance())
+         }
     }
 
 }
