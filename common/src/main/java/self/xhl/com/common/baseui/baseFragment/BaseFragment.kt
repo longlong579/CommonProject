@@ -61,6 +61,10 @@ public abstract class BaseFragment : SupportFragment() {
     @LayoutRes
     protected abstract fun getContentLayoutId(): Int
 
+
+    //初始化ToolBar
+    abstract fun initToolBar(root: View)
+
     //初始化控件
     abstract fun initWidget(root: View)
 
@@ -85,9 +89,13 @@ public abstract class BaseFragment : SupportFragment() {
 
     //延迟加载
     private fun firstInit() {
-        initWidget(mRoot!!)//初始化toolbar等
-        onFirstInit()//初始化控件  其实都可以在onFirstInit或initWidget()中延时加载 分开是为了代码清晰些
-        initData()// 当View创建完成后初始化数据
+        mRoot?.let {
+            initToolBar(it)
+            initWidget(it)//初始化toolbar等
+            onFirstInit()//初始化控件  其实都可以在onFirstInit或initWidget()中延时加载 分开是为了代码清晰些
+            initData()// 当View创建完成后初始化数据
+        }
+
     }
 
     /*

@@ -3,6 +3,7 @@ package self.xhl.com.common.baseui.mvp.activity
 import android.widget.TextView
 import android.widget.Toast
 import com.timmy.tdialog.TDialog
+import self.xhl.com.common.baseui.baseActivity.PermissionBaseActivity
 import self.xhl.com.common.baseui.baseActivity.ToolbarActivity
 import self.xhl.com.common.baseui.mvp.presenter.BaseContract
 import self.xhl.com.common.widget.LoadingDialog
@@ -13,7 +14,7 @@ import self.xhl.com.common.widget.LoadingDialog
  * 2018/7/27 17:27
  */
 
-public abstract class PresentToolbarActivity<Presenter : BaseContract.Presenter> : ToolbarActivity(), BaseContract.View<Presenter> {
+public abstract class PresentToolbarActivity<Presenter : BaseContract.Presenter> : PermissionBaseActivity(), BaseContract.View<Presenter> {
     protected var mPresenter: Presenter? = null
     protected var mLoadingDialog: TDialog? = null
 

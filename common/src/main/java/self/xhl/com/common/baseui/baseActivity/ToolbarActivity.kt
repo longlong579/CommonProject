@@ -22,11 +22,10 @@ public abstract class ToolbarActivity : BaseActivity() {
     private var toolbarNmae="ToolBar"
     private var enableBack=true
     private var toolBarBackDrawableRes=R.drawable.abc_ic_ab_back_material
-
     @MenuRes
     private var  munuId=0
     @ColorRes
-    private var titleColorRes=0
+    private var titleColorRes=-1
 
      override fun initWidget() {
         super.initWidget()
@@ -65,12 +64,14 @@ public abstract class ToolbarActivity : BaseActivity() {
                     centerTitle.text = toolbarNmae
                     centerTitle.visibility = View.VISIBLE
                     //setToolBarTitleColor(titleColorRes)
-                    centerTitle.setTextColor(ContextCompat.getColor(this,titleColorRes))
+                    if(titleColorRes!=-1)
+                        centerTitle.setTextColor(ContextCompat.getColor(this,titleColorRes))
                 }
                 else -> {
                     centerTitle.visibility = View.GONE
                     toolbar.title = toolbarNmae
-                    toolbar.setTitleTextColor(ContextCompat.getColor(this,titleColorRes))
+                    if(titleColorRes!=-1)
+                        toolbar.setTitleTextColor(ContextCompat.getColor(this,titleColorRes))
                 }
             }
             if (enableBack) {
