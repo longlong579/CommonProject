@@ -30,7 +30,7 @@ public abstract class BaseActivity:SupportActivity()
             }
 
             initBefore()
-            initToolBar()
+            initToolBarPre()
             initWidget()
             initData()
         } else {
@@ -71,7 +71,7 @@ public abstract class BaseActivity:SupportActivity()
     /**
      * 初始化控件调用之前
      */
-    open fun initToolBar() {
+    open fun initToolBarPre() {
 
     }
     /**

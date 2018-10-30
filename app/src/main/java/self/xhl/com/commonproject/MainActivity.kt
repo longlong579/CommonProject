@@ -13,17 +13,19 @@ class MainActivity : PermissionBaseActivity() {
         return R.layout.activity_main
     }
 
-    override fun initToolBar() {
-        super.initToolBar()
+    override fun initToolBarPre() {
+        super.initToolBarPre()
+        StatusBarCompat.translucentStatusBar(this,true)
+        StatusBarCompat.setStatusBarDarkFont(this,true)
         build().setHasToolBar(true)
                 .setShowCenterTitle(true)
                 .setToolBarTitle("我是测试")
+                .setToolBarTitleColorRes(R.color.red_100)
                 .setEnableBack(true)
     }
+
     override fun initWidget() {
         super.initWidget()
-        StatusBarCompat.translucentStatusBar(this,true)
-        StatusBarCompat.setStatusBarDarkFont(this,true)
         checkForcePermissions(object :OnPermissionResultListener{
 
             override fun onAllow() {
