@@ -1,16 +1,13 @@
-package self.xhl.com.common.imageloader;
+package self.xhl.com.commonproject.imageloader;
 
 import android.app.Activity;
 import android.net.Uri;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.lzy.imagepicker.loader.ImageLoader;
 
 import java.io.File;
-
-import self.xhl.com.common.R;
 
 /**
  * ================================================

@@ -3,10 +3,10 @@
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
+import com.xhl.statusbarcompatutil.StatusBarCompat
 import kotlinx.android.synthetic.main.fragment_login_inform_audit.*
-
 import self.xhl.com.common.baseui.baseFragment.ToolbarFragment
-import self.xhl.com.commonproject.R
+import self.xhl.com.commonproject.data.pager.PageBean
 
 /**
  * @author xhl
@@ -25,11 +25,14 @@ class LoginFragment :ToolbarFragment() {
 
     override fun initToolBarPre() {
         super.initToolBarPre()
+        StatusBarCompat.translucentStatusBar(_mActivity,false)
+        StatusBarCompat.setStatusBarDarkFont(_mActivity,false)
         build().setHasToolBar(true)
                 .setShowCenterTitle(true)
                 .setToolBarTitle("我是Frgment测试")
                 .setToolBarTitleColorRes(R.color.red_100)
                 .setEnableBack(true)
+        var p= PageBean
     }
 
     override fun initWidget(root: View) {

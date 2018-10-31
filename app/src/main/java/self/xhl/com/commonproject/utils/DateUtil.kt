@@ -1,4 +1,4 @@
-package com.yangche51.android.common.utils
+package self.xhl.com.commonproject.utils
 
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -56,11 +56,11 @@ object DateUtil {
     var FORMAT_SHORT_SPE = "yyyyMMdd"
     var FORMAT_SHORT_SPE_ = "HH:mm"
 
-    var TIMEZONE = "Asia/Shanghai"
+    var TIMEZONE = "Asia/Shanghai"//时区
 
     /**
      * 根据预设格式返回当前日期
-
+     "yyyy-MM-dd HH:mm:ss"
      * @return
      */
     val now: String

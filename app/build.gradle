@@ -31,6 +31,16 @@ android {
         }
     }
 }
+allprojects {
+    repositories {
+
+        flatDir {
+            dirs 'libs'
+            dirs project(':common').file('libs')
+        }
+    }
+}
+
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')

@@ -8,4 +8,7 @@
     <item name="tag_recycler_holder" type="id" />
     <!--默认头像的drawable名字-->
     <item name="default_portrait" type="drawable" />
+    <item name="tv_empty" type="id" />//默认的EhanRecycleView 空布局tv的id
+    <item name="im_empty" type="id" />//默认的EhanRecycleView 空布局iv的id
+    <item name="txt_msg" type="id" />//默认的EhanRecycleView 空布局显示文字的id
 </resources>

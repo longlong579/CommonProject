@@ -27,6 +27,11 @@ android {
 }
 
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}//添加自己的aar     compile(name: 'filtermenu-1.0.1', ext: 'aar')
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
@@ -54,68 +59,53 @@ dependencies {
     api "io.reactivex:rxandroid:$rootProject.ext.rxjavaVersion"
     api "com.eightbitlab:rxbus:$rootProject.ext.rxBusVersion"
 
-    // eventbus
-    api "org.greenrobot:eventbus:$rootProject.ext.eventBusVersion"
-
-    //gson
-    api "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
-
-    // glide
-    api "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
-    kapt "com.github.bumptech.glide:compiler:${GLIDE_VERSION}"
-    api "jp.co.cyberagent.android.gpuimage:gpuimage-library:${GPUIMAGE_VERSION}"
-    api 'jp.wasabeef:glide-transformations:3.3.0'
-
-    //底部导航栏样式BottomNavigationBar
-    api "com.ashokvarma.android:bottom-navigation-bar:$rootProject.ext.navigationbarVersion"
 
     // 修复 官方fragment的一些坑
     api "me.yokeyword:fragmentation:$rootProject.ext.fragmentationVersion"
-    compile "me.yokeyword:fragmentation-swipeback:$rootProject.ext.fragmentationVersion"
+    api "me.yokeyword:fragmentation-swipeback:$rootProject.ext.fragmentationVersion"
 
-    //滑动回退
+    api "net.qiujuer.genius:ui:$rootProject.ext.materialDesignViewVersion"  //android Material Design
+    api "com.ashokvarma.android:bottom-navigation-bar:$rootProject.ext.navigationbarVersion"   //底部导航栏样式BottomNavigationBar
+    api "com.android.support:cardview-v7:$rootProject.ext.supportVersion"  //CardView
+    api "com.ruffian.library:RTextView:$rootProject.ext.RTextViewVersion"    //扩展的TextView
+    api 'me.biubiubiu.justifytext:library:1.1'  //换行Text
 
-    //RecyclerView 分割线
-    api "com.choices.divider:RecyclerView_Divider:$rootProject.ext.recycleviewDividerVersion"
-
-    // 增强recycler adapter
-    api "com.github.CymChad:BaseRecyclerViewAdapterHelper:$rootProject.ext.BASE_RECYCLERVIEW_HELPER_VERSION"
-
-    //CardView
-    api "com.android.support:cardview-v7:$rootProject.ext.supportVersion"
-
-    //android Material Design
-    api "net.qiujuer.genius:ui:$rootProject.ext.materialDesignViewVersion"
-
-    //扩展的TextView
-    api "com.ruffian.library:RTextView:$rootProject.ext.RTextViewVersion"
-
-    //状态栏
-    api ('com.github.longlong579:StatusBarCompatUtil:1.1.0', { exclude group: 'com.android.support' })
+    /**
+     * 注意根目录添加
+     allprojects {
+     repositories {
+     flatDir {dirs 'libs'
+     dirs project(':common').file('libs')}
+       }
+     }
+     */
+    api(name: 'recyclerview', ext: 'aar')//SuperRecyclerView
+    api "com.choices.divider:RecyclerView_Divider:$rootProject.ext.recycleviewDividerVersion" //RecyclerView 分割线
+    api "com.github.CymChad:BaseRecyclerViewAdapterHelper:$rootProject.ext.BASE_RECYCLERVIEW_HELPER_VERSION" // 增强recycler adapter
 
     //TDialog
     api ('com.timmy.tdialog:tdialog:2.0.0', {
         exclude group: 'com.android.support'
     })
 
-    //换行Text
-    api 'me.biubiubiu.justifytext:library:1.1'
+    api 'com.contrarywind:wheelview:4.0.8'  //WheelView
+    api 'com.contrarywind:Android-PickerView:4.1.6' //data,option.区域选择滚轮
 
-    //WheelView
-    api 'com.contrarywind:wheelview:4.0.8'
-
-    //data,option.区域选择滚轮
-    api 'com.contrarywind:Android-PickerView:4.1.6'
-    api 'com.lzy.widget:imagepicker:0.6.1'
+    api 'com.lzy.widget:imagepicker:0.6.1'//仿微信图片选择 无压缩
+    api 'top.zibin:Luban:1.1.8'//鲁班压缩
 
     //最强工具类
     api 'com.blankj:utilcode:1.20.0'
+    //状态栏工具
+    api ('com.github.longlong579:StatusBarCompatUtil:1.1.0', { exclude group: 'com.android.support' })
 
-    //七牛
-    api 'com.qiniu:qiniu-android-sdk:7.3.+'
+    // glide
+    api "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$rootProject.ext.glideVersion"
+    api "jp.co.cyberagent.android.gpuimage:gpuimage-library:$rootProject.ext.gpuimage_version"
+    api 'jp.wasabeef:glide-transformations:3.3.0'
 
-    api 'top.zibin:Luban:1.1.8'
-
-
+    api "com.google.code.gson:gson:$rootProject.ext.gsonVersion"//gson
+    api "org.greenrobot:eventbus:$rootProject.ext.eventBusVersion"  // eventbus
 
 }

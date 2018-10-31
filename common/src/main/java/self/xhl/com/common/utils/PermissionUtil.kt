@@ -2,7 +2,7 @@ package self.xhl.com.common.utils
 
 /**
  * @author xhl
- * @desc
+ * @desc  权限工具类
  * 2018/10/25 18:14
  */
 class PermissionUtil {

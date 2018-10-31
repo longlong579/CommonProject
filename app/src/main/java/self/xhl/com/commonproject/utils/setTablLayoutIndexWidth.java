@@ -1,4 +1,4 @@
-package self.xhl.com.common.utils;
+package self.xhl.com.commonproject.utils;
 
 import android.content.res.Resources;
 import android.support.design.widget.TabLayout;
@@ -10,9 +10,10 @@ import java.lang.reflect.Field;
 
 /**
  * Created by Administrator on 2018\9\9 0009.
+ * 设置TabLayout指示器的宽度
  */
 
-public class setTablLayoutIndexWith {
+public class setTablLayoutIndexWidth {
     public static void setIndicator(TabLayout tabs, int leftDip, int rightDip) {
         Class<?> tabLayout = tabs.getClass();
         Field tabStrip = null;

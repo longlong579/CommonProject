@@ -1,4 +1,4 @@
-package self.xhl.com.common.utils
+package self.xhl.com.commonproject.utils
 
 import android.content.Context
 import android.widget.Toast

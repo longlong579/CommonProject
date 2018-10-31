@@ -1,4 +1,4 @@
-package self.xhl.com.common.baseui.mvp.Pager;
+package self.xhl.com.commonproject.data.pager;
 
 
 /**

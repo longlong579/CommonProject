@@ -1,8 +1,6 @@
-package self.xhl.com.common.utils
+package self.xhl.com.commonproject.utils
 
-import android.util.Log
-
-  /*
+/*
    *多次按钮点击判断  gv_isf.setOnItemClickListener(new OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,

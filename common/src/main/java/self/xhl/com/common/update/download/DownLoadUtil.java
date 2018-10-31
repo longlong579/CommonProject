@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 
+import com.blankj.utilcode.util.EncryptUtils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -27,7 +29,6 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import self.xhl.com.common.update.FileConstants;
-import self.xhl.com.common.utils.CryptoUtil;
 
 /**
  * @author bingo
@@ -68,8 +69,9 @@ public class DownLoadUtil {
                 if (!FileConstants.FILE_APK.exists()) {
                     FileConstants.FILE_APK.mkdirs();
                 }
-                file = new File(FileConstants.FILE_APK,
-                        CryptoUtil.getMD5(url) + ".apk");
+                //CryptoUtil.getMD5(url)
+                file = new File(FileConstants.FILE_APK, EncryptUtils.encryptMD5ToString(url)
+                        + ".apk");
                 if (file.exists()) {
                     file.delete();
                 }
