@@ -1,14 +1,12 @@
 package self.xhl.com.common.widget
 
-import android.content.Context
 import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentManager
-import android.support.v7.app.AppCompatActivity
-import android.view.View
+import android.view.LayoutInflater
 import android.widget.TextView
+import com.blankj.utilcode.util.SizeUtils
 import com.timmy.tdialog.TDialog
 import self.xhl.com.common.R
-import android.view.LayoutInflater
 
 
 /**
@@ -28,16 +26,16 @@ class LoadingDialog {
                     .create()
         }
 
-        fun instance(context: FragmentActivity, message: CharSequence?=null): TDialog {
+        fun instance(context: FragmentActivity, message: CharSequence? = null): TDialog {
             val inflater = LayoutInflater.from(context)
             val view = inflater.inflate(R.layout.dialog_loading, null)
             val textView = view.findViewById<TextView>(R.id.tv_load_dialog)
-            if(!message.isNullOrBlank())
+            if (!message.isNullOrBlank())
                 textView.text = message
             return TDialog.Builder(context.getSupportFragmentManager())
                     .setDialogView(view)
-                    .setHeight(300)
-                    .setWidth(300)
+                    .setHeight(SizeUtils.dp2px(200f))
+                    .setWidth(SizeUtils.dp2px(200f))
                     .setCancelableOutside(true)
                     .create()
         }

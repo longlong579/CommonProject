@@ -1,4 +1,4 @@
-package com.example.administrator.myapplication
+package self.xhl.com.common.widget
 
 import android.content.Context
 import android.util.AttributeSet
@@ -7,11 +7,13 @@ import android.widget.RelativeLayout
 
 /**
  * Created by Administrator on 2018\9\5 0005.
+ * 正方形RelativeLayout
  */
 class SquareRelativeLayout : RelativeLayout {
 
     constructor(context: Context, attrs: AttributeSet,
                 defStyle: Int) : super(context, attrs, defStyle)
+
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
     constructor(context: Context) : super(context)
 

@@ -16,6 +16,7 @@ import java.util.Map;
  * 万能分割
  * 使用此类  item的tag会被占用  如果外部使用会造成乱
  * 外部可以使用 item.setTag(key,obj)
+ * https://github.com/YuJunKui1995/UniversalItemDecoration
  */
 
 public abstract class UniversalItemDecoration extends RecyclerView.ItemDecoration {
