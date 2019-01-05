@@ -1,5 +1,6 @@
 package self.xhl.com.commonproject
 
+import io.reactivex.Observable
 import org.junit.Test
 
 import org.junit.Assert.*

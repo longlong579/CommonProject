@@ -1,7 +1,7 @@
 package self.xhl.com.spdelegate
 
 import android.content.Context
-import self.xhl.com.common.app.BaseApp
+import self.xhl.com.net.app.BaseApp
 
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty

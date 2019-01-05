@@ -14,6 +14,10 @@ android {
         targetSdkVersion appTargetSdkVersion
         versionCode appVersionCode
         versionName appVersionName
+        multiDexEnabled true
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
     }
     buildTypes {
         release {
@@ -51,16 +55,17 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
+    //LeakCanary
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+
     // retrofit
     implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava:$rootProject.ext.retrofit2RxjavaAdapterVersion"
-
     // rxjava/rxandroid
-    implementation "io.reactivex:rxjava:$rootProject.ext.rxjavaVersion"
-    implementation "io.reactivex:rxandroid:$rootProject.ext.rxjavaVersion"
     implementation "com.eightbitlab:rxbus:$rootProject.ext.rxBusVersion"
-
     implementation project(':common_net')
-    implementation project (':common')
+    implementation project(':common')
 }

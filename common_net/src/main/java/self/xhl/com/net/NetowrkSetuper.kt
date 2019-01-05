@@ -26,7 +26,7 @@ fun makeRetrofit(isLongTimeout: Boolean): Retrofit {
             .baseUrl(getHostUrl())
             .client(makeClient(isLongTimeout))
 //            .addConverterFactory(GsonConverterFactory.create())
-//            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+            //.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(makeGson()))
             .addCallAdapterFactory(RxTransformErrorCallAdapterFactory.createWithScheduler(Schedulers.io()))
             .validateEagerly(false)

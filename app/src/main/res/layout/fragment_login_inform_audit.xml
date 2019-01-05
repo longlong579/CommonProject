@@ -45,7 +45,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="50dp"
         app:corner_radius="3dp"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorPrimary"
         android:gravity="center"
         android:textSize="16sp"
         android:text="返回登录"/>

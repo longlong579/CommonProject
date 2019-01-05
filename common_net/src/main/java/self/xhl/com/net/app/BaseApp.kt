@@ -1,4 +1,4 @@
-package self.xhl.com.common.app
+package self.xhl.com.net.app
 
 import android.app.Application
 import retrofit2.Retrofit

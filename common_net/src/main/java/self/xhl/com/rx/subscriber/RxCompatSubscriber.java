@@ -3,12 +3,12 @@ package self.xhl.com.rx.subscriber;
 import android.util.Log;
 
 import com.eightbitlab.rxbus.Bus;
+
 import rx.Subscriber;
 import self.xhl.com.net.exception.BizException;
-import self.xhl.com.net.exception.TokenFailException;
-import self.xhl.com.net.netchgbypro.exception.RespCode2Msg;
-import self.xhl.com.net.netutil.ExceptionUtil;
 import self.xhl.com.net.exception.TickOutException;
+import self.xhl.com.net.exception.TokenFailException;
+import self.xhl.com.net.netutil.ExceptionUtil;
 import self.xhl.com.rx.event.TickOutEvent;
 import self.xhl.com.rx.event.TokenFailEvent;
 

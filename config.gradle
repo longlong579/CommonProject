@@ -14,9 +14,10 @@ ext {
     constrlayoutVersion='1.0.2'          //Constralayout版本
 
     //Retrofit  RxJava
-    retrofitVersion = '2.1.0'
-    retrofit2RxjavaAdapterVersion = '2.1.0'
-    rxjavaVersion = '1.2.1'
+    retrofitVersion = '2.5.0'
+    retrofit2RxjavaAdapterVersion = '2.5.0'
+    rxjavaVersion = '2.2.4'
+    rxAndroidVersion = '2.1.0'
     rxBusVersion='1.0.2'
 
     eventBusVersion='3.0.0'  //eventBUS

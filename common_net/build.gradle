@@ -24,19 +24,21 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     compileOnly "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
-
     // kotlin
     compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    compileOnly 'org.jetbrains.anko:anko-sdk15:0.9.1'
-    compileOnly 'org.jetbrains.anko:anko-common:0.9.1'
+    compileOnly 'org.jetbrains.anko:anko-sdk15:0.10.8'
+    compileOnly 'org.jetbrains.anko:anko-common:0.10.5'
 
     // retrofit
-    compileOnly "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
-    compileOnly "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
-    compileOnly "com.squareup.retrofit2:adapter-rxjava:$rootProject.ext.retrofit2RxjavaAdapterVersion"
+    api "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
+    api "com.squareup.retrofit2:converter-scalars:$rootProject.ext.retrofitVersion"
+    api "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
+    api "com.squareup.retrofit2:adapter-rxjava:$rootProject.ext.retrofitVersion"
+
     // rxjava/rxandroid
-    compileOnly "io.reactivex:rxjava:$rootProject.ext.rxjavaVersion"
-    compileOnly "io.reactivex:rxandroid:$rootProject.ext.rxjavaVersion"
+    api "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjavaVersion"
+    api "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
+    api "com.eightbitlab:rxbus:$rootProject.ext.rxBusVersion"
 
     //gson
     implementation "com.google.code.gson:gson:$rootProject.ext.gsonVersion"

@@ -3,13 +3,15 @@ package self.xhl.com.net.rxcalladapt;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
+import io.reactivex.Observable;
+
+import io.reactivex.functions.Function;
 import retrofit2.Call;
 import retrofit2.CallAdapter;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import rx.Observable;
 import rx.Scheduler;
-import rx.functions.Func1;
+
 
 /**
  * @author bingo
@@ -35,17 +37,17 @@ public final class RxTransformErrorCallAdapterFactory extends CallAdapter.Factor
     }
 
     @Override
-    public CallAdapter<?> get(Type returnType, Annotation[] annotations, Retrofit retrofit) {
-        CallAdapter<?> adapter = original.get(returnType, annotations, retrofit);
+    public CallAdapter<?,?> get(Type returnType, Annotation[] annotations, Retrofit retrofit) {
+        CallAdapter<?,?> adapter = original.get(returnType, annotations, retrofit);
         if(adapter == null) return null;
 
         return new RxCallAdapterWrapper(adapter);
     }
 
-    private static class RxCallAdapterWrapper implements CallAdapter<Observable<?>> {
-        private final CallAdapter<?> wrapped;
+    private static class RxCallAdapterWrapper implements CallAdapter {
+        private final CallAdapter<?,?> wrapped;
 
-        RxCallAdapterWrapper(CallAdapter<?> wrapped) {
+        RxCallAdapterWrapper(CallAdapter<?,?> wrapped) {
             this.wrapped = wrapped;
         }
 
@@ -54,16 +56,16 @@ public final class RxTransformErrorCallAdapterFactory extends CallAdapter.Factor
             return wrapped.responseType();
         }
 
-        @SuppressWarnings("unchecked")
         @Override
-        public <R> Observable<?> adapt(Call<R> call) {
-            return ((Observable) wrapped.adapt(call)).onErrorResumeNext(new Func1<Throwable, Observable>() {
+        public Object adapt(Call call) {
+            return ((Observable) wrapped.adapt(call)).onErrorResumeNext(new Function<Throwable, Observable>() {
                 @Override
-                public Observable call(Throwable throwable) {
+                public Observable apply(Throwable throwable) throws Exception {
                     return Observable.error(transformException(throwable));
                 }
             });
         }
+
 
         private Throwable transformException(Throwable throwable) {
             return throwable;
