@@ -58,13 +58,13 @@ class LoginFragment : ToolbarFragment() {
 //        }
         var path1 = "http://ww1.sinaimg.cn/large/85cccab3gw1etdkmwyrtsg20dw07hx33.jpg"
         var path2 = "http://img.52z.com/upload/news/20130624/201306241320518553.jpg"
-        btnBack2Login.setOnClickListener {
-            singleToast("wsce")
-            //imageLoad(context!!, path1, imageView, RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE))
-            imageLoadCircle(context!!, path2, imageView)
-            imageLoadRoundedCorners(context!!,path2,imageView,20,RoundedCornersTransformation.CornerType.BOTTOM)
-            //imageLoadWithProgress(context!!,"http://ww1.sinaimg.cn/large/85cccab3gw1etdkmwyrtsg20dw07hx33.jpg",imageView,progressView)
-        }
+//        btnBack2Login.setOnClickListener {
+//            singleToast("wsce")
+//            //imageLoad(context!!, path1, imageView, RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE))
+//            imageLoadCircle(context!!, path2, imageView)
+//            imageLoadRoundedCorners(context!!,path2,imageView,20,RoundedCornersTransformation.CornerType.BOTTOM)
+//            //imageLoadWithProgress(context!!,"http://ww1.sinaimg.cn/large/85cccab3gw1etdkmwyrtsg20dw07hx33.jpg",imageView,progressView)
+//        }
 
     }
 

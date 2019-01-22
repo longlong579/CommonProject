@@ -16,6 +16,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import searchview.xhl.com.scanner.R;
+
 public abstract class QRCodeView extends RelativeLayout implements Camera.PreviewCallback {
     private static final int NO_CAMERA_ID = -1;
     protected Camera mCamera;

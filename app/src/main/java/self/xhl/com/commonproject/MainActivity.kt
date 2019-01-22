@@ -4,7 +4,7 @@ import com.xhl.statusbarcompatutil.StatusBarCompat
 import org.jetbrains.anko.toast
 import self.xhl.com.common.baseui.baseActivity.PermissionBaseActivity
 import self.xhl.com.common.utils.PermissionUtil
-
+//为了其他项目也能用 故不依赖Common
 class MainActivity : PermissionBaseActivity() {
 
 
