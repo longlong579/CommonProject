@@ -12,7 +12,7 @@ android {
         versionName appVersionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
     }
     buildTypes {
         release {
@@ -24,6 +24,10 @@ android {
 //        exclude 'META-INF/common_release.kotlin_module'
 //    }
     buildToolsVersion '27.0.3'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 
@@ -51,64 +55,89 @@ dependencies {
 
     // retrofit
     compileOnly "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
-    compileOnly"com.squareup.retrofit2:converter-scalars:$rootProject.ext.retrofitVersion"
+    compileOnly "com.squareup.retrofit2:converter-scalars:$rootProject.ext.retrofitVersion"
     compileOnly "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
     compileOnly "com.squareup.retrofit2:adapter-rxjava:$rootProject.ext.retrofitVersion"
-    compileOnly 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'// RxJava2CallAdapterFactory 因为retrofit只支持到1.x
+    compileOnly 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+
 
     // rxjava/rxandroid
     compileOnly "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjavaVersion"
     compileOnly "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
     compileOnly "com.eightbitlab:rxbus:$rootProject.ext.rxBusVersion"
 
-
-
-    // 修复 官方fragment的一些坑
-    api "me.yokeyword:fragmentation:$rootProject.ext.fragmentationVersion"
-    api "me.yokeyword:fragmentation-swipeback:$rootProject.ext.fragmentationVersion"
-
-    api "net.qiujuer.genius:ui:$rootProject.ext.materialDesignViewVersion"  //android Material Design
-    api "com.ashokvarma.android:bottom-navigation-bar:$rootProject.ext.navigationbarVersion"   //底部导航栏样式BottomNavigationBar
-    api "com.android.support:cardview-v7:$rootProject.ext.supportVersion"  //CardView
-    api "com.ruffian.library:RTextView:$rootProject.ext.RTextViewVersion"    //扩展的TextView
-    api 'me.biubiubiu.justifytext:library:1.1'  //换行Text
-
-    /**
-     * 注意根目录添加
-     allprojects {
-     repositories {
-     flatDir {dirs 'libs'
-     dirs project(':common').file('libs')}
-       }
-     }
-     */
-    api(name: 'recyclerview', ext: 'aar')//SuperRecyclerView
-    api "com.choices.divider:RecyclerView_Divider:$rootProject.ext.recycleviewDividerVersion" //RecyclerView 分割线
-    api "com.github.CymChad:BaseRecyclerViewAdapterHelper:$rootProject.ext.BASE_RECYCLERVIEW_HELPER_VERSION" // 增强recycler adapter
-
-    //TDialog
-    api ('com.timmy.tdialog:tdialog:2.0.0', {
-        exclude group: 'com.android.support'
-    })
-
-    api 'com.contrarywind:wheelview:4.0.8'  //WheelView
-    api 'com.contrarywind:Android-PickerView:4.1.6' //data,option.区域选择滚轮
-
-    api 'com.lzy.widget:imagepicker:0.6.1'//仿微信图片选择 无压缩
-    api 'top.zibin:Luban:1.1.8'//鲁班压缩
+    //android Material Design 扁平设计
+    api "net.qiujuer.genius:ui:$rootProject.ext.materialDesignViewVersion"
+    //CardView
+    api "com.android.support:cardview-v7:$rootProject.ext.supportVersion"
 
     //最强工具类
     api 'com.blankj:utilcode:1.20.0'
+
     //状态栏工具
-    api ('com.github.longlong579:StatusBarCompatUtil:1.1.0', { exclude group: 'com.android.support' })
+    api('com.github.longlong579:StatusBarCompatUtil:1.1.0', {
+        exclude group: 'com.android.support'
+    })
 
-    // glide
+    //扩展的TextView
+    api "com.ruffian.library:RWidgetHelper:$rootProject.ext.RWidgetHelperVersion"
+    //流布局
+    api 'cn.bingoogolapple:bga-flowlayout:1.0.0@aar'
+    //换行Text
+    api 'me.biubiubiu.justifytext:library:1.1'
+    //TDialog
+    api('com.timmy.tdialog:tdialog:2.0.0', {
+        exclude group: 'com.android.support'
+    })
+    //WheelView
+    api 'com.contrarywind:wheelview:4.0.8'
+    //data,option.区域选择滚轮
+    api 'com.contrarywind:Android-PickerView:4.1.6'
+
+    //底部导航栏样式BottomNavigationBar
+    api "com.ashokvarma.android:bottom-navigation-bar:$rootProject.ext.navigationbarVersion"
+
+    // 修复 官方fragment的一些坑 supportFragment
+    api "me.yokeyword:fragmentation:$rootProject.ext.fragmentationVersion"
+    api "me.yokeyword:fragmentation-swipeback:$rootProject.ext.fragmentationVersion"
+
+
+    //----------------------RecycleView相关--------------------------------------
+    //SuperRecyclerView
+    api "com.choices.divider:RecyclerView_Divider:$rootProject.ext.recycleviewDividerVersion"
+    // 增强recycler adapter
+    api "com.github.CymChad:BaseRecyclerViewAdapterHelper:$rootProject.ext.BASE_RECYCLERVIEW_HELPER_VERSION"
+    //------------------------------------------------------------------------------
+
+
+    /**
+     * 注意根目录添加
+     allprojects {repositories {flatDir {dirs 'libs'
+     dirs project(':common').file('libs')}}}*/
+    api(name: 'recyclerview', ext: 'aar')
+
+    //----------------------------------图片相关--------------------------------------------------------------------
+    //多图选择器 自带鲁班压缩 剪切  或者可以用TakePhoto
+    api 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
+    //api 'com.lzy.widget:imagepicker:0.6.1'//仿微信图片选择 无压缩 已不更新
+    //api 'top.zibin:Luban:1.1.8'//鲁班压缩
+    // api 'com.sunfusheng:GlideImageView:2.0.0'//GlideImageView 圆形 圆角 高斯模糊 GlideImageView.load() 已包含Glide4.8.0
+
+
+    //----------------------------------glide相关--------------------------------------------------------------------
     api "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"
+    api "com.github.bumptech.glide:annotations:$rootProject.ext.glideVersion"
     kapt "com.github.bumptech.glide:compiler:$rootProject.ext.glideVersion"
+    api "com.github.bumptech.glide:okhttp3-integration:$rootProject.ext.glideVersion"
+    // Glide变化 四周圆角处理 模糊 圆角 黑白等 glide_transformations
+    api "jp.wasabeef:glide-transformations:$rootProject.ext.glide_transformations"
+    //滤镜
     api "jp.co.cyberagent.android.gpuimage:gpuimage-library:$rootProject.ext.gpuimage_version"
-    api 'jp.wasabeef:glide-transformations:3.3.0'
+    //-------------------------------------------------------------------------------------------------
 
-    api "com.google.code.gson:gson:$rootProject.ext.gsonVersion"//gson
-    api "org.greenrobot:eventbus:$rootProject.ext.eventBusVersion"  // eventbus
+    //gson
+    api "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
 
+    // eventbus
+    api "org.greenrobot:eventbus:$rootProject.ext.eventBusVersion"
 }

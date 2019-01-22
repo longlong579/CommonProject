@@ -2,10 +2,16 @@
 
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.renderscript.RenderScript
 import android.view.View
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.xhl.statusbarcompatutil.StatusBarCompat
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import kotlinx.android.synthetic.main.fragment_login_inform_audit.*
 import self.xhl.com.common.baseui.baseFragment.ToolbarFragment
+import self.xhl.com.common.glide.*
+import self.xhl.com.common.glide.progress.ProgressManager
 import self.xhl.com.commonproject.data.pager.PageBean
 import self.xhl.com.commonproject.kotlinextension.singleToast
 
@@ -50,8 +56,14 @@ class LoginFragment : ToolbarFragment() {
 //        btnBack2Login.singclick {
 //            var v = it
 //        }
+        var path1 = "http://ww1.sinaimg.cn/large/85cccab3gw1etdkmwyrtsg20dw07hx33.jpg"
+        var path2 = "http://img.52z.com/upload/news/20130624/201306241320518553.jpg"
         btnBack2Login.setOnClickListener {
             singleToast("wsce")
+            //imageLoad(context!!, path1, imageView, RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE))
+            imageLoadCircle(context!!, path2, imageView)
+            imageLoadRoundedCorners(context!!,path2,imageView,20,RoundedCornersTransformation.CornerType.BOTTOM)
+            //imageLoadWithProgress(context!!,"http://ww1.sinaimg.cn/large/85cccab3gw1etdkmwyrtsg20dw07hx33.jpg",imageView,progressView)
         }
 
     }
