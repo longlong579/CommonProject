@@ -34,7 +34,7 @@ class MainActivity : PermissionBaseActivity() {
             override fun onReject() {
                 toast("授权失败")
             }
-        },PermissionUtil.PERMISSION_CAMERA,PermissionUtil.PERMISSION_READ_CONTACTS,PermissionUtil.PERMISSION_READ_EXTERNAL_STORAGE)
+        },PermissionUtil.PERMISSION_READ_CONTACTS)
 
          if(findFragment(LoginFragment::class.java)==null)
          {

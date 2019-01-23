@@ -50,6 +50,7 @@ public abstract class PermissionBaseActivity extends ToolbarActivity {
      * @param onPermissionResultListener 申请权限结果回调
      */
     public void checkPermissions(OnPermissionResultListener onPermissionResultListener,final String ...permissions) {
+        flagIsForcePermission = false;
         if (Build.VERSION.SDK_INT < 23 || permissions.length == 0) {// android6.0已下不需要申请，直接为"同意"
             if (onPermissionResultListener != null)
                 onPermissionResultListener.onAllow();

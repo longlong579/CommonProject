@@ -72,4 +72,5 @@ dependencies {
     implementation "com.eightbitlab:rxbus:$rootProject.ext.rxBusVersion"
     implementation project(':common_net')
     implementation project(':common')
+    implementation project(':scanner')
 }

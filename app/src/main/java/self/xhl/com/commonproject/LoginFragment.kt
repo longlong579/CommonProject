@@ -1,18 +1,20 @@
 ﻿package self.xhl.com.commonproject
 
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.renderscript.RenderScript
 import android.view.View
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
+import android.view.WindowManager
 import com.xhl.statusbarcompatutil.StatusBarCompat
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import kotlinx.android.synthetic.main.fragment_login_inform_audit.*
+import searchview.xhl.com.scanner.qrcode.zxingScaner.ScannerActivity
+import self.xhl.com.common.baseui.baseActivity.PermissionBaseActivity
 import self.xhl.com.common.baseui.baseFragment.ToolbarFragment
-import self.xhl.com.common.glide.*
-import self.xhl.com.common.glide.progress.ProgressManager
-import self.xhl.com.commonproject.data.pager.PageBean
+import self.xhl.com.common.glide.imageLoadCircle
+import self.xhl.com.common.glide.imageLoadRoundedCorners
+import self.xhl.com.common.utils.PermissionUtil
 import self.xhl.com.commonproject.kotlinextension.singleToast
 
 
@@ -33,18 +35,21 @@ class LoginFragment : ToolbarFragment() {
 
     override fun initToolBarPre() {
         super.initToolBarPre()
-        StatusBarCompat.translucentStatusBar(_mActivity, false)
-        StatusBarCompat.setStatusBarDarkFont(_mActivity, false)
         build().setHasToolBar(true)
                 .setShowCenterTitle(false)
                 .setToolBarTitle("我是Frgment测试")
                 .setToolBarTitleColorRes(R.color.red_100)
                 .setEnableBack(true)
-        var p = PageBean
     }
 
     override fun initWidget(root: View) {
-
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            _mActivity.window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)  //透明状态栏
+//            _mActivity.window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION) //透明导航栏
+//        }
+        StatusBarCompat.setOffsetPaddingView(_mActivity,getToorBar())
+        StatusBarCompat.translucentStatusBar(_mActivity)
+        StatusBarCompat.setStatusBarDarkFont(_mActivity, false)
     }
 
     override fun onFirstInit() {
@@ -65,6 +70,8 @@ class LoginFragment : ToolbarFragment() {
             imageLoadRoundedCorners(context!!,path2,imageView,20,RoundedCornersTransformation.CornerType.BOTTOM)
             getToorBar()?.title="ww"
             //imageLoadWithProgress(context!!,"http://ww1.sinaimg.cn/large/85cccab3gw1etdkmwyrtsg20dw07hx33.jpg",imageView,progressView)
+            val intent=Intent(context,ScannerActivity::class.java)
+            startActivity(intent)
         }
 
     }

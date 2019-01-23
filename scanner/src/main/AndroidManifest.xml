@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="searchview.xhl.com.scanner">
-    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application>
-        <activity android:name=".qrcode.zxingScaner.ScanerActivity"></activity>
+        <activity android:name=".qrcode.zxingScaner.ScannerActivity"></activity>
     </application>
 
 </manifest>
