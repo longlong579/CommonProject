@@ -6,7 +6,6 @@
     <searchview.xhl.com.scanner.qrcode.zxing.ZXingView
         android:id="@+id/zxingview"
         style="@style/MatchMatch"
-        android:fitsSystemWindows="true"
         app:qrcv_animTime="1000"
         app:qrcv_barCodeTipText="将条码放入框内，即可自动扫描"
         app:qrcv_barcodeRectHeight="200dp"

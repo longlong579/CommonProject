@@ -12,12 +12,14 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Vibrator
 import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.app.AppCompatActivity
 import android.view.Window
 import android.view.WindowManager
 import kotlinx.android.synthetic.main.activity_scanner.*
 import kotlinx.android.synthetic.main.toolbar.*
 import searchview.xhl.com.scanner.R
+import searchview.xhl.com.scanner.R.id.zxingview
 import searchview.xhl.com.scanner.qrcode.core.QRCodeView
 
 /**
@@ -37,8 +39,8 @@ class ScannerActivity : AppCompatActivity(), QRCodeView.Delegate {
         requestWindowFeature(Window.FEATURE_NO_TITLE)//无标题
         setTransparentStatusBar(this)//状态栏导航栏透明
         setContentView(R.layout.activity_scanner)
-        goRequestPermission(permissions)
         zxingview.setDelegate(this)
+        permissionAllAllow()//不在此调用  mSurfaceCreated = false;开始进来则为false
         zxingview.stopSpotAndHiddenRect() // 停止识别，并且隐藏扫描框
         btnPic.setOnClickListener {
             //系统相册
@@ -69,11 +71,12 @@ class ScannerActivity : AppCompatActivity(), QRCodeView.Delegate {
     private fun setTransparentStatusBar(activity: Activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             activity.window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)  //透明状态栏
-            activity.window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION) //透明导航栏
+            //activity.window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION) //透明导航栏
         }
     }
     override fun onStart() {
         super.onStart()
+        goRequestPermission(permissions)
     }
 
     override fun onResume() {
@@ -98,7 +101,7 @@ class ScannerActivity : AppCompatActivity(), QRCodeView.Delegate {
     override fun onScanQRCodeSuccess(result: String?) {
 
         vibrate()
-        //zxingview.startSpot() // 开始识别
+        zxingview.startSpot() // 开始识别
     }
 
     override fun onCameraAmbientBrightnessChanged(isDark: Boolean) {
