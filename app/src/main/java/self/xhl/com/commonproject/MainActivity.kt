@@ -14,13 +14,13 @@ class MainActivity : PermissionBaseActivity() {
 
     override fun initToolBarPre() {
         super.initToolBarPre()
-        StatusBarCompat.translucentStatusBar(this,true)
-        StatusBarCompat.setStatusBarDarkFont(this,true)
+//        StatusBarCompat.translucentStatusBar(this,true)
+//        StatusBarCompat.setStatusBarDarkFont(this,true)
         build().setHasToolBar(false)
-//                .setShowCenterTitle(true)
-//                .setToolBarTitle("我是测试")
-//                .setToolBarTitleColorRes(R.color.red_100)
-//                .setEnableBack(true)
+                .setShowCenterTitle(true)
+                .setToolBarTitle("我是测试")
+                .setToolBarTitleColorRes(R.color.red_100)
+                .setEnableBack(true)
     }
 
     override fun initWidget() {

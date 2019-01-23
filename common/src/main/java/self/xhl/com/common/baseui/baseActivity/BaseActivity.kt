@@ -42,7 +42,6 @@ public abstract class BaseActivity:SupportActivity()
      * 初始化窗口
      */
     open fun initWidows() {
-
     }
 
     /**

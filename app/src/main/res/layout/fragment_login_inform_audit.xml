@@ -53,7 +53,7 @@
 
         android:textSize="16sp" />
 
-    <com.ruffian.library.RTextView
+    <com.ruffian.library.widget.RTextView
         android:id="@+id/btnBack2Login"
         android:layout_width="match_parent"
         android:layout_height="50dp"

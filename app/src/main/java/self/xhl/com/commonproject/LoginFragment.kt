@@ -33,10 +33,10 @@ class LoginFragment : ToolbarFragment() {
 
     override fun initToolBarPre() {
         super.initToolBarPre()
-        StatusBarCompat.translucentStatusBar(_mActivity, false)
-        StatusBarCompat.setStatusBarDarkFont(_mActivity, false)
+//        StatusBarCompat.translucentStatusBar(_mActivity, false)
+//        StatusBarCompat.setStatusBarDarkFont(_mActivity, false)
         build().setHasToolBar(true)
-                .setShowCenterTitle(true)
+                .setShowCenterTitle(false)
                 .setToolBarTitle("我是Frgment测试")
                 .setToolBarTitleColorRes(R.color.red_100)
                 .setEnableBack(true)
@@ -63,6 +63,7 @@ class LoginFragment : ToolbarFragment() {
             //imageLoad(context!!, path1, imageView, RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE))
             imageLoadCircle(context!!, path2, imageView)
             imageLoadRoundedCorners(context!!,path2,imageView,20,RoundedCornersTransformation.CornerType.BOTTOM)
+            getToorBar()?.title="ww"
             //imageLoadWithProgress(context!!,"http://ww1.sinaimg.cn/large/85cccab3gw1etdkmwyrtsg20dw07hx33.jpg",imageView,progressView)
         }
 
