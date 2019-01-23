@@ -46,4 +46,6 @@ dependencies {
 //    api "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
 //    api 'com.github.tbruyelle:rxpermissions:0.10.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // eventbus
+    api "org.greenrobot:eventbus:$rootProject.ext.eventBusVersion"
 }

@@ -12,26 +12,25 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Vibrator
 import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.app.AppCompatActivity
 import android.view.Window
 import android.view.WindowManager
 import kotlinx.android.synthetic.main.activity_scanner.*
-import kotlinx.android.synthetic.main.toolbar.*
+import org.greenrobot.eventbus.EventBus
 import searchview.xhl.com.scanner.R
-import searchview.xhl.com.scanner.R.id.zxingview
+import searchview.xhl.com.scanner.qrcode.ScannerResultEvent
 import searchview.xhl.com.scanner.qrcode.core.QRCodeView
 
 /**
-* @作者 xhl
-* 注意：权限交由外部处理 未授权则不许进入
-* @创建时间 2019/1/23 17:36
-*/
+ * @作者 xhl
+ * 注意：权限交由外部处理 未授权则不许进入
+ * @创建时间 2019/1/23 17:36
+ */
 class ScannerActivity : AppCompatActivity(), QRCodeView.Delegate {
     private val TAG = ScannerActivity::class.java.simpleName
     private val REQUEST_CODE_CHOOSE_QRCODE_FROM_GALLERY = 666
-    private var mFlashing=false
-    private var permissions: Array<String> = arrayOf(Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    private var mFlashing = false
+    private var permissions: Array<String> = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
     private var tipDialog: AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,18 +70,15 @@ class ScannerActivity : AppCompatActivity(), QRCodeView.Delegate {
     private fun setTransparentStatusBar(activity: Activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             activity.window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)  //透明状态栏
-            //activity.window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION) //透明导航栏
+            activity.window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION) //透明导航栏
         }
     }
+
     override fun onStart() {
         super.onStart()
         goRequestPermission(permissions)
     }
 
-    override fun onResume() {
-        super.onResume()
-       // goRequestPermission(permissions)
-    }
     override fun onStop() {
         zxingview.stopCamera() // 关闭摄像头预览，并且隐藏扫描框
         super.onStop()
@@ -95,32 +91,6 @@ class ScannerActivity : AppCompatActivity(), QRCodeView.Delegate {
         }
         zxingview.onDestroy() // 销毁二维码扫描控件
         super.onDestroy()
-    }
-
-    //----------------------------------zxing回调-------------------------------------
-    override fun onScanQRCodeSuccess(result: String?) {
-
-        vibrate()
-        zxingview.startSpot() // 开始识别
-    }
-
-    override fun onCameraAmbientBrightnessChanged(isDark: Boolean) {
-        // 这里是通过修改提示文案来展示环境是否过暗的状态，接入方也可以根据 isDark 的值来实现其他交互效果
-        var tipText = zxingview.getScanBoxView().getTipText()
-        val ambientBrightnessTip = "\n环境过暗，请打开闪光灯"
-        if (isDark) {
-            if (!tipText.contains(ambientBrightnessTip)) {
-                zxingview.getScanBoxView().setTipText(tipText + ambientBrightnessTip)
-            }
-        } else {
-            if (tipText.contains(ambientBrightnessTip)) {
-                tipText = tipText.substring(0, tipText.indexOf(ambientBrightnessTip))
-                zxingview.getScanBoxView().setTipText(tipText)
-            }
-        }
-    }
-
-    override fun onScanQRCodeOpenCameraError() {
     }
 
     private fun vibrate() {
@@ -182,13 +152,13 @@ class ScannerActivity : AppCompatActivity(), QRCodeView.Delegate {
         tipDialog = AlertDialog.Builder(this)
                 .setTitle(PermissionUtil.getPermissionTip(permission))
                 .setMessage(strMsg)
-                .setNegativeButton(strBtnCancel,{dialog, which ->
+                .setNegativeButton(strBtnCancel, { dialog, which ->
                     tipDialog?.cancel()
                     onReject()
                 }).setPositiveButton("去授权", { dialog, which ->
-                    dialog?.cancel()
-                    goRequestPermission(permissions)
-                })
+            dialog?.cancel()
+            goRequestPermission(permissions)
+        })
                 .setCancelable(false)
                 .create()
 
@@ -204,24 +174,23 @@ class ScannerActivity : AppCompatActivity(), QRCodeView.Delegate {
                     tipDialog?.cancel()
                     onReject()
                 }).setPositiveButton("授权", DialogInterface.OnClickListener { dialog, which ->
-                    tipDialog?.cancel()
-                    toAppDetailSetting()
-                })
+            tipDialog?.cancel()
+            toAppDetailSetting()
+        })
                 .setCancelable(false)
                 .create()
 
         tipDialog?.show()
     }
 
-    private fun permissionAllAllow()
-    {
+    private fun permissionAllAllow() {
         zxingview.startCamera() // 打开后置摄像头开始预览，但是并未开始识别
         //        mZXingView.startCamera(Camera.CameraInfo.CAMERA_FACING_FRONT); // 打开前置摄像头开始预览，但是并未开始识别
 
         zxingview.startSpotAndShowRect() // 显示扫描框，并开始识别
     }
-    private fun onReject()
-    {
+
+    private fun onReject() {
         finish()
     }
 
@@ -240,6 +209,7 @@ class ScannerActivity : AppCompatActivity(), QRCodeView.Delegate {
     private fun goRequestPermission(permissions: Array<String>) {
         ActivityCompat.requestPermissions(this, permissions, permissions.size)
     }
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         // 循环判断权限，只要有一个拒绝了，则回调onReject()。 全部允许时才回调onAllow()
@@ -260,5 +230,32 @@ class ScannerActivity : AppCompatActivity(), QRCodeView.Delegate {
             }
         }
         permissionAllAllow()
+    }
+
+    //----------------------------------zxing回调-------------------------------------
+    override fun onScanQRCodeSuccess(result: String?) {
+        vibrate()
+        EventBus.getDefault().post(ScannerResultEvent(result))
+        finish()
+       // zxingview.startSpot() // 开始识别
+    }
+
+    override fun onCameraAmbientBrightnessChanged(isDark: Boolean) {
+        // 这里是通过修改提示文案来展示环境是否过暗的状态，接入方也可以根据 isDark 的值来实现其他交互效果
+        var tipText = zxingview.getScanBoxView().getTipText()
+        val ambientBrightnessTip = "\n环境过暗，请打开闪光灯"
+        if (isDark) {
+            if (!tipText.contains(ambientBrightnessTip)) {
+                zxingview.getScanBoxView().setTipText(tipText + ambientBrightnessTip)
+            }
+        } else {
+            if (tipText.contains(ambientBrightnessTip)) {
+                tipText = tipText.substring(0, tipText.indexOf(ambientBrightnessTip))
+                zxingview.getScanBoxView().setTipText(tipText)
+            }
+        }
+    }
+
+    override fun onScanQRCodeOpenCameraError() {
     }
 }
