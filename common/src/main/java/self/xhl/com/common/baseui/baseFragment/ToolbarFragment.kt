@@ -63,8 +63,8 @@ public abstract class ToolbarFragment : BaseFragment() {
     }
 
     private fun initToolbarHere(root: View) {
+        val toolbar = root.findViewById<View>(R.id.toolbar)
         if (hasBar) {
-            val toolbar = root.findViewById<View>(R.id.toolbar)
             when (toolbar) {
                 null -> throw RuntimeException("该布局不包含toolBar,请添加toolBar或复写hasToolBar")
                 else -> toolbar as Toolbar
@@ -96,6 +96,13 @@ public abstract class ToolbarFragment : BaseFragment() {
                 initToolbarNav(toolbar)
             }
             initToolbarMenue(toolbar)
+        }
+        else
+        {
+            if(toolbar!=null)
+            {
+                toolbar.visibility=View.GONE
+            }
         }
     }
 
