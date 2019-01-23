@@ -18,6 +18,8 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 
+import searchview.xhl.com.scanner.R;
+
 public class ScanBoxView extends View {
     private int mMoveStepDistance;
     private int mAnimDelayTime;
@@ -218,7 +220,7 @@ public class ScanBoxView extends View {
             mOriginQRCodeGridScanLineBitmap = ((BitmapDrawable) mCustomGridScanLineDrawable).getBitmap();
         }
         if (mOriginQRCodeGridScanLineBitmap == null) {
-            mOriginQRCodeGridScanLineBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.qrcode_default_grid_scan_line);
+            mOriginQRCodeGridScanLineBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.qrcode_default_grid_scan_line);
             mOriginQRCodeGridScanLineBitmap = BGAQRCodeUtil.makeTintBitmap(mOriginQRCodeGridScanLineBitmap, mScanLineColor);
         }
         mOriginBarCodeGridScanLineBitmap = BGAQRCodeUtil.adjustPhotoRotation(mOriginQRCodeGridScanLineBitmap, 90);
@@ -230,7 +232,7 @@ public class ScanBoxView extends View {
             mOriginQRCodeScanLineBitmap = ((BitmapDrawable) mCustomScanLineDrawable).getBitmap();
         }
         if (mOriginQRCodeScanLineBitmap == null) {
-            mOriginQRCodeScanLineBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.qrcode_default_scan_line);
+            mOriginQRCodeScanLineBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.qrcode_default_scan_line);
             mOriginQRCodeScanLineBitmap = BGAQRCodeUtil.makeTintBitmap(mOriginQRCodeScanLineBitmap, mScanLineColor);
         }
         mOriginBarCodeScanLineBitmap = BGAQRCodeUtil.adjustPhotoRotation(mOriginQRCodeScanLineBitmap, 90);

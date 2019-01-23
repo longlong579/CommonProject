@@ -1,13 +1,13 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion appCompileSdkVersion
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion appMinSdkVersion
+        targetSdkVersion appTargetSdkVersion
+        versionCode appVersionCode
+        versionName appVersionName
     }
 
     buildTypes {
@@ -17,9 +17,26 @@ android {
         }
     }
 
-}
 
+}
+allprojects {
+    repositories {
+        flatDir {
+            dirs 'libs'
+            dirs project(':common').file('libs')
+        }
+    }
+}
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.google.zxing:core:3.3.3'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    compileOnly 'com.google.zxing:core:3.3.3'
+//    api "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
+//    api "com.android.support.constraint:constraint-layout:$rootProject.ext.constrlayoutVersion"
+//
+//    // rxjava/rxandroid/RxPermission
+//    api "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjavaVersion"
+//    api "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
+//    api 'com.github.tbruyelle:rxpermissions:0.10.2'
+    implementation project(':common')
 }

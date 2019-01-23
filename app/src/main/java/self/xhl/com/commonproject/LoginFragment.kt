@@ -33,8 +33,8 @@ class LoginFragment : ToolbarFragment() {
 
     override fun initToolBarPre() {
         super.initToolBarPre()
-//        StatusBarCompat.translucentStatusBar(_mActivity, false)
-//        StatusBarCompat.setStatusBarDarkFont(_mActivity, false)
+        StatusBarCompat.translucentStatusBar(_mActivity, false)
+        StatusBarCompat.setStatusBarDarkFont(_mActivity, false)
         build().setHasToolBar(true)
                 .setShowCenterTitle(false)
                 .setToolBarTitle("我是Frgment测试")
