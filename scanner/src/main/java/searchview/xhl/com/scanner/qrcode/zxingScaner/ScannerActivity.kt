@@ -10,6 +10,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
 import android.os.Vibrator
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
@@ -121,8 +122,14 @@ class ScannerActivity : AppCompatActivity(), QRCodeView.Delegate {
     }
 
     private fun vibrate() {
-        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        vibrator.vibrate(200)
+        val vibrator = getSystemService(Activity.VIBRATOR_SERVICE) as Vibrator
+                ?: return
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            vibrator.vibrate(VibrationEffect.createOneShot(200, 0x8F))
+        } else {
+            vibrator.vibrate(200)
+        }
     }
 
     //注意 用kotlin 时Intent? 可空 否则 进入系统相册不选择直接返回会崩溃

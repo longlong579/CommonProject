@@ -64,12 +64,7 @@ dependencies {
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 
-    // retrofit
-    implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
-    implementation "com.squareup.retrofit2:adapter-rxjava:$rootProject.ext.retrofit2RxjavaAdapterVersion"
-    // rxjava/rxandroid
-    implementation "com.eightbitlab:rxbus:$rootProject.ext.rxBusVersion"
+
     implementation project(':common_net')
     implementation project(':common')
     implementation project(':scanner')

@@ -23,24 +23,23 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    api "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
+    compileOnly "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
     // kotlin
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api 'org.jetbrains.anko:anko-sdk15:0.10.8'
-    api 'org.jetbrains.anko:anko-common:0.10.5'
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    compileOnly 'org.jetbrains.anko:anko-sdk15:0.10.8'
+    compileOnly 'org.jetbrains.anko:anko-common:0.10.5'
 
     // retrofit
-    api "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
-    api "com.squareup.retrofit2:converter-scalars:$rootProject.ext.retrofitVersion"
-    api "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
-    api "com.squareup.retrofit2:adapter-rxjava:$rootProject.ext.retrofitVersion"
+    compileOnly "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
+    compileOnly "com.squareup.retrofit2:converter-scalars:$rootProject.ext.retrofitVersion"
+    compileOnly "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
+    compileOnly "com.squareup.retrofit2:adapter-rxjava:$rootProject.ext.retrofitVersion"
 
     // rxjava/rxandroid
-    api "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjavaVersion"
-    api "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
-    api "com.eightbitlab:rxbus:$rootProject.ext.rxBusVersion"
+    compileOnly "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjavaVersion"
+    compileOnly "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
+    compileOnly "com.eightbitlab:rxbus:$rootProject.ext.rxBusVersion"
 
     //gson
-    implementation "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
-    implementation "com.eightbitlab:rxbus:$rootProject.ext.rxBusVersion"
+    compileOnly "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
 }

@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
@@ -97,6 +98,7 @@ public class QRCodeEncoder {
         }
     }
 
+
     /**
      * 添加logo到二维码图片上
      */
@@ -126,6 +128,66 @@ public class QRCodeEncoder {
         return bitmap;
     }
 
+    /**
+     * 同步创建指定前景色、指定背景色、带logo的二维码图片。该方法是耗时操作，请在子线程中调用。
+     *
+     * @param content text
+     * @param width width
+     * @param height height
+     * @param foregroundColors 上下左右四部分前景色，背景默认透明。
+     * @return bitmap
+     */
+    public static Bitmap syncEncodeQRCode(String content, int width, int height, int[] foregroundColors, Bitmap logo) {
+        int[] newColors = new int[4];
+        for (int i = 0; i < 4; i++) {
+            newColors[i] = Color.BLACK;
+        }
+        if (foregroundColors != null)
+            System.arraycopy(foregroundColors, 0, newColors, 0, foregroundColors.length);
+
+        try {
+            BitMatrix result = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, width, height, HINTS);
+            int w = result.getWidth();
+            int h = result.getHeight();
+            int[] pixels = new int[w * h];
+            for (int y = 0; y < h; y++) {
+                int offset = y * w;
+                for (int x = 0; x < w; x++) {
+                    if (result.get(x, y)) {
+                        pixels[offset + x] = newColors[getAreaIndex(w, h, x, y)];
+                    } else {
+                        pixels[offset + x] = Color.TRANSPARENT;
+                    }
+                }
+            }
+
+            Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+            bitmap.setPixels(pixels, 0, w, 0, 0, w, h);
+            return addLogoToQRCode(bitmap, logo);
+        } catch (WriterException | IllegalArgumentException e) {
+            return null;
+        }
+    }
+
+    private static int getAreaIndex(int w, int h, int x, int y) {
+        int centerW = w / 2;
+        int centerH = h / 2;
+        int index = 0;
+        if (x >= centerW)
+            if (y >= centerH)
+                index = 3;
+            else
+                index = 1;
+        else if (y >= centerH)
+            index = 2;
+        else
+            index = 0;
+        return index;
+    }
+
+
+
+    //---------------------------------------条形码-----------------------------------------------------
     /**
      * 同步创建条形码图片
      *

@@ -57,15 +57,14 @@ dependencies {
     api "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
     api "com.squareup.retrofit2:converter-scalars:$rootProject.ext.retrofitVersion"
     api "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
-    api "com.squareup.retrofit2:adapter-rxjava:$rootProject.ext.retrofitVersion"
+    api "com.squareup.retrofit2:adapter-rxjava:$rootProject.ext.retrofit2RxjavaAdapterVersion"
     api 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
 
 
-    // rxjava/rxandroid
-    compileOnly "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjavaVersion"
-    compileOnly "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
-    compileOnly "com.eightbitlab:rxbus:$rootProject.ext.rxBusVersion"
-    //RxPermission
+    // rxjava/rxandroid/rxbus/rxPermission
+    api "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjavaVersion"
+    api "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
+    api "com.eightbitlab:rxbus:$rootProject.ext.rxBusVersion"
     api 'com.github.tbruyelle:rxpermissions:0.10.2'
 
     //android Material Design 扁平设计
