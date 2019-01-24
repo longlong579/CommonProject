@@ -38,7 +38,7 @@ repositories {
 }//添加自己的aar     compile(name: 'filtermenu-1.0.1', ext: 'aar')
 
 dependencies {
-    api fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     // support
     api "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"

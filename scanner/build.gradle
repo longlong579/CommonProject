@@ -46,5 +46,10 @@ dependencies {
     compileOnly "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjavaVersion"
     compileOnly "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
     compileOnly "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
+    // eventbus
+    compileOnly "org.greenrobot:eventbus:$rootProject.ext.eventBusVersion"
+
+    compileOnly 'com.uber.autodispose:autodispose:1.1.0'
+    compileOnly 'com.uber.autodispose:autodispose-android-archcomponents:1.1.0'
 
 }
