@@ -9,7 +9,7 @@ import self.xhl.com.net.app.BaseApp
  * 2018/12/27 17:14
  */
 var mToast: Toast? = null
-fun Any?.singleToast(message: CharSequence) {
+fun Any?.singleToast(message: CharSequence?) {
     when (mToast == null) {
         true -> {
             mToast = Toast.makeText(BaseApp.instance, message, Toast.LENGTH_SHORT)//利用全局Context 简化代码 否则每次Activity销毁都要置null

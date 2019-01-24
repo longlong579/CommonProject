@@ -1,20 +1,20 @@
 ﻿package self.xhl.com.commonproject
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
-import android.view.WindowManager
 import com.xhl.statusbarcompatutil.StatusBarCompat
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 import kotlinx.android.synthetic.main.fragment_login_inform_audit.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+import searchview.xhl.com.scanner.qrcode.ScannerResultEvent
 import searchview.xhl.com.scanner.qrcode.zxingScaner.ScannerActivity
-import self.xhl.com.common.baseui.baseActivity.PermissionBaseActivity
 import self.xhl.com.common.baseui.baseFragment.ToolbarFragment
 import self.xhl.com.common.glide.imageLoadCircle
 import self.xhl.com.common.glide.imageLoadRoundedCorners
-import self.xhl.com.common.utils.PermissionUtil
 import self.xhl.com.commonproject.kotlinextension.singleToast
 
 
@@ -28,6 +28,11 @@ class LoginFragment : ToolbarFragment() {
 
     override fun getContentLayoutId(): Int {
         return R.layout.fragment_login_inform_audit
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        EventBus.getDefault().register(this)
     }
 
     override fun initArgs(bundle: Bundle?) {
@@ -47,7 +52,7 @@ class LoginFragment : ToolbarFragment() {
 //            _mActivity.window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)  //透明状态栏
 //            _mActivity.window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION) //透明导航栏
 //        }
-        StatusBarCompat.setOffsetPaddingView(_mActivity,getToorBar())
+        StatusBarCompat.setOffsetPaddingView(_mActivity, getToorBar())
         StatusBarCompat.translucentStatusBar(_mActivity)
         StatusBarCompat.setStatusBarDarkFont(_mActivity, false)
     }
@@ -64,13 +69,13 @@ class LoginFragment : ToolbarFragment() {
         var path1 = "http://ww1.sinaimg.cn/large/85cccab3gw1etdkmwyrtsg20dw07hx33.jpg"
         var path2 = "http://img.52z.com/upload/news/20130624/201306241320518553.jpg"
         btnBack2Login.setOnClickListener {
-            singleToast("wsce")
+            //singleToast("wsce")
             //imageLoad(context!!, path1, imageView, RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE))
             imageLoadCircle(context!!, path2, imageView)
-            imageLoadRoundedCorners(context!!,path2,imageView,20,RoundedCornersTransformation.CornerType.BOTTOM)
-            getToorBar()?.title="ww"
+            imageLoadRoundedCorners(context!!, path2, imageView, 20, RoundedCornersTransformation.CornerType.BOTTOM)
+            getToorBar()?.title = "ww"
             //imageLoadWithProgress(context!!,"http://ww1.sinaimg.cn/large/85cccab3gw1etdkmwyrtsg20dw07hx33.jpg",imageView,progressView)
-            val intent=Intent(context,ScannerActivity::class.java)
+            val intent = Intent(context, ScannerActivity::class.java)
             startActivity(intent)
         }
 
@@ -97,11 +102,20 @@ class LoginFragment : ToolbarFragment() {
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onEvent(event: ScannerResultEvent) {
+        singleToast(event.data)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
 //        countDownTimer.onFinish() 会执行2次
         countDownTimer.cancel()
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
     }
 
     companion object {
