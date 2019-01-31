@@ -6,7 +6,7 @@ import android.widget.Toast
 import com.timmy.tdialog.TDialog
 import self.xhl.com.common.baseui.baseFragment.ToolbarFragment
 import self.xhl.com.common.baseui.mvp.presenter.BaseContract
-import self.xhl.com.common.widget.LoadingDialog
+import self.xhl.com.common.dialog.dialogfragment.LoadingDialog
 
 /**
  * @author xhl

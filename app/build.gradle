@@ -70,6 +70,7 @@ dependencies {
     implementation project(':common')
     implementation project(':scanner')
 
-    implementation 'com.uber.autodispose:autodispose:1.1.0'
-    implementation 'com.uber.autodispose:autodispose-android-archcomponents:1.1.0'
+    //版本1.1.0是在AndroidX下编写的
+    implementation 'com.uber.autodispose:autodispose:0.6.1'
+    implementation 'com.uber.autodispose:autodispose-android-archcomponents:0.6.1'
 }

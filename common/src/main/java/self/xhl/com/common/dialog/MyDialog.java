@@ -1,4 +1,4 @@
-package self.xhl.com.common.widget;
+package self.xhl.com.common.dialog;
 
 import android.app.AlertDialog;
 import android.content.Context;

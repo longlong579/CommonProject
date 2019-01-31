@@ -3,7 +3,7 @@ ext {
     appVersionName = '1.0.1'
     appVersionCode = 1
 
-    appMinSdkVersion = 15
+    appMinSdkVersion = 16
     appTargetSdkVersion = 27
 
     appCompileSdkVersion= 27        //SDK版本
@@ -33,6 +33,7 @@ ext {
     RWidgetHelperVersion='1.0.4'    //RWidgetHelper 扩展功能的View 方便设置边框 背景 渐变 圆形图片
     BASE_RECYCLERVIEW_HELPER_VERSION = '2.9.27' //BRVAH版本 adapter
     recycleviewDividerVersion='1.0.0'  //分割线
+    TDialogVersion='2.1.1'//TDialog 用于展示简单的Dialog 底部则建议用BottomSheetDialogFragment
 
 
 

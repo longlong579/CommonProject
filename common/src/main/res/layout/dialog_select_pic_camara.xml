@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    
+    <com.ruffian.library.widget.RTextView
+        android:id="@+id/tv_take_photo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        app:corner_radius="5dp"
+        app:background_normal="@color/white"
+        android:gravity="center"
+        android:text="拍照片"
+        android:textColor="#222222"
+        android:textSize="16sp"/>
+    
+    <com.ruffian.library.widget.RTextView
+        android:id="@+id/tv_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="15dp"
+        app:corner_radius="5dp"
+        app:background_normal="@color/white"
+        android:gravity="center"
+        android:text="我的相册"
+        android:textColor="#222222"
+        android:textSize="16sp"/>
+    
+    <com.ruffian.library.widget.RTextView
+        android:id="@+id/tv_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        app:corner_radius="5dp"
+        app:background_normal="@color/white"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="#222222"
+        android:textSize="16sp"/>
+
+</LinearLayout>

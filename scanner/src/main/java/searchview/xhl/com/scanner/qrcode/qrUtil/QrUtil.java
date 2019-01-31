@@ -1,15 +1,12 @@
 package searchview.xhl.com.scanner.qrcode.qrUtil;
 
+import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.util.TypedValue;
 import android.widget.ImageView;
-
-
-import com.uber.autodispose.AutoDispose;
-import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -28,9 +25,11 @@ import searchview.xhl.com.scanner.qrcode.zxing.QRCodeEncoder;
 public class QrUtil {
 
 //------------------------------------在主线程直接用-----------------------------------------
+
     /**
      * 获取建造者
-     *qr
+     * qr
+     *
      * @param text 样式字符串文本
      */
     public static QrUtil.Builder builder(@NonNull String text) {
@@ -45,15 +44,15 @@ public class QrUtil {
 
         private int width = 160; //dp 二维码 值越大 越清晰
 
-        private Bitmap logo=null;
+        private Bitmap logo = null;
 
         private String content;
 
-        private int[] colors={Color.GREEN, 0x99FF4081, Color.BLUE, Color.CYAN};
+        private int[] colors = {Color.GREEN, 0x99FF4081, Color.BLUE, Color.CYAN};
 
-        private int barWidth=160;//一维码宽度  值越大 越清晰 也别太大，占内存
-        private int barHeigh=70;//一维码高度
-        private int barTextSize=0;//0时 底下无文字 单位px
+        private int barWidth = 160;//一维码宽度  值越大 越清晰 也别太大，占内存
+        private int barHeigh = 70;//一维码高度
+        private int barTextSize = 0;//0时 底下无文字 单位px
 
         public Builder backColor(int backgroundColor) {
             this.backgroundColor = backgroundColor;
@@ -90,10 +89,12 @@ public class QrUtil {
             this.barWidth = width;
             return this;
         }
+
         public Builder codeBarHeigh(int heigh) {
             this.barHeigh = heigh;
             return this;
         }
+
         public Builder codeTextSize(int textSize) {
             this.barTextSize = textSize;
             return this;
@@ -112,7 +113,7 @@ public class QrUtil {
         //4种颜色
         public Bitmap into4Color(ImageView imageView) {
             int sizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, width, imageView.getResources().getDisplayMetrics());
-            Bitmap bitmap = QRCodeEncoder.syncEncodeQRCode(content, sizePx, sizePx,colors, logo);
+            Bitmap bitmap = QRCodeEncoder.syncEncodeQRCode(content, sizePx, sizePx, colors, logo);
             if (imageView != null) {
                 imageView.setImageBitmap(bitmap);
             }
@@ -123,7 +124,7 @@ public class QrUtil {
         public Bitmap intoBar(ImageView imageView) {
             int widthPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, barWidth, imageView.getResources().getDisplayMetrics());
             int heighPx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, barHeigh, imageView.getResources().getDisplayMetrics());
-            Bitmap bitmap = QRCodeEncoder.syncEncodeBarcode(content, barWidth, barHeigh,barTextSize);
+            Bitmap bitmap = QRCodeEncoder.syncEncodeBarcode(content, barWidth, barHeigh, barTextSize);
             if (imageView != null) {
                 imageView.setImageBitmap(bitmap);
             }
@@ -132,22 +133,35 @@ public class QrUtil {
     }
 
 
-
     //------------------------------------在子线程用-----------------------------------------
 
+    static class f implements LifecycleOwner {
+        public f() {
+            super();
+        }
+
+        @NonNull
+        @Override
+        public Lifecycle getLifecycle() {
+            return null;
+        }
+    }
+
     //白底黑色的二维码  返回的Disposable 在onDestroy中销毁 防内存溢出 实际使用时生成还是比较快的，一般不会出现内存泄漏
-    public static Disposable createAndShowQRCode(String qrContent, final ImageView imageView,final Bitmap logo) {
+    public static Disposable createAndShowQRCode(String qrContent, final ImageView imageView, final Bitmap logo) {
         Disposable disposable = Observable.just(qrContent)
+
                 .flatMap(new Function<String, ObservableSource<Bitmap>>() {
                     @Override
                     public ObservableSource<Bitmap> apply(String s) throws Exception {
-                        int[] colors={Color.GREEN, 0x99FF4081, Color.BLUE, Color.CYAN};
+                        int[] colors = {Color.GREEN, 0x99FF4081, Color.BLUE, Color.CYAN};
                         int size = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 160, imageView.getResources().getDisplayMetrics());
-                        Bitmap bitmap=null;
-                        bitmap=QRCodeEncoder.syncEncodeQRCode(s, size, Color.BLACK, Color.WHITE, logo);
+                        Bitmap bitmap = null;
+                        bitmap = QRCodeEncoder.syncEncodeQRCode(s, size, Color.BLACK, Color.WHITE, logo);
                         return Observable.just(bitmap);
                     }
                 })
+
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Bitmap>() {
@@ -170,15 +184,13 @@ public class QrUtil {
                 .flatMap(new Function<String, ObservableSource<Bitmap>>() {
                     @Override
                     public ObservableSource<Bitmap> apply(String s) throws Exception {
-                        int[] colors={Color.GREEN, 0x99FF4081, Color.BLUE, Color.CYAN};
+                        int[] colors = {Color.GREEN, 0x99FF4081, Color.BLUE, Color.CYAN};
                         int size = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 160, imageView.getResources().getDisplayMetrics());
-                        Bitmap bitmap=null;
-                        if(foregroundColors==null) {
-                            bitmap= QRCodeEncoder.syncEncodeQRCode(s, size, size, colors, logo);
-                        }
-                        else
-                        {
-                             bitmap = QRCodeEncoder.syncEncodeQRCode(s, size, size, foregroundColors, logo);
+                        Bitmap bitmap = null;
+                        if (foregroundColors == null) {
+                            bitmap = QRCodeEncoder.syncEncodeQRCode(s, size, size, colors, logo);
+                        } else {
+                            bitmap = QRCodeEncoder.syncEncodeQRCode(s, size, size, foregroundColors, logo);
                         }
                         return Observable.just(bitmap);
                     }

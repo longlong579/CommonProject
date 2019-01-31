@@ -2,6 +2,7 @@
 
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
@@ -27,6 +28,7 @@ import searchview.xhl.com.scanner.qrcode.ScannerResultEvent
 import searchview.xhl.com.scanner.qrcode.qrUtil.QrUtil
 import searchview.xhl.com.scanner.qrcode.zxing.QRCodeEncoder
 import self.xhl.com.common.baseui.baseFragment.ToolbarFragment
+import self.xhl.com.common.dialog.bottom_sheet_dialogfragment.SelectImageTypeFragment
 import self.xhl.com.commonproject.kotlinextension.singleToast
 
 
@@ -91,7 +93,11 @@ class LoginFragment : ToolbarFragment() {
 //            startActivity(intent)
            // d=QrUtil.createAndShow4ColorsQRCode("wfsafsa",null,imageView,null)
            // QrUtil.builder("wrew").into4Color(imageView)
-            QrUtil.builder("wwr").intoBar(imageView)
+            //QrUtil.builder("wwr").intoBar(imageView)
+//            val intent = Intent(context, Main3Activity::class.java)
+//            startActivity(intent)
+            var s=SelectImageTypeFragment.newInstance("","")
+            s.show(fragmentManager,"fsa")
 
         }
     }

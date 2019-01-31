@@ -49,7 +49,8 @@ dependencies {
     // eventbus
     compileOnly "org.greenrobot:eventbus:$rootProject.ext.eventBusVersion"
 
-    compileOnly 'com.uber.autodispose:autodispose:1.1.0'
-    compileOnly 'com.uber.autodispose:autodispose-android-archcomponents:1.1.0'
+    //版本1.1.0是在AndroidX下编写的
+    compileOnly 'com.uber.autodispose:autodispose:0.6.1'
+    compileOnly 'com.uber.autodispose:autodispose-android-archcomponents:0.6.1'
 
 }
