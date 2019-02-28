@@ -8,7 +8,7 @@ import self.xhl.com.net.app.BaseApp
  * @desc
  * 2018/12/27 17:14
  */
-var mToast: Toast? = null
+private var mToast: Toast? = null
 fun Any?.singleToast(message: CharSequence?) {
     when (mToast == null) {
         true -> {

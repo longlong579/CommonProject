@@ -34,11 +34,14 @@ public class BottomBarTab extends FrameLayout {
     private int colorUnselected= Color.GRAY;
 
     private TextView mTvUnreadCount;
-
+    //只传一个icon 颜色由由filter改变
     public BottomBarTab(Context context, @DrawableRes int icon, CharSequence title) {
         this(context, null, icon, title);
     }
-
+    //传2个icon
+    public BottomBarTab(Context context, @DrawableRes int iconResId,@DrawableRes int iconSelectedResId, CharSequence title) {
+        this(context, null, iconResId, title);
+    }
     public BottomBarTab(Context context, AttributeSet attrs, int icon, CharSequence title) {
         this(context, attrs, 0, icon, title);
     }

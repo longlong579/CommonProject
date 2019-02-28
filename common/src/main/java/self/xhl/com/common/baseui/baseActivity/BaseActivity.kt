@@ -1,6 +1,7 @@
 package self.xhl.com.common.baseui.baseActivity
 
 import android.os.Bundle
+import android.support.v7.app.AppCompatDelegate
 import android.view.Window
 import me.yokeyword.fragmentation.SupportActivity
 import self.xhl.com.common.widget.emptyview.PlaceHolderView
@@ -21,7 +22,7 @@ public abstract class BaseActivity:SupportActivity()
         requestWindowFeature(Window.FEATURE_NO_TITLE)//隐藏标题栏
         // 在界面未初始化之前调用的初始化窗口
         initWidows()
-
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)//兼容Vector
         if (initArgs(intent.extras)) {
             // 得到界面Id并设置到Activity界面中
             val layId = getContentLayoutId()
