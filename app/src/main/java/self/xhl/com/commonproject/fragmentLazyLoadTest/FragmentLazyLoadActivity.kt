@@ -11,7 +11,9 @@ import kotlinx.android.synthetic.main.activity_main2.*
 import self.xhl.com.commonproject.MainActivity
 import self.xhl.com.commonproject.R
 
-
+/**
+ * Activity+Fragment 懒加载 异常退出保存数据测试 add模式
+ */
 class FragmentLazyLoadActivity : AppCompatActivity() {
 
     private lateinit var mFragmention: FragmentManager
