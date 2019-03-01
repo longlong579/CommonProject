@@ -8,5 +8,7 @@
     <color name="font_black">#333333</color>
     <color name="color_toobbar_title">#222222</color>
     <color name="red_100">#efa4a4</color>
+    <color name="colorRed">#EB1D1E</color>
     <color name="divider">#E5E5E5</color>
+    <color name="tab_text_normal">#212121</color>
 </resources>

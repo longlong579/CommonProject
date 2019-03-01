@@ -3,7 +3,6 @@ package searchview.xhl.com.scanner.qrcode.zxingScaner
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -25,6 +24,8 @@ import searchview.xhl.com.scanner.qrcode.core.QRCodeView
 /**
  * @作者 xhl
  * 注意：权限交由外部处理 未授权则不许进入
+ * 原先在启动时做了权限判断 ，但出现第一次权限判断后mSurfaceCreated = false的情况 导致扫码不能用
+ * 原因暂未找到，原先想反射设置mSurfaceCreated，保险起见用透明Activity做了权限判断
  * @创建时间 2019/1/23 17:36
  */
 class ScannerActivity : AppCompatActivity(), QRCodeView.Delegate {
@@ -41,7 +42,7 @@ class ScannerActivity : AppCompatActivity(), QRCodeView.Delegate {
         setContentView(R.layout.activity_scanner)
         zxingview.setDelegate(this)
         permissionAllAllow()//不在此调用  mSurfaceCreated = false;开始进来则为false
-        zxingview.stopSpotAndHiddenRect() // 停止识别，并且隐藏扫描框
+      //  zxingview.stopSpotAndHiddenRect() // 停止识别，并且隐藏扫描框
         btnPic.setOnClickListener {
             //系统相册
             val intent = Intent()
@@ -77,7 +78,7 @@ class ScannerActivity : AppCompatActivity(), QRCodeView.Delegate {
 
     override fun onStart() {
         super.onStart()
-        goRequestPermission(permissions)
+//        goRequestPermission(permissions)
     }
 
     override fun onStop() {
@@ -143,101 +144,101 @@ class ScannerActivity : AppCompatActivity(), QRCodeView.Delegate {
     }
 
 
-    //--------------------------------------权限-------------------------------
-
-    /**
-     * 显示提示"跳转到应用权限设置界面"的dialog
-     *
-     * @param permission 具体的某个权限，用于展示dialog的内容文字。
-     */
-    private var strBtnCancel = "取消"
-    private var strMsg: String? = null
-    private fun showTipDialog(permission: String) {
-        strBtnCancel = "确定"
-        strMsg = "相应功能需要本权限,您确定不授权?"
-
-        tipDialog = AlertDialog.Builder(this)
-                .setTitle(PermissionUtil.getPermissionTip(permission))
-                .setMessage(strMsg)
-                .setNegativeButton(strBtnCancel, { dialog, which ->
-                    tipDialog?.cancel()
-                    onReject()
-                }).setPositiveButton("去授权", { dialog, which ->
-            dialog?.cancel()
-            goRequestPermission(permissions)
-        })
-                .setCancelable(false)
-                .create()
-
-        tipDialog?.show()
-    }
-
-    private fun showRationaleTipDialog(permission: String) {
-        strBtnCancel = "取消"
-        tipDialog = AlertDialog.Builder(this)
-                .setTitle(PermissionUtil.getPermissionTip(permission))
-                .setMessage("你已拒绝过本权限的请求并选择“不再询问”，本次需要到“设置”页面重新授权。")
-                .setNegativeButton(strBtnCancel, { dialog, which ->
-                    tipDialog?.cancel()
-                    onReject()
-                }).setPositiveButton("授权", DialogInterface.OnClickListener { dialog, which ->
-            tipDialog?.cancel()
-            toAppDetailSetting()
-        })
-                .setCancelable(false)
-                .create()
-
-        tipDialog?.show()
-    }
-
+//    //--------------------------------------权限-------------------------------
+//
+//    /**
+//     * 显示提示"跳转到应用权限设置界面"的dialog
+//     *
+//     * @param permission 具体的某个权限，用于展示dialog的内容文字。
+//     */
+//    private var strBtnCancel = "取消"
+//    private var strMsg: String? = null
+//    private fun showTipDialog(permission: String) {
+//        strBtnCancel = "确定"
+//        strMsg = "相应功能需要本权限,您确定不授权?"
+//
+//        tipDialog = AlertDialog.Builder(this)
+//                .setTitle(PermissionUtil.getPermissionTip(permission))
+//                .setMessage(strMsg)
+//                .setNegativeButton(strBtnCancel, { dialog, which ->
+//                    tipDialog?.cancel()
+//                    onReject()
+//                }).setPositiveButton("去授权", { dialog, which ->
+//            dialog?.cancel()
+//            goRequestPermission(permissions)
+//        })
+//                .setCancelable(false)
+//                .create()
+//
+//        tipDialog?.show()
+//    }
+//
+//    private fun showRationaleTipDialog(permission: String) {
+//        strBtnCancel = "取消"
+//        tipDialog = AlertDialog.Builder(this)
+//                .setTitle(PermissionUtil.getPermissionTip(permission))
+//                .setMessage("你已拒绝过本权限的请求并选择“不再询问”，本次需要到“设置”页面重新授权。")
+//                .setNegativeButton(strBtnCancel, { dialog, which ->
+//                    tipDialog?.cancel()
+//                    onReject()
+//                }).setPositiveButton("授权", DialogInterface.OnClickListener { dialog, which ->
+//            tipDialog?.cancel()
+//            toAppDetailSetting()
+//        })
+//                .setCancelable(false)
+//                .create()
+//
+//        tipDialog?.show()
+//    }
+//
     private fun permissionAllAllow() {
         zxingview.startCamera() // 打开后置摄像头开始预览，但是并未开始识别
         //        mZXingView.startCamera(Camera.CameraInfo.CAMERA_FACING_FRONT); // 打开前置摄像头开始预览，但是并未开始识别
 
         zxingview.startSpotAndShowRect() // 显示扫描框，并开始识别
     }
-
-    private fun onReject() {
-        finish()
-    }
-
-    /**
-     * 跳转系统的App应用详情页
-     */
-    protected fun toAppDetailSetting() {
-        val localIntent = Intent()
-        localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        localIntent.action = "android.settings.APPLICATION_DETAILS_SETTINGS"
-        localIntent.data = Uri.fromParts("package", packageName, null)
-        startActivity(localIntent)
-    }
-
-    //权限授权
-    private fun goRequestPermission(permissions: Array<String>) {
-        ActivityCompat.requestPermissions(this, permissions, permissions.size)
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        // 循环判断权限，只要有一个拒绝了，则回调onReject()。 全部允许时才回调onAllow()
-        for (i in grantResults.indices) {
-            if (grantResults[i] == PackageManager.PERMISSION_DENIED) {// 拒绝权限
-                // 对于 ActivityCompat.shouldShowRequestPermissionRationale
-                // 1：用户拒绝了该权限，没有勾选"不再提醒"，此方法将返回true。
-                // 2：用户拒绝了该权限，有勾选"不再提醒"，此方法将返回 false。
-                // 3：如果用户同意了权限，此方法返回false
-                if (!ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[i])) {
-                    // 拒绝选了"不再提醒"，一般提示跳转到权限设置页面
-                    showRationaleTipDialog(permissions[i])
-                } else {
-                    showTipDialog(permissions[i])
-
-                }
-                return
-            }
-        }
-        permissionAllAllow()
-    }
+//
+//    private fun onReject() {
+//        finish()
+//    }
+//
+//    /**
+//     * 跳转系统的App应用详情页
+//     */
+//    protected fun toAppDetailSetting() {
+//        val localIntent = Intent()
+//        localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//        localIntent.action = "android.settings.APPLICATION_DETAILS_SETTINGS"
+//        localIntent.data = Uri.fromParts("package", packageName, null)
+//        startActivity(localIntent)
+//    }
+//
+//    //权限授权
+//    private fun goRequestPermission(permissions: Array<String>) {
+//        ActivityCompat.requestPermissions(this, permissions, permissions.size)
+//    }
+//
+//    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//        // 循环判断权限，只要有一个拒绝了，则回调onReject()。 全部允许时才回调onAllow()
+//        for (i in grantResults.indices) {
+//            if (grantResults[i] == PackageManager.PERMISSION_DENIED) {// 拒绝权限
+//                // 对于 ActivityCompat.shouldShowRequestPermissionRationale
+//                // 1：用户拒绝了该权限，没有勾选"不再提醒"，此方法将返回true。
+//                // 2：用户拒绝了该权限，有勾选"不再提醒"，此方法将返回 false。
+//                // 3：如果用户同意了权限，此方法返回false
+//                if (!ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[i])) {
+//                    // 拒绝选了"不再提醒"，一般提示跳转到权限设置页面
+//                    showRationaleTipDialog(permissions[i])
+//                } else {
+//                    showTipDialog(permissions[i])
+//
+//                }
+//                return
+//            }
+//        }
+//        permissionAllAllow()
+//    }
 
     //----------------------------------zxing回调-------------------------------------
     override fun onScanQRCodeSuccess(result: String?) {

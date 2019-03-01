@@ -7,7 +7,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application>
-        <activity android:name=".qrcode.zxingScaner.ScannerActivity"></activity>
+        <activity android:name=".qrcode.zxingScaner.ZingScannerActivity" android:theme="@style/Theme.Transparent"/>
+        <activity android:name=".qrcode.zxingScaner.ScannerActivity" />
     </application>
 
 </manifest>

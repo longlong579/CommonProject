@@ -23,7 +23,7 @@ android {
 //    packagingOptions {
 //        exclude 'META-INF/common_release.kotlin_module'
 //    }
-    buildToolsVersion '27.0.3'
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -145,4 +145,6 @@ dependencies {
     //版本1.1.0是在AndroidX下编写的
     api 'com.uber.autodispose:autodispose:0.6.1'
     api 'com.uber.autodispose:autodispose-android-archcomponents:0.6.1'
+
+    api 'q.rorbin:badgeview:1.1.3'
 }

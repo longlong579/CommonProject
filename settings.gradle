@@ -1,1 +1,1 @@
-include ':app', ':scanner','common',"common_net"
+include ':app', ':scanner', 'common', "common_net", ':djmaplocation'

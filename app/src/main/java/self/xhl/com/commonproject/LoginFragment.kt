@@ -1,34 +1,18 @@
 ﻿package self.xhl.com.commonproject
 
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleOwner
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.TypedValue
 import android.view.View
-import android.widget.ImageView
-import com.uber.autodispose.AutoDispose
-import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import com.xhl.statusbarcompatutil.StatusBarCompat
-import io.reactivex.Observable
-import io.reactivex.ObservableSource
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Consumer
-import io.reactivex.functions.Function
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_login_inform_audit.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import searchview.xhl.com.scanner.qrcode.ScannerResultEvent
-import searchview.xhl.com.scanner.qrcode.qrUtil.QrUtil
-import searchview.xhl.com.scanner.qrcode.zxing.QRCodeEncoder
+import searchview.xhl.com.scanner.qrcode.zxingScaner.ZingScannerActivity
 import self.xhl.com.common.baseui.baseFragment.ToolbarFragment
-import self.xhl.com.common.dialog.bottom_sheet_dialogfragment.SelectImageTypeFragment
 import self.xhl.com.commonproject.kotlinextension.singleToast
 
 
@@ -83,26 +67,29 @@ class LoginFragment : ToolbarFragment() {
         var path1 = "http://ww1.sinaimg.cn/large/85cccab3gw1etdkmwyrtsg20dw07hx33.jpg"
         var path2 = "http://img.52z.com/upload/news/20130624/201306241320518553.jpg"
         btnBack2Login.setOnClickListener {
-//            //singleToast("wsce")
+            //            //singleToast("wsce")
 //            //imageLoad(context!!, path1, imageView, RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE))
 //            imageLoadCircle(context!!, path2, imageView)
 //            imageLoadRoundedCorners(context!!, path2, imageView, 20, RoundedCornersTransformation.CornerType.BOTTOM)
 //            getToorBar()?.title = "ww"
 //            //imageLoadWithProgress(context!!,"http://ww1.sinaimg.cn/large/85cccab3gw1etdkmwyrtsg20dw07hx33.jpg",imageView,progressView)
-//            val intent = Intent(context, ScannerActivity::class.java)
-//            startActivity(intent)
-           // d=QrUtil.createAndShow4ColorsQRCode("wfsafsa",null,imageView,null)
-           // QrUtil.builder("wrew").into4Color(imageView)
+
+            // d=QrUtil.createAndShow4ColorsQRCode("wfsafsa",null,imageView,null)
+            // QrUtil.builder("wrew").into4Color(imageView)
             //QrUtil.builder("wwr").intoBar(imageView)
 //            val intent = Intent(context, Main3Activity::class.java)
 //            startActivity(intent)
-            var s=SelectImageTypeFragment.newInstance("","")
-            s.show(fragmentManager,"fsa")
+//            var s = SelectImageTypeFragment.newInstance("", "")
+//            s.showFragment(fragmentManager, "fsa")
+
+            /**********扫码***************/
+            val intent = Intent(context, ZingScannerActivity::class.java)
+            startActivity(intent)
 
         }
     }
 
-   var d: Disposable?=null
+    var d: Disposable? = null
     override fun initData() {
 
     }
@@ -138,8 +125,7 @@ class LoginFragment : ToolbarFragment() {
     override fun onDestroy() {
         super.onDestroy()
         EventBus.getDefault().unregister(this)
-        if(d!=null && !d?.isDisposed!!)
-        {
+        if (d != null && !d?.isDisposed!!) {
 //            d?.dispose()
 //            d=null
         }
