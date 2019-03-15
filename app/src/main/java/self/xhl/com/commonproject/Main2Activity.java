@@ -14,7 +14,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import self.xhl.com.common.dialog.bottom_sheet_dialogfragment.SelectImageTypeFragment;
 
 
 public class Main2Activity extends AppCompatActivity {
@@ -26,24 +25,22 @@ public class Main2Activity extends AppCompatActivity {
 
     }
 
-    private void fu(LifecycleOwner owner)
-    {
-        Observable.just(1)
-                .flatMap(new Function<Integer,ObservableSource<String>>()
-        {
-            @Override
-            public ObservableSource<String> apply(Integer integer) throws Exception {
-                return Observable.just("" );
-            }
-        })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .as(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(owner)))
-                .subscribe(new Consumer<String>() {
-                    @Override
-                    public void accept(String integer) throws Exception {
-
-                    }
-                });
-    }
+//    private void fu(LifecycleOwner owner) {
+//        Observable.just(1)
+//                .flatMap(new Function<Integer, ObservableSource<String>>() {
+//                    @Override
+//                    public ObservableSource<String> apply(Integer integer) throws Exception {
+//                        return Observable.just("");
+//                    }
+//                })
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .as(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(owner)))
+//                .subscribe(new Consumer<String>() {
+//                    @Override
+//                    public void accept(String integer) throws Exception {
+//
+//                    }
+//                });
+//    }
 }

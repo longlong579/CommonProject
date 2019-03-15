@@ -6,7 +6,7 @@ ext {
     appMinSdkVersion = 17 //4.2以上
     appTargetSdkVersion = 27
 
-    appCompileSdkVersion= 27        //SDK版本
+    appCompileSdkVersion= 27      //SDK版本
     appBuildToolsVersion = "27.0.3"  //编译版本
 
     // 相关依赖库版本

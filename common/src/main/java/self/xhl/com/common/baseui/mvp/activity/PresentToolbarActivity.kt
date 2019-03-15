@@ -13,7 +13,7 @@ import self.xhl.com.common.dialog.dialogfragment.LoadingDialog
  * 2018/7/27 17:27
  */
 
-public abstract class PresentToolbarActivity<Presenter : BaseContract.Presenter> : PermissionBaseActivity(), BaseContract.View<Presenter> {
+ abstract class PresentToolbarActivity<Presenter : BaseContract.Presenter> : PermissionBaseActivity(), BaseContract.View<Presenter> {
     protected var mPresenter: Presenter? = null
     protected var mLoadingDialog: TDialog? = null
 
