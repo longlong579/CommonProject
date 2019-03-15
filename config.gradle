@@ -3,7 +3,7 @@ ext {
     appVersionName = '1.0.1'
     appVersionCode = 1
 
-    appMinSdkVersion = 16
+    appMinSdkVersion = 17 //4.2以上
     appTargetSdkVersion = 27
 
     appCompileSdkVersion= 27        //SDK版本

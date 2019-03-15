@@ -4,6 +4,8 @@ import com.xhl.statusbarcompatutil.StatusBarCompat
 import org.jetbrains.anko.toast
 import self.xhl.com.common.baseui.baseActivity.PermissionBaseActivity
 import self.xhl.com.common.utils.PermissionUtil
+
+
 //为了其他项目也能用 故不依赖Common
 class MainActivity : PermissionBaseActivity() {
 
@@ -14,8 +16,8 @@ class MainActivity : PermissionBaseActivity() {
 
     override fun initToolBarPre() {
         super.initToolBarPre()
-//        StatusBarCompat.translucentStatusBar(this,true)
-//        StatusBarCompat.setStatusBarDarkFont(this,true)
+        StatusBarCompat.translucentStatusBar(this,true)
+        StatusBarCompat.setStatusBarDarkFont(this,true)
         build().setHasToolBar(false)
                 .setShowCenterTitle(true)
                 .setToolBarTitle("我是测试")
@@ -40,6 +42,34 @@ class MainActivity : PermissionBaseActivity() {
          {
              loadRootFragment(R.id.fl_container,LoginFragment.newInstance())
          }
+        closeAndroidPDialog()
+    }
+
+    /**
+     * 解决AndroidP 打包勾选Debug时 弹出“Detectedproblems with API compatibility”问题
+     * 原因：Debug调用了隐藏的API
+     */
+    private fun closeAndroidPDialog() {
+        try {
+            val aClass = Class.forName("android.content.pm.PackageParser\$Package")
+            val declaredConstructor = aClass.getDeclaredConstructor(String::class.java)
+            declaredConstructor.isAccessible = true
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        try {
+            val cls = Class.forName("android.app.ActivityThread")
+            val declaredMethod = cls.getDeclaredMethod("currentActivityThread")
+            declaredMethod.isAccessible = true
+            val activityThread = declaredMethod.invoke(null)
+            val mHiddenApiWarningShown = cls.getDeclaredField("mHiddenApiWarningShown")
+            mHiddenApiWarningShown.isAccessible = true
+            mHiddenApiWarningShown.setBoolean(activityThread, true)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
     }
 
 }
