@@ -1,9 +1,19 @@
 ﻿package self.xhl.com.commonproject
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.support.v4.content.ContextCompat
 import android.view.View
+import com.amap.api.location.AMapLocationClient
+import com.amap.api.location.AMapLocationClientOption
+import com.blankj.utilcode.util.ToastUtils
+//import com.xhl.gdlocation.GDLocationClient
+//import com.xhl.gdlocation.GdLocationMode
+//import com.xhl.gdlocation.GdLocationResult
+//import com.xhl.gdlocation.IGdLocationListener
 import com.xhl.statusbarcompatutil.StatusBarCompat
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_login_inform_audit.*
@@ -12,6 +22,7 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import searchview.xhl.com.scanner.qrcode.ScannerResultEvent
 import searchview.xhl.com.scanner.qrcode.zxingScaner.ZingScannerActivity
+import self.xhl.com.common.baseui.baseActivity.PermissionBaseActivity
 import self.xhl.com.common.baseui.baseFragment.ToolbarFragment
 import self.xhl.com.commonproject.kotlinextension.singleToast
 
@@ -83,10 +94,66 @@ class LoginFragment : ToolbarFragment() {
 //            s.showFragment(fragmentManager, "fsa")
 
             /**********扫码***************/
-            val intent = Intent(context, ZingScannerActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(context, ZingScannerActivity::class.java)
+//            startActivity(intent)
+
+            //小米没用！！！就算去设置中心设置了，还是错误
+            (_mActivity as PermissionBaseActivity).checkForcePermissions(object :PermissionBaseActivity.OnPermissionResultListener
+            {
+                override fun onAllow() {
+                    getloc()
+                }
+
+                override fun onReject() {
+                    ToastUtils.showLong("权限问题")
+                }
+            },Manifest.permission.ACCESS_FINE_LOCATION)
 
         }
+
+
+
+
+//        GDLocationClient.newBuilder(_mActivity)
+//                .onceLocation(false)
+//                .build().locate(object :IGdLocationListener
+//        {
+//            override fun gdLocationReceive(gdLocationInfo: GdLocationResult?) {
+//               var x=0
+//                ToastUtils.showLong("定位成功")
+//            }
+//
+//            override fun onFail(errCode: Int, errInfo: String?) {
+//                var x=0
+//                ToastUtils.showLong("定位失败")
+//
+//            }
+//        })
+    }
+
+    private fun getloc()
+    {
+        val mlocationClient = AMapLocationClient(_mActivity)
+        val option = AMapLocationClientOption()
+
+
+        option.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy)
+                .setOnceLocation(false)
+                .setInterval(2000)
+
+        mlocationClient.setLocationOption(option)
+        mlocationClient.setLocationListener {
+            var x = it
+            if (it.errorCode == 12) {
+                ToastUtils.showLong("定位失败")
+            }
+            else if(it.errorCode==0)
+            {
+                ToastUtils.showLong(it.city)
+            }
+
+        }
+        mlocationClient.startLocation()
     }
 
     var d: Disposable? = null
@@ -137,4 +204,6 @@ class LoginFragment : ToolbarFragment() {
             return fragment
         }
     }
+
+
 }

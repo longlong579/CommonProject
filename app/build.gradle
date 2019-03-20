@@ -42,7 +42,7 @@ android {
             buildConfigField 'String', 'HOST', TEST_HOST
         }
         debug {
-            applicationIdSuffix ".debug" //包名后缀  第三方Appid 要重新申请
+//            applicationIdSuffix ".debug" //包名后缀  第三方Appid 要重新申请
             minifyEnabled false
             signingConfig signingConfigs.config
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -82,6 +82,7 @@ dependencies {
     implementation project(':common_net_rx1')
     implementation project(':common')
     implementation project(':scanner')
+    implementation project(':gdlocation')
 
     //版本1.1.0是在AndroidX下编写的
     implementation 'com.uber.autodispose:autodispose:0.6.1'

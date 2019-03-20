@@ -17,7 +17,7 @@ import self.xhl.com.common.R
  */
 public abstract class ToolbarActivity : BaseActivity() {
     private var mToolbar: Toolbar? = null
-    private var hasBar: Boolean = true
+    private var hasBar: Boolean = false
     private var showCenterTitle=true
     private var toolbarNmae="ToolBar"
     private var enableBack=true

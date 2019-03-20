@@ -7,14 +7,19 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
+import com.blankj.utilcode.util.ToastUtils
+import com.xhl.gdlocation.GDLocationClient
+import com.xhl.gdlocation.GdLocationResult
+import com.xhl.gdlocation.IGdLocationListener
 import kotlinx.android.synthetic.main.activity_main2.*
+import self.xhl.com.common.baseui.baseActivity.PermissionBaseActivity
 import self.xhl.com.commonproject.MainActivity
 import self.xhl.com.commonproject.R
 
 /**
  * Activity+Fragment 懒加载 异常退出保存数据测试 add模式
  */
-class FragmentLazyLoadActivity : AppCompatActivity() {
+class FragmentLazyLoadActivity : PermissionBaseActivity() {
 
     private lateinit var mFragmention: FragmentManager
     private val FRAGMENT_KEY = "fragment_key"
@@ -29,7 +34,10 @@ class FragmentLazyLoadActivity : AppCompatActivity() {
     private var f3: LazyLoadFragment? = null
     private var fragmentList: ArrayList<Fragment> = arrayListOf()
 
-
+    override fun getContentLayoutId(): Int {
+     return  R.layout.activity_main2
+    }
+   lateinit var gdLocationClient:GDLocationClient
     //此模式适合activity+Fragment
     //hide 和 show才能触发onHidden add不能触发
     //所以要想做延迟加载 在onHidden里面处理的话 需要初始化的时候就把所有的fragment都add
@@ -37,7 +45,25 @@ class FragmentLazyLoadActivity : AppCompatActivity() {
     //那么 onCreate 之后就会立马执行onHidden而此时还咩有onCreateView所以会报空指针
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main2)
+//        setContentView(R.layout.activity_main2)
+
+        gdLocationClient= GDLocationClient.newBuilder(this).onceLocation(false).build()
+
+        gdLocationClient.locate(
+                object :IGdLocationListener
+                {
+                    override fun gdLocationReceive(gdLocationInfo: GdLocationResult?) {
+                        ToastUtils.showLong("我是第一个定位")
+                    }
+
+                    override fun onFail(errCode: Int, errInfo: String?) {
+                    }
+
+                    override fun equals(other: Any?): Boolean {
+                        return super.equals(other)
+                    }
+                }
+        )
         if (savedInstanceState != null) {
             savedInstanceState.apply {
                 reStoreSaveInstance(savedInstanceState)//重新获取Fragment
@@ -123,4 +149,9 @@ class FragmentLazyLoadActivity : AppCompatActivity() {
 //    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
 //        super.onSaveInstanceState(outState, outPersistentState)
 //    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        gdLocationClient.onDestroy()
+    }
 }
