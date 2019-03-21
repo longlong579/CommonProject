@@ -3,7 +3,9 @@ package com.xhl.scanner.qrcode.core;
 import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.os.AsyncTask;
+import android.test.TouchUtils;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
 
