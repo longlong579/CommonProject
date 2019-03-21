@@ -38,6 +38,7 @@ class ScannerActivity : AppCompatActivity(), QRCodeView.Delegate {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)//无标题
+        getSupportActionBar()?.hide()//隐藏ActionBar 防止系统设置了有ActionBar的主题 而此处未设置主题时，主题覆盖
         setTransparentStatusBar(this)//状态栏导航栏透明
         setContentView(R.layout.activity_scanner)
         zxingview.setDelegate(this)

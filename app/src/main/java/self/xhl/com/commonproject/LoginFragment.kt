@@ -94,20 +94,20 @@ class LoginFragment : ToolbarFragment() {
 //            s.showFragment(fragmentManager, "fsa")
 
             /**********扫码***************/
-//            val intent = Intent(context, ZingScannerActivity::class.java)
-//            startActivity(intent)
+            val intent = Intent(context, ZingScannerActivity::class.java)
+            startActivity(intent)
 
-            //小米没用！！！就算去设置中心设置了，还是错误
-            (_mActivity as PermissionBaseActivity).checkForcePermissions(object :PermissionBaseActivity.OnPermissionResultListener
-            {
-                override fun onAllow() {
-                    getloc()
-                }
 
-                override fun onReject() {
-                    ToastUtils.showLong("权限问题")
-                }
-            },Manifest.permission.ACCESS_FINE_LOCATION)
+//            (_mActivity as PermissionBaseActivity).checkForcePermissions(object :PermissionBaseActivity.OnPermissionResultListener
+//            {
+//                override fun onAllow() {
+//                    getloc()
+//                }
+//
+//                override fun onReject() {
+//                    ToastUtils.showLong("权限问题")
+//                }
+//            },Manifest.permission.ACCESS_FINE_LOCATION)
 
         }
 
