@@ -1,1 +1,1 @@
-include ':app', ':scanner', ':layout_test', ':base', 'common', "common_net_rx1",':gdlocation'
+include ':app', ':scanner', ':layout_test',':gdlocation', ':base', 'common', "common_net_rx1"

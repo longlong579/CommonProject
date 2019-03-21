@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import searchview.xhl.com.scanner.qrcode.zxingScaner.ZingScannerActivity;
+import com.xhl.scanner.qrcode.zxingscaner.ZingScannerActivity;
 
 public class MainActivity extends AppCompatActivity {
 

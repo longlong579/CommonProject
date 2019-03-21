@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/MatchMatch">
 
-    <searchview.xhl.com.scanner.qrcode.zxing.ZXingView
+    <com.xhl.scanner.qrcode.zxing.ZXingView
         android:id="@+id/zxingview"
         style="@style/MatchMatch"
         app:qrcv_animTime="1000"

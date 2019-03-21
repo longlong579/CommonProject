@@ -1,11 +1,8 @@
 ﻿package self.xhl.com.commonproject
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.support.v4.content.ContextCompat
 import android.view.View
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
@@ -20,9 +17,8 @@ import kotlinx.android.synthetic.main.fragment_login_inform_audit.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import searchview.xhl.com.scanner.qrcode.ScannerResultEvent
-import searchview.xhl.com.scanner.qrcode.zxingScaner.ZingScannerActivity
-import self.xhl.com.common.baseui.baseActivity.PermissionBaseActivity
+import com.xhl.scanner.qrcode.ScannerResultEvent
+import com.xhl.scanner.qrcode.zxingscaner.ZingScannerActivity
 import self.xhl.com.common.baseui.baseFragment.ToolbarFragment
 import self.xhl.com.commonproject.kotlinextension.singleToast
 
