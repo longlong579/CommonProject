@@ -8,10 +8,10 @@ import com.amap.api.location.AMapLocation;
 /**
  * @author xhl
  * 封装自己需要的内容  不提供POI内容 此接口只提供基本的定位信息 供外部使用
+ * 权限管理交由外部处理
  * @desc 2019/3/13 10:19
  */
 public class GdLocationResult implements Parcelable {
-
     private int locationType;//定位方式
     private String locationDetail;
     private double latitude;

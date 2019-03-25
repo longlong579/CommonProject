@@ -53,7 +53,7 @@ class FragmentLazyLoadActivity : PermissionBaseActivity() {
                 object :IGdLocationListener
                 {
                     override fun gdLocationReceive(gdLocationInfo: GdLocationResult?) {
-                        ToastUtils.showLong("我是第一个定位")
+                        //ToastUtils.showLong("我是第一个定位")
                     }
 
                     override fun onFail(errCode: Int, errInfo: String?) {

@@ -1,5 +1,6 @@
 package self.xhl.com.commonproject.app
 
+import com.mob.MobSDK
 import com.orhanobut.logger.*
 import com.squareup.leakcanary.LeakCanary
 import retrofit2.Retrofit
@@ -16,7 +17,7 @@ import self.xhl.com.net.makeRetrofit
 class App : BaseApp() {
     override fun onCreate() {
         super.onCreate()
-
+        MobSDK.init(this)
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return
         }

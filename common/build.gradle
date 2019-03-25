@@ -53,8 +53,6 @@ dependencies {
     api 'com.orhanobut:logger:2.2.0'
     // kotlin
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api 'org.jetbrains.anko:anko-sdk15:0.9.1'
-    api 'org.jetbrains.anko:anko-common:0.9.1'
 
     // retrofit
     api "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
@@ -80,9 +78,7 @@ dependencies {
     api 'com.blankj:utilcode:1.20.0'
 
     //状态栏工具
-    api('com.github.longlong579:StatusBarCompatUtil:1.2.1', {
-        exclude group: 'com.android.support'
-    })
+    api 'com.github.longlong579:StatusBarCompatUtil:1.2.1'
 
     //扩展的TextView
     api "com.ruffian.library:RWidgetHelper:$rootProject.ext.RWidgetHelperVersion"
@@ -91,9 +87,7 @@ dependencies {
     //换行Text
     api 'me.biubiubiu.justifytext:library:1.1'
     //TDialog
-    api('com.timmy.tdialog:tdialog:2.1.1', {
-        exclude group: 'com.android.support'
-    })
+    api 'com.timmy.tdialog:tdialog:2.1.1'
     //WheelView
     api 'com.contrarywind:wheelview:4.0.8'
     //data,option.区域选择滚轮

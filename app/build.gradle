@@ -3,8 +3,47 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+apply plugin: 'com.mob.sdk'
 
+MobSDK {
+    appKey "2a946a6832888"
+    appSecret "63bffde1459d7ad00b9410599ddbb741"
+    ShareSDK {
+        devInfo {
+//            SinaWeibo {
+//                appKey "568898243"
+//                appSecret "38a4f8204cc784f81f9f0daaf31e02e3"
+//                callbackUri "http://www.sharesdk.cn"
+//            }
+//            TencentWeibo {
+//                appKey "801307650"
+//                appSecret "ae36f4ee3946e1cbb98d6965b0b2ff5c"
+//                callbackUri "http://www.sharesdk.cn"
+//            }
+//            ShortMessage {}
+            Wechat {
+                appId "wx4868b35061f87885"
+                appSecret "64020361b8ec4c99936c0e3999a9f249"
+                userName "gh_afb25ac019c9"
+                path "pages/index/index.html?id=1"
+                withShareTicket true
+                miniprogramType 2
+            }
+            QQ {
+                appId "100371282"
+                appKey "aed9b0303e3ed1e27bae87c33761161d"
+            }
+            WechatMoments {
+                appId "wx4868b35061f87885"
+                appSecret "64020361b8ec4c99936c0e3999a9f249"
+            }
+//            WechatFavorite {
+//                appId "wx4868b35061f87885"
+//                appSecret "64020361b8ec4c99936c0e3999a9f249"
+//            }
+        }
+    }
+}
 android {
     signingConfigs {
         config {
@@ -41,16 +80,18 @@ android {
             buildConfigField 'boolean', 'IS_DEBUG', 'false'
             buildConfigField 'String', 'HOST', TEST_HOST
         }
+
         debug {
 //            applicationIdSuffix ".debug" //包名后缀  第三方Appid 要重新申请
-            minifyEnabled false
-            signingConfig signingConfigs.config
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField 'boolean', 'IS_DEBUG', 'true'
-            buildConfigField 'String', 'HOST', TEST_HOST
-        }
+                    minifyEnabled false
+                    signingConfig signingConfigs.config
+                    proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+                    buildConfigField 'boolean', 'IS_DEBUG', 'true'
+                    buildConfigField 'String', 'HOST', TEST_HOST
+                }
     }
 }
+
 allprojects {
     repositories {
 

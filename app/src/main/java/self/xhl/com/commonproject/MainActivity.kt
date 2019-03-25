@@ -1,7 +1,6 @@
 package self.xhl.com.commonproject
 
 import com.xhl.statusbarcompatutil.StatusBarCompat
-import org.jetbrains.anko.toast
 import self.xhl.com.common.baseui.baseActivity.PermissionBaseActivity
 import self.xhl.com.common.utils.PermissionUtil
 
@@ -30,11 +29,11 @@ class MainActivity : PermissionBaseActivity() {
         checkForcePermissions(object :OnPermissionResultListener{
 
             override fun onAllow() {
-                toast("授权成功")
+                //toast("授权成功")
             }
 
             override fun onReject() {
-                toast("授权失败")
+                //toast("授权失败")
             }
         },PermissionUtil.PERMISSION_READ_CONTACTS,PermissionUtil.PERMISSION_ACCESS_FINE_LOCATION)
 
