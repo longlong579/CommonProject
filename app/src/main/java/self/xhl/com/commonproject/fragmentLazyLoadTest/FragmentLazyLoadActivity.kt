@@ -23,7 +23,7 @@ class FragmentLazyLoadActivity : PermissionBaseActivity() {
 
     private lateinit var mFragmention: FragmentManager
     private val FRAGMENT_KEY = "fragment_key"
-    private var currentFragmentIndex: Int = 0
+    private var currentFragmentIndex: Int = -1
 
     private val F1Tag = "one"
     private val F2Tag = "two"
@@ -47,23 +47,6 @@ class FragmentLazyLoadActivity : PermissionBaseActivity() {
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_main2)
 
-        gdLocationClient= GDLocationClient.newBuilder(this).onceLocation(false).build()
-
-        gdLocationClient.locate(
-                object :IGdLocationListener
-                {
-                    override fun gdLocationReceive(gdLocationInfo: GdLocationResult?) {
-                        //ToastUtils.showLong("我是第一个定位")
-                    }
-
-                    override fun onFail(errCode: Int, errInfo: String?) {
-                    }
-
-                    override fun equals(other: Any?): Boolean {
-                        return super.equals(other)
-                    }
-                }
-        )
         if (savedInstanceState != null) {
             savedInstanceState.apply {
                 reStoreSaveInstance(savedInstanceState)//重新获取Fragment
@@ -89,10 +72,10 @@ class FragmentLazyLoadActivity : PermissionBaseActivity() {
                 fragmentList.add(f3 ?: return)
             }
             mTra.commitNowAllowingStateLoss()//先提交一次 将Fragment都Add
-            //第2步 先显示一次
-        }
 
-        changeFragment(currentFragmentIndex)//异常退出时显示到正确位置
+        }
+        //第2步 先显示一次 不用currentFragmentIndex，直接用第一个位置
+        changeFragment(0)//异常退出时显示到正确位置
 
         bt1.setOnClickListener {
             changeFragment(0)
@@ -106,16 +89,22 @@ class FragmentLazyLoadActivity : PermissionBaseActivity() {
         bt4.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
+        bt8.setOnClickListener {
+            startActivity(Intent(this, ViewPageActivity::class.java))
+        }
     }
 
 
     //通过标志改变Fragment
     private fun changeFragment(index: Int) {
-        currentFragmentIndex = index
-        val mTra = supportFragmentManager.beginTransaction()
-        hideAllFragment(mTra)
-        mTra.show(fragmentList[index])
-        mTra.commitAllowingStateLoss()
+        //在本界面则不替换
+        if(currentFragmentIndex!=index) {
+            currentFragmentIndex = index
+            val mTra = supportFragmentManager.beginTransaction()
+            hideAllFragment(mTra)
+            mTra.show(fragmentList[index])
+            mTra.commitAllowingStateLoss()
+        }
     }
 
     fun hideAllFragment(mTra: FragmentTransaction) {

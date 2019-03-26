@@ -22,18 +22,25 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        tools:replace="android:name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:name">
+        <activity android:name=".fragmentLazyLoadTest.ViewPageActivity"></activity>
+        <activity
+            android:name=".LocationTest.GdLocationActivity"
+            android:label="@string/title_activity_gd_location"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Main4Activity"
             android:label="@string/title_activity_main4"
             android:theme="@style/AppTheme.NoActionBar">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.VIEW" />-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.VIEW" /> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".fragmentLazyLoadTest.FragmentLazyLoadActivity">
             <intent-filter>

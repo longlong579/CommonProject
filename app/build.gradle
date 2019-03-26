@@ -83,12 +83,12 @@ android {
 
         debug {
 //            applicationIdSuffix ".debug" //包名后缀  第三方Appid 要重新申请
-                    minifyEnabled false
-                    signingConfig signingConfigs.config
-                    proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-                    buildConfigField 'boolean', 'IS_DEBUG', 'true'
-                    buildConfigField 'String', 'HOST', TEST_HOST
-                }
+            minifyEnabled false
+            signingConfig signingConfigs.config
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'boolean', 'IS_DEBUG', 'true'
+            buildConfigField 'String', 'HOST', TEST_HOST
+        }
     }
 }
 
@@ -110,6 +110,7 @@ dependencies {
     implementation "com.android.support:support-v4:$rootProject.ext.supportVersion"
     implementation "com.android.support.constraint:constraint-layout:$rootProject.ext.constrlayoutVersion"
 
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
