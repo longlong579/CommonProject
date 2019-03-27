@@ -1,4 +1,4 @@
-package self.xhl.com.commonproject.fragmentLazyLoadTest
+package self.xhl.com.commonproject.fragmentlazyloadtest
 
 
 import android.content.Intent
@@ -6,11 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
-import android.support.v7.app.AppCompatActivity
-import com.blankj.utilcode.util.ToastUtils
 import com.xhl.gdlocation.GDLocationClient
-import com.xhl.gdlocation.GdLocationResult
-import com.xhl.gdlocation.IGdLocationListener
 import kotlinx.android.synthetic.main.activity_main2.*
 import self.xhl.com.common.baseui.baseActivity.PermissionBaseActivity
 import self.xhl.com.commonproject.MainActivity

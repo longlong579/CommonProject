@@ -24,7 +24,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme"
         tools:replace="android:name">
-        <activity android:name=".fragmentLazyLoadTest.ViewPageActivity"></activity>
+        <activity android:name=".fragmentlazyloadtest.ViewPageActivity"></activity>
         <activity
             android:name=".LocationTest.GdLocationActivity"
             android:label="@string/title_activity_gd_location"
@@ -42,7 +42,7 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".fragmentLazyLoadTest.FragmentLazyLoadActivity">
+        <activity android:name=".fragmentlazyloadtest.FragmentLazyLoadActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
