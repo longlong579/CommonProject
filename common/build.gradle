@@ -121,6 +121,8 @@ dependencies {
     //api 'com.lzy.widget:imagepicker:0.6.1'//仿微信图片选择 无压缩 已不更新
     //api 'top.zibin:Luban:1.1.8'//鲁班压缩
     // api 'com.sunfusheng:GlideImageView:2.0.0'//GlideImageView 圆形 圆角 高斯模糊 GlideImageView.load() 已包含Glide4.8.0
+    //双指缩放图片 2.0以上版本用了androidX
+    api 'com.github.chrisbanes:PhotoView:2.0.0'
 
 
     //----------------------------------glide相关--------------------------------------------------------------------

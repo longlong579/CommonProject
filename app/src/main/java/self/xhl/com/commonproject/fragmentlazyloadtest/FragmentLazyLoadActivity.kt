@@ -1,4 +1,4 @@
-package self.xhl.com.commonproject.fragmentLazyLoadTest
+package self.xhl.com.commonproject.fragmentlazyloadtest
 
 
 import android.content.Intent
@@ -6,11 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
-import android.support.v7.app.AppCompatActivity
-import com.blankj.utilcode.util.ToastUtils
 import com.xhl.gdlocation.GDLocationClient
-import com.xhl.gdlocation.GdLocationResult
-import com.xhl.gdlocation.IGdLocationListener
 import kotlinx.android.synthetic.main.activity_main2.*
 import self.xhl.com.common.baseui.baseActivity.PermissionBaseActivity
 import self.xhl.com.commonproject.MainActivity
@@ -23,7 +19,7 @@ class FragmentLazyLoadActivity : PermissionBaseActivity() {
 
     private lateinit var mFragmention: FragmentManager
     private val FRAGMENT_KEY = "fragment_key"
-    private var currentFragmentIndex: Int = 0
+    private var currentFragmentIndex: Int = -1
 
     private val F1Tag = "one"
     private val F2Tag = "two"
@@ -47,23 +43,6 @@ class FragmentLazyLoadActivity : PermissionBaseActivity() {
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_main2)
 
-        gdLocationClient= GDLocationClient.newBuilder(this).onceLocation(false).build()
-
-        gdLocationClient.locate(
-                object :IGdLocationListener
-                {
-                    override fun gdLocationReceive(gdLocationInfo: GdLocationResult?) {
-                        //ToastUtils.showLong("我是第一个定位")
-                    }
-
-                    override fun onFail(errCode: Int, errInfo: String?) {
-                    }
-
-                    override fun equals(other: Any?): Boolean {
-                        return super.equals(other)
-                    }
-                }
-        )
         if (savedInstanceState != null) {
             savedInstanceState.apply {
                 reStoreSaveInstance(savedInstanceState)//重新获取Fragment
@@ -74,25 +53,26 @@ class FragmentLazyLoadActivity : PermissionBaseActivity() {
             //第一步：先将Fragment add到FragmentTransaction
             if (f1 == null) {
                 f1 = LazyLoadFragment.newInstance("第1111111个", "")
-                mTra.add(R.id.fragmentContent, f1, F1Tag)
+                mTra.add(R.id.fragmentContent, f1!!, F1Tag)
                 fragmentList.add(f1 ?: return)//多线程可能把f1置空 但空时,提前退出，不加入list
             }
 
             if (f2 == null) {
                 f2 = LazyLoadFragment.newInstance("第22222个", "")
-                mTra.add(R.id.fragmentContent, f2, F2Tag)
+                mTra.add(R.id.fragmentContent, f2!!, F2Tag)
+
                 fragmentList.add(f2 ?: return)
             }
             if (f3 == null) {
                 f3 = LazyLoadFragment.newInstance("第333333个", "")
-                mTra.add(R.id.fragmentContent, f3, F3Tag)
+                mTra.add(R.id.fragmentContent, f3!!, F3Tag)
                 fragmentList.add(f3 ?: return)
             }
             mTra.commitNowAllowingStateLoss()//先提交一次 将Fragment都Add
-            //第2步 先显示一次
-        }
 
-        changeFragment(currentFragmentIndex)//异常退出时显示到正确位置
+        }
+        //第2步 先显示一次 不用currentFragmentIndex，直接用第一个位置
+        changeFragment(0)//异常退出时显示到正确位置
 
         bt1.setOnClickListener {
             changeFragment(0)
@@ -106,16 +86,22 @@ class FragmentLazyLoadActivity : PermissionBaseActivity() {
         bt4.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
+        bt8.setOnClickListener {
+            startActivity(Intent(this, ViewPageActivity::class.java))
+        }
     }
 
 
     //通过标志改变Fragment
     private fun changeFragment(index: Int) {
-        currentFragmentIndex = index
-        val mTra = supportFragmentManager.beginTransaction()
-        hideAllFragment(mTra)
-        mTra.show(fragmentList[index])
-        mTra.commitAllowingStateLoss()
+        //在本界面则不替换
+        if(currentFragmentIndex!=index) {
+            currentFragmentIndex = index
+            val mTra = supportFragmentManager.beginTransaction()
+            hideAllFragment(mTra)
+            mTra.show(fragmentList[index])
+            mTra.commitAllowingStateLoss()
+        }
     }
 
     fun hideAllFragment(mTra: FragmentTransaction) {

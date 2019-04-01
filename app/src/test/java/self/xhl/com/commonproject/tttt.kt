@@ -35,24 +35,26 @@ class tttt {
     @Test
     fun t() {
         var observer = Observable.create<String> {
-            println("Current thread is " + Thread.currentThread().getName())
+            //println("Current thread is " + Thread.currentThread().getName())
             println(TagA + "A")
             it.onNext("A")
 
             println(TagA + "B")
             it.onNext("B")
 
-            println(TagA + "Throwable")
-            it.onError(Throwable())
+//            println(TagA + "Throwable")
+//            it.onError(Throwable())
 
-            println(TagA + "onComplete")
-            it.onComplete()
+
 
             println(TagA + "D")
             it.onNext("D")
 
             println(TagA + "E")
             it.onNext("E")
+
+            println(TagA + "onComplete")
+            it.onComplete()
         }
 
         observer.subscribeOn(Schedulers.newThread())

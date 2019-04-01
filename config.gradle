@@ -6,12 +6,12 @@ ext {
     appMinSdkVersion = 17 //4.2以上
     appTargetSdkVersion = 27
 
-    appCompileSdkVersion= 27      //SDK版本
-    appBuildToolsVersion = "27.0.3"  //编译版本
+    appCompileSdkVersion= 28    //SDK版本
+//    appBuildToolsVersion = "27.0.3"  //编译版本
 
     // 相关依赖库版本
-    supportVersion = '27.1.1'            //V7包版本
-    constrlayoutVersion='1.1.3'          //Constralayout版本
+    supportVersion = '28.0.0'            //V7包版本
+    constrlayoutVersion='1.1.0'          //Constralayout版本
 
     //Retrofit  RxJava
     retrofitVersion = '2.5.0'

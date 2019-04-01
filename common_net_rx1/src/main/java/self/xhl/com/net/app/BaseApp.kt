@@ -1,6 +1,7 @@
 package self.xhl.com.net.app
 
 import android.app.Application
+import com.xhl.base.app.BaseApplication
 import retrofit2.Retrofit
 
 /**
@@ -8,7 +9,7 @@ import retrofit2.Retrofit
  * @author bingo xhl
  * @version 1.0.0
  */
- abstract class BaseApp : Application() {
+ abstract class BaseApp : BaseApplication() {
 
     val mRetrofit: Retrofit by lazy {
         genNetworkClient(false)

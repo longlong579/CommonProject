@@ -13,7 +13,6 @@ import com.blankj.utilcode.util.ToastUtils
 //import com.xhl.gdlocation.IGdLocationListener
 import com.xhl.statusbarcompatutil.StatusBarCompat
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.fragment_login_inform_audit.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -23,8 +22,12 @@ import self.xhl.com.common.baseui.baseFragment.ToolbarFragment
 import self.xhl.com.commonproject.kotlinextension.singleToast
 import com.mob.wrappers.ShareSDKWrapper.share
 import cn.sharesdk.onekeyshare.OnekeyShare
-
-
+import com.mob.tools.gui.BitmapProcessor.stop
+import com.tongji.braindata.data.DataManager
+import com.tongji.braindata.data.entity.BaseBean
+import io.reactivex.android.schedulers.AndroidSchedulers
+import self.xhl.com.rx.subscriber.RxCompatException
+import self.xhl.com.rx.subscriber.RxCompatOnCompletedSubscriber
 
 
 /**
@@ -77,40 +80,55 @@ class LoginFragment : ToolbarFragment() {
 //        }
         var path1 = "http://ww1.sinaimg.cn/large/85cccab3gw1etdkmwyrtsg20dw07hx33.jpg"
         var path2 = "http://img.52z.com/upload/news/20130624/201306241320518553.jpg"
-        btnBack2Login.setOnClickListener {
-            //            //singleToast("wsce")
-//            //imageLoad(context!!, path1, imageView, RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE))
-//            imageLoadCircle(context!!, path2, imageView)
-//            imageLoadRoundedCorners(context!!, path2, imageView, 20, RoundedCornersTransformation.CornerType.BOTTOM)
-//            getToorBar()?.title = "ww"
-//            //imageLoadWithProgress(context!!,"http://ww1.sinaimg.cn/large/85cccab3gw1etdkmwyrtsg20dw07hx33.jpg",imageView,progressView)
+        DataManager.getAboutUs()
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnTerminate{
+                    stop()
+                }
+                .subscribe(object : RxCompatOnCompletedSubscriber<BaseBean<String?>>(){
+                    override fun onNextCompat(data: BaseBean<String?>?) {
+                        var x=0
+                    }
 
-            // d=QrUtil.createAndShow4ColorsQRCode("wfsafsa",null,imageView,null)
-            // QrUtil.builder("wrew").into4Color(imageView)
-            //QrUtil.builder("wwr").intoBar(imageView)
-//            val intent = Intent(context, Main3Activity::class.java)
-//            startActivity(intent)
-//            var s = SelectImageTypeFragment.newInstance("", "")
-//            s.showFragment(fragmentManager, "fsa")
+                    override fun onErrorCompat(e: RxCompatException?) {
+                        var x=0
+                    }
+                })
 
-            /**********扫码***************/
-//            val intent = Intent(context, ZingScannerActivity::class.java)
-//            startActivity(intent)
-
-            showShare()
-
-//            (_mActivity as PermissionBaseActivity).checkForcePermissions(object :PermissionBaseActivity.OnPermissionResultListener
-//            {
-//                override fun onAllow() {
-//                    getloc()
-//                }
+//        btnBack2Login.setOnClickListener {
+//            //            //singleToast("wsce")
+////            //imageLoad(context!!, path1, imageView, RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE))
+////            imageLoadCircle(context!!, path2, imageView)
+////            imageLoadRoundedCorners(context!!, path2, imageView, 20, RoundedCornersTransformation.CornerType.BOTTOM)
+////            getToorBar()?.title = "ww"
+////            //imageLoadWithProgress(context!!,"http://ww1.sinaimg.cn/large/85cccab3gw1etdkmwyrtsg20dw07hx33.jpg",imageView,progressView)
 //
-//                override fun onReject() {
-//                    ToastUtils.showLong("权限问题")
-//                }
-//            },Manifest.permission.ACCESS_FINE_LOCATION)
-
-        }
+//            // d=QrUtil.createAndShow4ColorsQRCode("wfsafsa",null,imageView,null)
+//            // QrUtil.builder("wrew").into4Color(imageView)
+//            //QrUtil.builder("wwr").intoBar(imageView)
+////            val intent = Intent(context, Main3Activity::class.java)
+////            startActivity(intent)
+////            var s = SelectImageTypeFragment.newInstance("", "")
+////            s.showFragment(fragmentManager, "fsa")
+//
+//            /**********扫码***************/
+////            val intent = Intent(context, ZingScannerActivity::class.java)
+////            startActivity(intent)
+//
+//            showShare()
+//
+////            (_mActivity as PermissionBaseActivity).checkForcePermissions(object :PermissionBaseActivity.OnPermissionResultListener
+////            {
+////                override fun onAllow() {
+////                    getloc()
+////                }
+////
+////                override fun onReject() {
+////                    ToastUtils.showLong("权限问题")
+////                }
+////            },Manifest.permission.ACCESS_FINE_LOCATION)
+//
+//        }
 
 
 
@@ -199,7 +217,7 @@ class LoginFragment : ToolbarFragment() {
     protected var countDownTimer: CountDownTimer = object : CountDownTimer((1000 * 3).toLong(), 1000) {
         override fun onTick(millisUntilFinished: Long) {
             val value = (millisUntilFinished / 1000).toInt().toString()
-            text_tishi.text = getString(R.string.abc_action_bar_home_description, value)
+//            text_tishi.text = getString(R.string.abc_action_bar_home_description, value)
         }
 
         override fun onFinish() {
