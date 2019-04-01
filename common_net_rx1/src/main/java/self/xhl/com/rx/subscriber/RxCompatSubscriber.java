@@ -4,7 +4,8 @@ import android.util.Log;
 
 import com.eightbitlab.rxbus.Bus;
 
-import rx.Subscriber;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import self.xhl.com.net.exception.BizException;
 import self.xhl.com.net.exception.TickOutException;
 import self.xhl.com.net.exception.TokenFailException;
@@ -17,9 +18,13 @@ import self.xhl.com.rx.event.TokenFailEvent;
  * @version 1.0.0
  */
 //按需修改（注意踢下线的判断 code值 以及踢下线的事件注册）自定义Subscriber 异常统一处理   比如添加Token过期处理
-public abstract class RxCompatSubscriber<T> extends Subscriber<T> {
+public abstract class RxCompatSubscriber<T> implements Observer<T> {
     public static final String RXCOMPAT_SUBSCRIBER_TAG = RxCompatSubscriber.class.getSimpleName();
 
+    @Override
+    public void onSubscribe(Disposable d) {
+
+    }
 
     @Override
     public final void onError(Throwable e) {
@@ -70,7 +75,7 @@ public abstract class RxCompatSubscriber<T> extends Subscriber<T> {
     }
 
     @Override
-    public final void onCompleted() {
+    public final void onComplete() {
         try {
             onCompletedCompat();
         } catch (Throwable throwable) {

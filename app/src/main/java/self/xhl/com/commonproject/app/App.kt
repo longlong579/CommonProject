@@ -1,12 +1,17 @@
 package self.xhl.com.commonproject.app
 
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import com.mob.MobSDK
 import com.orhanobut.logger.*
 import com.squareup.leakcanary.LeakCanary
 import retrofit2.Retrofit
 import self.xhl.com.commonproject.BuildConfig
+import self.xhl.com.commonproject.StartServiceReceiver
 import self.xhl.com.net.app.BaseApp
 import self.xhl.com.net.makeRetrofit
+import self.xhl.com.net.netParams.INetExternalParams
+import self.xhl.com.net.netParams.NetworkIniter
 
 
 /**
@@ -38,6 +43,11 @@ class App : BaseApp() {
 //        })
         Logger.addLogAdapter(AndroidLogAdapter(formatStrategy))
 
+        //动态注册，此广播只能动态注册才能接收到
+        var filter =  IntentFilter()
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION)//网络的连接（包括wifi和移动网络）
+        registerReceiver(StartServiceReceiver(),filter)
+
     }
 
     override fun genNetworkClient(isLongTimeout: Boolean): Retrofit {
@@ -45,5 +55,32 @@ class App : BaseApp() {
     }
 
     override fun setupNetworkClient() {
+        NetworkIniter.init(NetworkIniter.Builder(this)
+                .externalParams(object : INetExternalParams
+                {
+                    override fun isRelease(): Boolean {
+                        return BuildConfig.IS_DEBUG
+                    }
+
+                    override fun httpHost(): String {
+                        return BuildConfig.HOST
+                    }
+
+                    override fun httpsHost(): String? {
+                        return BuildConfig.HOST
+                    }
+
+                    override fun getTokenKey(): String {
+                        return "token"
+                    }
+                    override fun getToken(): String? {
+                        return ""
+                    }
+
+                    override fun sign(): String? {
+                        return ""
+                    }
+                })
+                .build())
     }
 }

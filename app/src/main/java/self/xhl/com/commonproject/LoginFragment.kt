@@ -77,40 +77,40 @@ class LoginFragment : ToolbarFragment() {
 //        }
         var path1 = "http://ww1.sinaimg.cn/large/85cccab3gw1etdkmwyrtsg20dw07hx33.jpg"
         var path2 = "http://img.52z.com/upload/news/20130624/201306241320518553.jpg"
-        btnBack2Login.setOnClickListener {
-            //            //singleToast("wsce")
-//            //imageLoad(context!!, path1, imageView, RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE))
-//            imageLoadCircle(context!!, path2, imageView)
-//            imageLoadRoundedCorners(context!!, path2, imageView, 20, RoundedCornersTransformation.CornerType.BOTTOM)
-//            getToorBar()?.title = "ww"
-//            //imageLoadWithProgress(context!!,"http://ww1.sinaimg.cn/large/85cccab3gw1etdkmwyrtsg20dw07hx33.jpg",imageView,progressView)
-
-            // d=QrUtil.createAndShow4ColorsQRCode("wfsafsa",null,imageView,null)
-            // QrUtil.builder("wrew").into4Color(imageView)
-            //QrUtil.builder("wwr").intoBar(imageView)
-//            val intent = Intent(context, Main3Activity::class.java)
-//            startActivity(intent)
-//            var s = SelectImageTypeFragment.newInstance("", "")
-//            s.showFragment(fragmentManager, "fsa")
-
-            /**********扫码***************/
-//            val intent = Intent(context, ZingScannerActivity::class.java)
-//            startActivity(intent)
-
-            showShare()
-
-//            (_mActivity as PermissionBaseActivity).checkForcePermissions(object :PermissionBaseActivity.OnPermissionResultListener
-//            {
-//                override fun onAllow() {
-//                    getloc()
-//                }
+//        btnBack2Login.setOnClickListener {
+//            //            //singleToast("wsce")
+////            //imageLoad(context!!, path1, imageView, RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE))
+////            imageLoadCircle(context!!, path2, imageView)
+////            imageLoadRoundedCorners(context!!, path2, imageView, 20, RoundedCornersTransformation.CornerType.BOTTOM)
+////            getToorBar()?.title = "ww"
+////            //imageLoadWithProgress(context!!,"http://ww1.sinaimg.cn/large/85cccab3gw1etdkmwyrtsg20dw07hx33.jpg",imageView,progressView)
 //
-//                override fun onReject() {
-//                    ToastUtils.showLong("权限问题")
-//                }
-//            },Manifest.permission.ACCESS_FINE_LOCATION)
-
-        }
+//            // d=QrUtil.createAndShow4ColorsQRCode("wfsafsa",null,imageView,null)
+//            // QrUtil.builder("wrew").into4Color(imageView)
+//            //QrUtil.builder("wwr").intoBar(imageView)
+////            val intent = Intent(context, Main3Activity::class.java)
+////            startActivity(intent)
+////            var s = SelectImageTypeFragment.newInstance("", "")
+////            s.showFragment(fragmentManager, "fsa")
+//
+//            /**********扫码***************/
+////            val intent = Intent(context, ZingScannerActivity::class.java)
+////            startActivity(intent)
+//
+//            showShare()
+//
+////            (_mActivity as PermissionBaseActivity).checkForcePermissions(object :PermissionBaseActivity.OnPermissionResultListener
+////            {
+////                override fun onAllow() {
+////                    getloc()
+////                }
+////
+////                override fun onReject() {
+////                    ToastUtils.showLong("权限问题")
+////                }
+////            },Manifest.permission.ACCESS_FINE_LOCATION)
+//
+//        }
 
 
 
@@ -199,7 +199,7 @@ class LoginFragment : ToolbarFragment() {
     protected var countDownTimer: CountDownTimer = object : CountDownTimer((1000 * 3).toLong(), 1000) {
         override fun onTick(millisUntilFinished: Long) {
             val value = (millisUntilFinished / 1000).toInt().toString()
-            text_tishi.text = getString(R.string.abc_action_bar_home_description, value)
+//            text_tishi.text = getString(R.string.abc_action_bar_home_description, value)
         }
 
         override fun onFinish() {

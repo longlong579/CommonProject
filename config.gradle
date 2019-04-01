@@ -11,7 +11,7 @@ ext {
 
     // 相关依赖库版本
     supportVersion = '27.1.1'            //V7包版本
-    constrlayoutVersion='1.1.3'          //Constralayout版本
+    constrlayoutVersion='1.1.0'          //Constralayout版本
 
     //Retrofit  RxJava
     retrofitVersion = '2.5.0'

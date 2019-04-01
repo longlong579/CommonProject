@@ -1,8 +1,7 @@
-package self.xhl.com.spdelegate
+package com.xhl.base.spdelegate
 
 import android.content.Context
-import self.xhl.com.net.app.BaseApp
-
+import com.xhl.base.app.BaseApplication
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -15,7 +14,7 @@ import kotlin.reflect.KProperty
 class SPreference<T>(val name: String?, val default: T,val defaultName:String="share_data") : ReadWriteProperty<Any?, T> {
 
     val prefs by lazy {
-        BaseApp.instance.getSharedPreferences(defaultName, Context.MODE_PRIVATE)
+        BaseApplication.instance.getSharedPreferences(defaultName, Context.MODE_PRIVATE)
     }
 
     override fun getValue(thisRef: Any?, property: KProperty<*>): T = with(prefs) {
