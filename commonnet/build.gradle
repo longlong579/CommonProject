@@ -30,8 +30,9 @@ dependencies {
     // retrofit
     compileOnly "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
     compileOnly "com.squareup.retrofit2:converter-scalars:$rootProject.ext.retrofitVersion"
+    compileOnly "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.retrofitVersion"
     compileOnly "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
-    compileOnly "com.squareup.retrofit2:adapter-rxjava:$rootProject.ext.retrofitVersion"
+
 
     // rxjava/rxandroid
     compileOnly "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjavaVersion"

@@ -2,10 +2,11 @@
 package self.xhl.com.net
 
 import com.google.gson.GsonBuilder
+import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import rx.schedulers.Schedulers
 import self.xhl.com.net.netParams.NetworkIniter
 import self.xhl.com.net.rxcalladapt.RxTransformErrorCallAdapterFactory
 import self.xhl.com.net.netchgbypro.converter.YcRespTypeAdapterFactory
@@ -26,7 +27,8 @@ fun makeRetrofit(isLongTimeout: Boolean): Retrofit {
             .baseUrl(getHostUrl())
             .client(makeClient(isLongTimeout))
 //            .addConverterFactory(GsonConverterFactory.create())
-            //.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(makeGson()))
             .addCallAdapterFactory(RxTransformErrorCallAdapterFactory.createWithScheduler(Schedulers.io()))
             .validateEagerly(false)

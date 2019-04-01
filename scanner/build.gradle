@@ -3,23 +3,20 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion appCompileSdkVersion
-
+    compileSdkVersion 28
     defaultConfig {
         minSdkVersion appMinSdkVersion
         targetSdkVersion appTargetSdkVersion
         versionCode appVersionCode
         versionName appVersionName
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
-
+    buildToolsVersion '28.0.2'
 }
 allprojects {
     repositories {
@@ -30,8 +27,7 @@ allprojects {
     }
 }
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     api 'com.google.zxing:core:3.3.3'
     //compileOnly 一些常用库
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
@@ -41,16 +37,13 @@ dependencies {
     compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     compileOnly 'org.jetbrains.anko:anko-sdk15:0.9.1'
     compileOnly 'org.jetbrains.anko:anko-common:0.9.1'
-
     // rxjava/rxandroid/rxbus
     compileOnly "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjavaVersion"
     compileOnly "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
     compileOnly "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
     // eventbus
     compileOnly "org.greenrobot:eventbus:$rootProject.ext.eventBusVersion"
-
     //版本1.1.0是在AndroidX下编写的
     compileOnly 'com.uber.autodispose:autodispose:0.6.1'
     compileOnly 'com.uber.autodispose:autodispose-android-archcomponents:0.6.1'
-
 }

@@ -5,12 +5,12 @@ import java.lang.reflect.Type;
 
 import io.reactivex.Observable;
 
+import io.reactivex.Scheduler;
 import io.reactivex.functions.Function;
 import retrofit2.Call;
 import retrofit2.CallAdapter;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import rx.Scheduler;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 
 /**
@@ -19,13 +19,13 @@ import rx.Scheduler;
  */
 //无需修改  observable捕获异常 交给onError
 public final class RxTransformErrorCallAdapterFactory extends CallAdapter.Factory{
-    private final RxJavaCallAdapterFactory original;
+    private final RxJava2CallAdapterFactory original;
     private RxTransformErrorCallAdapterFactory() {
-        original = RxJavaCallAdapterFactory.create();
+        original = RxJava2CallAdapterFactory.create();
     }
 
     private RxTransformErrorCallAdapterFactory(Scheduler scheduler) {
-        original = RxJavaCallAdapterFactory.createWithScheduler(scheduler);
+        original = RxJava2CallAdapterFactory.createWithScheduler(scheduler);
     }
 
     static CallAdapter.Factory create() {

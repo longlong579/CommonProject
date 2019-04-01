@@ -1,11 +1,8 @@
 package com.tongji.braindata.data
 
 
-import com.tongji.braindata.data.entity.BaseBean
+
 import okhttp3.RequestBody
-import retrofit2.http.GET
-import retrofit2.http.Query
-import io.reactivex.Observable
 import self.xhl.com.net.app.BaseApp
 
 import self.xhl.com.net.netutil.SignHelper

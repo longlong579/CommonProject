@@ -131,7 +131,7 @@ dependencies {
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
     // Optional, if you use support library fragments:
     debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3'
-    implementation project(':common_net_rx1')
+    implementation project(':commonnet')
     implementation project(':common')
     implementation project(':scanner')
     implementation project(':gdlocation')
