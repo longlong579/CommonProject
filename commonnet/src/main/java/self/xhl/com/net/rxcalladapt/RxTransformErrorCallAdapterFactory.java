@@ -14,7 +14,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 
 /**
- * @author bingo
+ * @author xhl
  * @version 1.0.0
  */
 //无需修改  observable捕获异常 交给onError
