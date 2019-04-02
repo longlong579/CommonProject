@@ -13,7 +13,6 @@ import com.blankj.utilcode.util.ToastUtils
 //import com.xhl.gdlocation.IGdLocationListener
 import com.xhl.statusbarcompatutil.StatusBarCompat
 import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.fragment_login_inform_audit.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -23,8 +22,12 @@ import self.xhl.com.common.baseui.baseFragment.ToolbarFragment
 import self.xhl.com.commonproject.kotlinextension.singleToast
 import com.mob.wrappers.ShareSDKWrapper.share
 import cn.sharesdk.onekeyshare.OnekeyShare
-
-
+import com.mob.tools.gui.BitmapProcessor.stop
+import com.tongji.braindata.data.DataManager
+import com.tongji.braindata.data.entity.BaseBean
+import io.reactivex.android.schedulers.AndroidSchedulers
+import self.xhl.com.rx.subscriber.RxCompatException
+import self.xhl.com.rx.subscriber.RxCompatOnCompletedSubscriber
 
 
 /**
@@ -77,6 +80,21 @@ class LoginFragment : ToolbarFragment() {
 //        }
         var path1 = "http://ww1.sinaimg.cn/large/85cccab3gw1etdkmwyrtsg20dw07hx33.jpg"
         var path2 = "http://img.52z.com/upload/news/20130624/201306241320518553.jpg"
+        DataManager.getAboutUs()
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnTerminate{
+                    stop()
+                }
+                .subscribe(object : RxCompatOnCompletedSubscriber<BaseBean<String?>>(){
+                    override fun onNextCompat(data: BaseBean<String?>?) {
+                        var x=0
+                    }
+
+                    override fun onErrorCompat(e: RxCompatException?) {
+                        var x=0
+                    }
+                })
+
 //        btnBack2Login.setOnClickListener {
 //            //            //singleToast("wsce")
 ////            //imageLoad(context!!, path1, imageView, RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE))

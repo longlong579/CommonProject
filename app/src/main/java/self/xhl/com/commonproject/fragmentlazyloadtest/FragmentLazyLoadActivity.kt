@@ -53,18 +53,19 @@ class FragmentLazyLoadActivity : PermissionBaseActivity() {
             //第一步：先将Fragment add到FragmentTransaction
             if (f1 == null) {
                 f1 = LazyLoadFragment.newInstance("第1111111个", "")
-                mTra.add(R.id.fragmentContent, f1, F1Tag)
+                mTra.add(R.id.fragmentContent, f1!!, F1Tag)
                 fragmentList.add(f1 ?: return)//多线程可能把f1置空 但空时,提前退出，不加入list
             }
 
             if (f2 == null) {
                 f2 = LazyLoadFragment.newInstance("第22222个", "")
-                mTra.add(R.id.fragmentContent, f2, F2Tag)
+                mTra.add(R.id.fragmentContent, f2!!, F2Tag)
+
                 fragmentList.add(f2 ?: return)
             }
             if (f3 == null) {
                 f3 = LazyLoadFragment.newInstance("第333333个", "")
-                mTra.add(R.id.fragmentContent, f3, F3Tag)
+                mTra.add(R.id.fragmentContent, f3!!, F3Tag)
                 fragmentList.add(f3 ?: return)
             }
             mTra.commitNowAllowingStateLoss()//先提交一次 将Fragment都Add

@@ -2,6 +2,7 @@ package self.xhl.com.commonproject.app
 
 import android.content.IntentFilter
 import android.net.ConnectivityManager
+import android.support.multidex.MultiDex
 import com.mob.MobSDK
 import com.orhanobut.logger.*
 import com.squareup.leakcanary.LeakCanary
@@ -27,7 +28,7 @@ class App : BaseApp() {
             return
         }
         LeakCanary.install(this)
-
+        MultiDex.install(this)
         //Logger
         val formatStrategy = PrettyFormatStrategy.newBuilder()
                 .showThreadInfo(false)  // (Optional) Whether to show thread info or not. Default true

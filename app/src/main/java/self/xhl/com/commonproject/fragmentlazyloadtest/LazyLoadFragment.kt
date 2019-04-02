@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.blankj.utilcode.util.ToastUtils
 import com.orhanobut.logger.Logger
-import kotlinx.android.synthetic.main.fragment_blank.*
 import self.xhl.com.commonproject.R
 import self.xhl.com.commonproject.kotlinextension.singleToast
 import self.xhl.com.common.baseui.baseFragment.BaseFragment
@@ -59,7 +58,7 @@ class LazyLoadFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        textF.text = mParam1
+//        textF.text = mParam1
     }
 
 
@@ -140,13 +139,7 @@ class LazyLoadFragment : Fragment() {
         singleToast("第一次加载数据：" + mParam1)
     }
 
-    open fun firstDelayInit() {
 
-    }
-
-    fun fragmentShow() {
-        Logger.d(this.javaClass.name + mParam1 + "  :显示加载")
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -182,11 +175,12 @@ class LazyLoadFragment : Fragment() {
             return
         }
         if (isFirstVisible && isVisibleToUser) {
-            onFragmentFirstVisible()
+            firstDelayInit()
             isFirstVisible = false
         }
         if (isVisibleToUser) {
             onFragmentVisibleChange(true)
+            fragmentShow()
             isFragmentVisibleInVP = true
             return
         }
@@ -229,20 +223,28 @@ class LazyLoadFragment : Fragment() {
         Logger.d(this.javaClass.name + mParam1 + "：状态：" + isVisible)
     }
 
-    /**
-     * 在fragment首次可见时回调，可在这里进行加载数据，保证只在第一次打开Fragment时才会加载数据，
+
+
+
+    protected fun isFragmentVisibleInVP(): Boolean {
+
+        return isFragmentVisibleInVP
+    }
+
+    /** 初始化延时加载 add模式下只加载一次
+     * 在ViewPager模式下 fragment首次可见时回调，可在这里进行加载数据，保证只在第一次打开Fragment时才会加载数据，
      * 这样就可以防止每次进入都重复加载数据
      * 该方法会在 onFragmentVisibleChange() 之前调用，所以第一次打开时，可以用一个全局变量表示数据下载状态，
      * 然后在该方法内将状态设置为下载状态，接着去执行下载的任务
      * 最后在 onFragmentVisibleChange() 里根据数据下载状态来控制下载进度ui控件的显示与隐藏
      */
-    protected fun onFragmentFirstVisible() {
-        Logger.d(this.javaClass.name + mParam1 + "：第一次显示")
+    open fun firstDelayInit() {
+
     }
 
-    protected fun isFragmentVisibleInVP(): Boolean {
-
-        return isFragmentVisibleInVP
+    //每次显示加载
+    open fun fragmentShow() {
+        Logger.d(this.javaClass.name + mParam1 + "  :显示加载")
     }
 
 }

@@ -43,10 +43,10 @@ class Main3Activity : AppCompatActivity() {
             adapterPart= AdapterPart(R.layout.item_part,list)
             addOnScrollListener(object :RecyclerView.OnScrollListener()
             {
-                override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
-                    val view=recyclerView?.getChildAt(0)
-                    val position=  recyclerView?.getChildAdapterPosition(view)
+                    val view=recyclerView.getChildAt(0)
+                    val position=  recyclerView.getChildAdapterPosition(view)
 
                     if(view?.top==0)
                     {
@@ -56,7 +56,7 @@ class Main3Activity : AppCompatActivity() {
                 }
 
 
-                override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
                 }
             })
