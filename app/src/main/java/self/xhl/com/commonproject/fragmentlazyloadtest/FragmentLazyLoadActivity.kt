@@ -138,6 +138,8 @@ class FragmentLazyLoadActivity : PermissionBaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        gdLocationClient.onDestroy()
+        if(gdLocationClient!=null) {
+            gdLocationClient.onDestroy()
+        }
     }
 }

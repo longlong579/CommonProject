@@ -11,7 +11,7 @@ import com.blankj.utilcode.util.ToastUtils
 import com.orhanobut.logger.Logger
 import self.xhl.com.commonproject.R
 import self.xhl.com.commonproject.kotlinextension.singleToast
-import self.xhl.com.common.baseui.baseFragment.BaseFragment
+import self.xhl.com.common.baseuiFragmention.baseFragment.BaseFragment
 
 
 class LazyLoadFragment : Fragment() {

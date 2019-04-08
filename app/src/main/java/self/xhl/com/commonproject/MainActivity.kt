@@ -1,7 +1,7 @@
 package self.xhl.com.commonproject
 
 import com.xhl.statusbarcompatutil.StatusBarCompat
-import self.xhl.com.common.baseui.baseActivity.PermissionBaseActivity
+import self.xhl.com.common.baseuiFragmention.baseActivity.PermissionBaseActivity
 import self.xhl.com.common.utils.PermissionUtil
 
 

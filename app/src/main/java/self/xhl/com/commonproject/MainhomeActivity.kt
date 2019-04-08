@@ -17,6 +17,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import self.xhl.com.commonproject.adapter.MainActivityAdapter
+import self.xhl.com.commonproject.fragmentlazyloadtest.FragmentLazyLoadActivity
 
 
 class MainhomeActivity : AppCompatActivity() {
@@ -49,7 +50,7 @@ class MainhomeActivity : AppCompatActivity() {
     {
         dataList.add(ItemBean(R.drawable.circle_dynamic_generation_code,"二维码", ZingScannerActivity::class.java))
         dataList.add(ItemBean(R.drawable.circle_gps_icon,"高德定位",GdLocationActivity::class.java))
-        dataList.add(ItemBean(R.drawable.ic_pic_placehold_default,"自定义View",SlefViewTestActivity::class.java))
+        dataList.add(ItemBean(R.drawable.circle_captcha,"Fragment懒加载", FragmentLazyLoadActivity::class.java))
         dataList.add(ItemBean(R.drawable.ic_pic_placehold_default,"自定义View",SlefViewTestActivity::class.java))
         dataList.add(ItemBean(R.drawable.ic_pic_placehold_default,"自定义View",SlefViewTestActivity::class.java))
         dataList.add(ItemBean(R.drawable.ic_pic_placehold_default,"自定义View",SlefViewTestActivity::class.java))

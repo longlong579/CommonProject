@@ -1,4 +1,4 @@
-package self.xhl.com.common.baseui.mvp.presenter;
+package self.xhl.com.common.baseuiFragmention.mvp.presenter;
 
 import android.support.annotation.StringRes;
 
@@ -19,7 +19,7 @@ public interface BaseContract {
         // 公共的：显示进度条 以下的实现是为了在Present中调用
         void showLoading();
 
-        void showDialogLoading(String msg, Boolean cancelAble);
+        void showDialogLoading(String msg,Boolean cancelAble);
 
         void hideLoading();
 
@@ -36,7 +36,7 @@ public interface BaseContract {
 
         void stop();
 
-        void startWithDialogLoading(String msg, Boolean cancelAble);//->对应view的showDialogLoading()
+        void startWithDialogLoading(String msg,Boolean cancelAble);//->对应view的showDialogLoading()
 
         void stopDialogLoading();
 

@@ -1,4 +1,4 @@
-package self.xhl.com.common.baseui.baseFragment
+package self.xhl.com.common.baseuiFragmention.baseActivity
 
 import android.support.annotation.ColorRes
 import android.support.annotation.DrawableRes
@@ -12,13 +12,12 @@ import self.xhl.com.common.R
 
 /**
  * @author xhl
- * @desc   fragment的toolBar 不去替换Acticity的ActionBar 所以设置menu不能用系统的OnCreateMenue（）方法
- * 默认不开启ToolBar  不带按返回键处理 交由外界处理
- * 2018/7/24 16:50
+ * @desc
+ * 2018/7/27 17:21
  */
-public abstract class ToolbarFragment : BaseFragment() {
-    private var mToolbar: Toolbar? = null//供外界定制 若要更改toolBar hasToolBar=false 实现自己的initToolBar 或用封装的好的几个方法（常用场景）
-    private var hasBar: Boolean = true
+public abstract class ToolbarActivity : BaseActivity() {
+    private var mToolbar: Toolbar? = null
+    private var hasBar: Boolean = false
     private var showCenterTitle=true
     private var toolbarNmae="ToolBar"
     private var enableBack=true
@@ -26,29 +25,23 @@ public abstract class ToolbarFragment : BaseFragment() {
     @MenuRes
     private var  munuId=0
     @ColorRes
-    private var titleColorRes=0
+    private var titleColorRes=-1
 
-    /**
-     * 初始化控件调用之前
-     */
-    open fun initToolBarPre() {
-
+     override fun initWidget() {
+        super.initWidget()
+        initToolbar(window.decorView.findViewById(android.R.id.content))
     }
 
-    fun getToorBar(): Toolbar? {
-        return mToolbar
-    }
-
-    fun build(): ToolbarFragment
+    fun build():ToolbarActivity
     {
         return this
     }
 
-    //toolBar返回按钮  可以复写满足自己的需求 默认交给MainActivity处理
+    //toolBar返回按钮  可以复写满足自己的需求
     open fun initToolbarNav(toolbar: Toolbar) {
         toolbar.setNavigationIcon(toolBarBackDrawableRes)
         toolbar.setNavigationOnClickListener {
-            _mActivity.onBackPressed()
+            onBackPressed()
         }
     }
 
@@ -56,12 +49,7 @@ public abstract class ToolbarFragment : BaseFragment() {
     open fun onMenuClick(menuId: Int) {
     }
 
-    override fun initToolBar(root: View) {
-        initToolBarPre()
-        initToolbarHere(root)
-    }
-
-    private fun initToolbarHere(root: View) {
+    private fun initToolbar(root: View) {
         val toolbar = root.findViewById<View>(R.id.toolbar)
         if (hasBar) {
             when (toolbar) {
@@ -71,24 +59,19 @@ public abstract class ToolbarFragment : BaseFragment() {
             this.mToolbar = toolbar
             val centerTitle = toolbar.findViewById<View>(R.id.toolbar_center_title) as TextView
             when {
-                showCenterTitle-> {
+                showCenterTitle -> {
                     toolbar.title = ""
                     centerTitle.text = toolbarNmae
                     centerTitle.visibility = View.VISIBLE
+                    //setToolBarTitleColor(titleColorRes)
                     if(titleColorRes!=-1)
-                        context?.let {
-                            centerTitle.setTextColor(ContextCompat.getColor(it,titleColorRes))
-                        }
-
+                        centerTitle.setTextColor(ContextCompat.getColor(this,titleColorRes))
                 }
                 else -> {
                     centerTitle.visibility = View.GONE
                     toolbar.title = toolbarNmae
                     if(titleColorRes!=-1)
-                        context?.let {
-                            toolbar.setTitleTextColor(ContextCompat.getColor(it,titleColorRes))
-                        }
-
+                        toolbar.setTitleTextColor(ContextCompat.getColor(this,titleColorRes))
                 }
             }
             if (enableBack) {
@@ -106,39 +89,47 @@ public abstract class ToolbarFragment : BaseFragment() {
     }
 
 
+     fun getToorBar(): Toolbar? {
+        return mToolbar
+    }
+
     //默认有toolBar
-    fun setHasToolBar(flaHasBar: Boolean) :ToolbarFragment{
+     fun setHasToolBar(flaHasBar: Boolean) :ToolbarActivity{
         hasBar=flaHasBar
         return this
     }
 
     //默认标题居中
-    fun setShowCenterTitle(showCenterTitle:Boolean): ToolbarFragment {
+    fun setShowCenterTitle(showCenterTitle:Boolean): ToolbarActivity {
         this.showCenterTitle=showCenterTitle
         return this
     }
 
     //默认toolBar名称
-    fun setToolBarTitle(toolbarName: String): ToolbarFragment {
+     fun setToolBarTitle(toolbarName: String): ToolbarActivity {
         this.toolbarNmae=toolbarName
         return this
     }
 
     //默认Title颜色
-    fun setToolBarTitleColorRes(@ColorRes toolBarTitleColor: Int): ToolbarFragment {
+    fun setToolBarTitleColorRes(@ColorRes toolBarTitleColor: Int): ToolbarActivity {
         this.titleColorRes=toolBarTitleColor
+        if(mToolbar!=null)
+        {
+
+        }
         return this
     }
 
     //默认可以返回
-    fun setEnableBack(isEnableBack:Boolean): ToolbarFragment {
+     fun setEnableBack(isEnableBack:Boolean): ToolbarActivity {
         enableBack=isEnableBack
         return this
     }
 
 
     //默认用系统颜色 状态栏背景色
-    fun setToolbarBackGround(@DrawableRes resId: Int = 0):ToolbarFragment {
+     fun setToolbarBackGround(@DrawableRes resId: Int = 0):ToolbarActivity {
         if (resId != 0)
             mToolbar?.setBackgroundResource(resId)
         return this
@@ -146,7 +137,7 @@ public abstract class ToolbarFragment : BaseFragment() {
 
 
     //默认的返回图标
-    fun setToolbarBackDrawable(@DrawableRes toolbarBackDrawableRes: Int): ToolbarFragment {
+     fun setToolbarBackDrawable(@DrawableRes toolbarBackDrawableRes: Int): ToolbarActivity {
         this.toolBarBackDrawableRes=toolbarBackDrawableRes
         return this
     }
@@ -154,12 +145,11 @@ public abstract class ToolbarFragment : BaseFragment() {
 
 
     // munuId>0有menue
-    fun setMenuId(@LayoutRes menuId: Int): ToolbarFragment //返回menuId 默认无menue
+    fun setMenuId(@LayoutRes menuId: Int): ToolbarActivity //返回menuId 默认无menue
     {
         this.munuId=menuId
         return this
     }
-
 
 
     private fun initToolbarMenue(toolbar: Toolbar) {

@@ -6,14 +6,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
-import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.xhl.gdlocation.GDLocationClient;
 import com.xhl.gdlocation.GdLocationResult;
 import com.xhl.gdlocation.IGdLocationListener;
 import com.xhl.statusbarcompatutil.StatusBarCompat;
 
-import self.xhl.com.common.baseui.baseActivity.PermissionBaseActivity;
+import self.xhl.com.common.baseuiFragmention.baseActivity.PermissionBaseActivity;
 
 /**
  *  * 高德定位 注意：在主项目AndroidMainifest中添加： 服务 和 key:（去申请）

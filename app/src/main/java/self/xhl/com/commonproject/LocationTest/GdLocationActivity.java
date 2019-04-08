@@ -12,7 +12,7 @@ import com.xhl.gdlocation.IGdLocationListener;
 import self.xhl.com.commonproject.R;
 
 public class GdLocationActivity extends AppCompatActivity {
-
+    GDLocationClient gdLocationClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +20,7 @@ public class GdLocationActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        GDLocationClient gdLocationClient = GDLocationClient.newBuilder(GdLocationActivity.this).onceLocation(false).build();
+        gdLocationClient = GDLocationClient.newBuilder(GdLocationActivity.this).onceLocation(false).build();
 
         gdLocationClient.locate(new IGdLocationListener() {
             @Override
@@ -34,5 +34,15 @@ public class GdLocationActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(gdLocationClient!=null)
+        {
+            gdLocationClient.onDestroy();
+            gdLocationClient=null;
+        }
     }
 }

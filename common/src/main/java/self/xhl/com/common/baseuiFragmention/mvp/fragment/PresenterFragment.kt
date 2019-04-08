@@ -1,4 +1,4 @@
-package self.xhl.com.common.baseui.mvp.fragment
+package self.xhl.com.common.baseuiFragmention.mvp.fragment
 
 import android.content.Context
 import android.widget.TextView

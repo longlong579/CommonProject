@@ -1,7 +1,6 @@
-package self.xhl.com.common.baseui.baseActivity
+package self.xhl.com.common.baseuiFragmention.baseActivity
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.AppCompatDelegate
 import android.view.Window
 import me.yokeyword.fragmentation.SupportActivity
@@ -14,7 +13,7 @@ import self.xhl.com.common.widget.emptyview.PlaceHolderView
  * 2018/7/27 16:13
  * 沉浸式状态栏 配置在 shouldDisableLightStatusBarMode
  */
-public abstract class BaseActivity: AppCompatActivity()
+public abstract class BaseActivity:SupportActivity()
 {
     protected var mPlaceHolderView: PlaceHolderView?=null
 
