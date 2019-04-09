@@ -1,5 +1,6 @@
-#Widget下自定义控件用法
-##1. SlidingLayout果冻弹跳布局
+# widget下自定义控件用法
+## 1. SlidingLayout果冻弹跳布局
+
 SlidingLayout(extends FrameLayout) 其实就是一个自定义的布局
 
 XML样式参数：
