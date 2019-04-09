@@ -143,10 +143,10 @@ public class BindViewHolder extends RecyclerView.ViewHolder  {
 
 
     /**
-     * Will set the image of an ImageView from a drawable.
+     * Will set the image of an ImageView from a drawable-hdpi.
      *
      * @param viewId   The view id.
-     * @param drawable The image drawable.
+     * @param drawable The image drawable-hdpi.
      * @return The BindViewHolder for chaining.
      */
     public BindViewHolder setImageDrawable(@IdRes int viewId, Drawable drawable) {

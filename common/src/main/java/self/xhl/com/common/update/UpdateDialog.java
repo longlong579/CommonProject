@@ -145,13 +145,13 @@ public class UpdateDialog {
         // 点击通知栏后打开的activity
         NotificationCompat.Builder builder = new NotificationCompat.Builder(mActivity);
         notif = builder.setSmallIcon(mIconRes)
-                // .setLargeIcon(BitmapFactory.decodeResource(mActivity.getResources(), R.drawable.ic_launcher))
+                // .setLargeIcon(BitmapFactory.decodeResource(mActivity.getResources(), R.drawable-hdpi.ic_launcher))
                 .setTicker("下载通知")
                 .setContent(new RemoteViews(mActivity.getPackageName(), R.layout.notif_update_content_layout))
                 .setContentIntent(getPendingIntent()).build();
         manager = (NotificationManager) mActivity.getSystemService(Context.NOTIFICATION_SERVICE);
 //        notif = new Notification();
-//        notif.icon = R.drawable.ic_launcher;
+//        notif.icon = R.drawable-hdpi.ic_launcher;
 //        notif.tickerText = "下载通知";
 //        // 通知栏显示所用到的布局文件
 //        notif.contentView = new RemoteViews(mActivity.getPackageName(), R.layout.notif_content_layout);

@@ -56,7 +56,7 @@ public class BottomBar extends LinearLayout {
         setOrientation(VERTICAL);
 
 //        ImageView shadowView = new ImageView(context);
-//        shadowView.setBackgroundResource(R.drawable.actionbar_shadow_up);
+//        shadowView.setBackgroundResource(R.drawable-hdpi.actionbar_shadow_up);
 //        addView(shadowView, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         mTabLayout = new LinearLayout(context);

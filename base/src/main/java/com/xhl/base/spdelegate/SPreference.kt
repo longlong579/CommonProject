@@ -7,6 +7,7 @@ import kotlin.reflect.KProperty
 
 /**
 * @作者 xhl
+ * Kotlin版
 * @desc SharedPreferences委托类 公用defaultName:文件名默认，可以在项目中用一个类管理所有文件名，以便清理
 * @创建时间 2018/7/11 13:10
 */

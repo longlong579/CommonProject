@@ -1,1 +1,1 @@
-include ':app', ':scanner',':gdlocation', ':base', ':common', ":commonnet"
+include ':app', ':scanner',':gdlocation', ':base', ':common', ':SelfWidget', ":commonnet"

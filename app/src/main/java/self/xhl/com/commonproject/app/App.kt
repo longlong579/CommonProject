@@ -3,7 +3,6 @@ package self.xhl.com.commonproject.app
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.support.multidex.MultiDex
-import com.mob.MobSDK
 import com.orhanobut.logger.*
 import com.squareup.leakcanary.LeakCanary
 import retrofit2.Retrofit
@@ -23,7 +22,7 @@ import self.xhl.com.net.netParams.NetworkIniter
 class App : BaseApp() {
     override fun onCreate() {
         super.onCreate()
-        MobSDK.init(this)
+//        MobSDK.init(this)
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return
         }

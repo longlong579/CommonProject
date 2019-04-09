@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Common</string>
+
+    <string name="prompt_empty">数据为空</string>
+    <string name="prompt_error">数据获取失败!</string>
+    <string name="prompt_loading">正在加载数据..</string>
+    <string name="press_again_exit">再按一次退出</string>
+    <string name="alphabet_and_number">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</string>
+    <string name="alphabet_and_number_and_dot">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.</string>
+</resources>

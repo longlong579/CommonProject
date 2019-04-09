@@ -1,4 +1,4 @@
-package self.xhl.com.commonproject.utils;
+package com.xhl.base.Utils;
 
 import android.content.res.Resources;
 import android.support.design.widget.TabLayout;
@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import java.lang.reflect.Field;
 
 /**
- * Created by Administrator on 2018\9\9 0009.
+ * Created by xhl on 2018\9\9 0009.
  * 设置TabLayout指示器的宽度
  */
 

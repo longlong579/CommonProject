@@ -13,6 +13,9 @@ ext {
     supportVersion = '28.0.0'            //V7包版本
     constrlayoutVersion='1.1.0'          //Constralayout版本
 
+    //AndroidUtilCode
+    utilcodeVersion='1.23.7'
+
     //Retrofit  RxJava
     retrofitVersion = '2.5.0'
     retrofit2RxjavaAdapterVersion = '2.5.0'

@@ -107,7 +107,7 @@ public class GDLocationClient {
 
         @GdLocationMode.LocationMode
         private int mode;//扫描模式 默认高精度
-        private boolean onceLocation;//默认 定位一次
+        private boolean onceLocation=true;//默认 定位一次
         private boolean onceLocationLatest; //默认获取连续几次中定位精度最高的那次
         //        private long interval;
         private boolean needAddress; //默认 需要详细地址

@@ -25,22 +25,22 @@ public class Main2Activity extends AppCompatActivity {
 
     }
 
-//    private void fu(LifecycleOwner owner) {
-//        Observable.just(1)
-//                .flatMap(new Function<Integer, ObservableSource<String>>() {
-//                    @Override
-//                    public ObservableSource<String> apply(Integer integer) throws Exception {
-//                        return Observable.just("");
-//                    }
-//                })
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .as(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(owner)))
-//                .subscribe(new Consumer<String>() {
-//                    @Override
-//                    public void accept(String integer) throws Exception {
-//
-//                    }
-//                });
-//    }
+    private void fu(LifecycleOwner owner) {
+        Observable.just(1)
+                .flatMap(new Function<Integer, ObservableSource<String>>() {
+                    @Override
+                    public ObservableSource<String> apply(Integer integer) throws Exception {
+                        return Observable.just("");
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .as(AutoDispose.autoDisposable(AndroidLifecycleScopeProvider.from(owner)))
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String integer) throws Exception {
+
+                    }
+                });
+    }
 }

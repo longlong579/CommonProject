@@ -24,13 +24,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme"
         tools:replace="android:name">
-        <activity android:name=".fragmentlazyloadtest.ViewPageActivity"></activity>
+        <activity android:name=".SlefViewTestActivity">
+        </activity>
+        <activity android:name=".MainhomeActivity"
+            android:label="CommonActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".fragmentlazyloadtest.ViewPageActivity" />
         <activity
             android:name=".LocationTest.GdLocationActivity"
             android:label="@string/title_activity_gd_location"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Main4Activity"
+            android:name=".GdLocationActivity"
             android:label="@string/title_activity_main4"
             android:theme="@style/AppTheme.NoActionBar">
 
@@ -43,12 +54,12 @@
             <!-- </intent-filter> -->
         </activity>
         <activity android:name=".fragmentlazyloadtest.FragmentLazyLoadActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.VIEW" />-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity android:name=".MainActivity" />
 
