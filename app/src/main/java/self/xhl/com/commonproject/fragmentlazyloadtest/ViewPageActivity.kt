@@ -29,7 +29,7 @@ class ViewPageActivity : AppCompatActivity() {
         titles.add("1")
         titles.add("2")
         adapter = ViewPageAdapter(supportFragmentManager, listFraget, titles)
-        viewPage.offscreenPageLimit=2//设置Fragment只初始化一次
+        viewPage.offscreenPageLimit=1//设置Fragment只初始化一次
         viewPage.adapter=adapter
         closeAndroidPDialog()
     }

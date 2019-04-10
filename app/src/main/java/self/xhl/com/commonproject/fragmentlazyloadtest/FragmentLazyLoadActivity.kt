@@ -33,7 +33,7 @@ class FragmentLazyLoadActivity : PermissionBaseActivity() {
     override fun getContentLayoutId(): Int {
      return  R.layout.activity_main2
     }
-   lateinit var gdLocationClient:GDLocationClient
+
     //此模式适合activity+Fragment
     //hide 和 show才能触发onHidden add不能触发
     //所以要想做延迟加载 在onHidden里面处理的话 需要初始化的时候就把所有的fragment都add
@@ -138,8 +138,5 @@ class FragmentLazyLoadActivity : PermissionBaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if(gdLocationClient!=null) {
-            gdLocationClient.onDestroy()
-        }
     }
 }

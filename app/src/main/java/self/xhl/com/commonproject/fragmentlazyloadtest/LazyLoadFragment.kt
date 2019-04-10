@@ -32,26 +32,26 @@ class LazyLoadFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.apply {
-            mParam1 = getString(ARG_PARAM1)
-            mParam2 = getString(ARG_PARAM2)
+            mParam1 = "   "+getString(ARG_PARAM1)
+            mParam2 = "   "+getString(ARG_PARAM2)
         }
         // initVariable()
-        Logger.d(this.javaClass.name + mParam1 + "：onCreate")
+        //Logger.d(mParam1 + "：onCreate")
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        Logger.d(mParam1 + "：onCreateView")
+        //Logger.d(mParam1 + "：onCreateView")
 
         if (!isReuseView || rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_blank, container, false)
         }
         if (isFragmentVisibleInVP && isFirstVisible)//ViewPagem模式下 只有当VIewPageAdapter 调用了setUserVisibleHint（）才有效
         {
+            firstDelayInit()
+            fragmentShow()
             isFirstVisible = false
-            Logger.d(mParam1 + "：懒加载加载")
-            ToastUtils.showLong("加载懒加载")
         }
         return rootView
     }
@@ -76,14 +76,14 @@ class LazyLoadFragment : Fragment() {
         } else {
             //throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
         }
-        Logger.d(this.javaClass.name + "：onAttach")
+        //Logger.d( mParam1+"：onAttach")
 
     }
 
     override fun onDetach() {
         super.onDetach()
         mListener = null
-        Logger.d(this.javaClass.name + mParam1 + "：onDetach")
+        //Logger.d( mParam1 + "：onDetach")
 
     }
 
@@ -108,32 +108,33 @@ class LazyLoadFragment : Fragment() {
         }
     }
 
+    //只有在add模式下有用
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
         fragmentHidden = hidden
         if (!hidden) {
             delayInit()
-            fragmentShow()//delayInit 和fragment不要同时用
+            fragmentShow()
         }
-        Logger.d(this.javaClass.name + mParam1 + "  :" + hidden)
+        //Logger.d(mParam1 + "  :addHidden" + hidden)
     }
 
     override fun onResume() {
         super.onResume()
-        Logger.d(this.javaClass.name + mParam1 + "  :onResume")
-        if (!fragmentHidden && !shouldLazyLoad)//add模式下页面每次显示加载
+        //Logger.d( mParam1 + "  :onResume")
+        if (!fragmentHidden && !shouldLazyLoad || isFragmentVisibleInVP)//add模式下页面每次显示加载
         {
             fragmentShow()
         }
     }
 
 
+    //add模式下延时加载
     private fun delayInit() {
 
         if (!shouldLazyLoad) {
             return
         }
-        Logger.d(this.javaClass.name + mParam1 + "  :开始加载")
         shouldLazyLoad = false
         firstDelayInit()
         singleToast("第一次加载数据：" + mParam1)
@@ -143,13 +144,13 @@ class LazyLoadFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        Logger.d(this.javaClass.name + mParam1 + "：onDestroyView")
+        initVariable()
+        //Logger.d( mParam1 + "：onDestroyView")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        initVariable()
-        Logger.d(this.javaClass.name + mParam1 + "：OnDestroy")
+        //Logger.d(mParam1 + "：OnDestroy")
     }
 
 
@@ -168,7 +169,11 @@ class LazyLoadFragment : Fragment() {
     //如果我们需要在 Fragment 可见与不可见时干点事，用这个的话就会有多余的回调了，那么就需要重新封装一个
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        Logger.d(this.javaClass.name + "：setUserVisibleHint")
+        Logger.d(mParam1+ "：setUserVisibleHint"+" "+isVisibleToUser)
+        if (isFragmentVisibleInVP) {
+            isFragmentVisibleInVP = false
+            onFragmentVisibleChange(false)
+        }
         isFragmentVisibleInVP = isVisibleToUser//可见性
         //setUserVisibleHint()有可能在fragment的生命周期外被调用
         if (rootView == null) {
@@ -184,10 +189,7 @@ class LazyLoadFragment : Fragment() {
             isFragmentVisibleInVP = true
             return
         }
-        if (isFragmentVisibleInVP) {
-            isFragmentVisibleInVP = false
-            onFragmentVisibleChange(false)
-        }
+
     }
 
 
@@ -220,7 +222,7 @@ class LazyLoadFragment : Fragment() {
      * false 可见  -> 不可见
      */
     protected fun onFragmentVisibleChange(isVisible: Boolean) {
-        Logger.d(this.javaClass.name + mParam1 + "：状态：" + isVisible)
+       // Logger.d( mParam1 + "：状态 " + isVisible)
     }
 
 
@@ -239,12 +241,14 @@ class LazyLoadFragment : Fragment() {
      * 最后在 onFragmentVisibleChange() 里根据数据下载状态来控制下载进度ui控件的显示与隐藏
      */
     open fun firstDelayInit() {
-
+        Logger.d( mParam1 + "  :懒加载加载")
+        singleToast(" 懒加载加载：" + mParam1)
     }
 
-    //每次显示加载
+    //每次显示加载 第一次加载时会显示2次 以后正常
     open fun fragmentShow() {
-        Logger.d(this.javaClass.name + mParam1 + "  :显示加载")
+        Logger.d(mParam1 + "  :每次显示加载")
+        singleToast("每次显示加载：" + mParam1)
     }
 
 }
