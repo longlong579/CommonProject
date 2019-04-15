@@ -3,21 +3,22 @@ package self.xhl.com.common.baseui.baseFragment
 import android.content.Context
 import android.os.Bundle
 import android.support.annotation.LayoutRes
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import me.yokeyword.fragmentation.SupportFragment
+import self.xhl.com.common.baseuiFragmention.baseFragment.BaseFragment
 import self.xhl.com.common.widget.emptyview.PlaceHolderView
 
-/**
- * @author xhl
- * @desc
- * 2018/7/24 09:13
- */
-public abstract class BaseFragment : SupportFragment() {
-    protected var mRoot: View? = null
+
+abstract class BaseFragment : Fragment() {
+
     protected var mPlaceHolderView: PlaceHolderView? = null//空布局
-    protected var mIsFirstInitData = true   // 标示是否第一次初始化数据
+
+    //注意：shouldLazyLoad/fragmentHidden 不要在异常时存储与处理 每次后台内存异常时，让其默认初始化
+    //Activity add模式下
+    private var shouldLazyLoad = true//是否需要去延时加载
+    private var fragmentHidden: Boolean = true//add模式下Fragment的显影
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -25,59 +26,132 @@ public abstract class BaseFragment : SupportFragment() {
         initArgs(arguments)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        if (mRoot == null) {
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+
+        if (!isReuseView || rootView == null) {
             val layId = getContentLayoutId()
             // 初始化当前的跟布局，但是不在创建时就添加到container里边
-            val root = inflater.inflate(layId, container, false)
-            mRoot = root
-//               initWidget(root)
-        } else {
-            if (mRoot!!.parent != null) {
-                // 把当前Root从其父控件中移除
-                (mRoot!!.parent as ViewGroup).removeView(mRoot)
-            }
+            rootView = inflater.inflate(layId, container, false)
         }
-        return mRoot
+        if (isFragmentVisibleInVP && isFirstVisible)//ViewPagem模式下 只有当VIewPageAdapter 调用了setUserVisibleHint（）才有效
+        {
+            onFirstInit()
+            fragmentShow()
+            isFirstVisible = false
+        }
+        return rootView
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        if (mIsFirstInitData) {
-            // 触发一次以后就不会触发
-            mIsFirstInitData = false
-            // 触发
-            //firstInit()
-        } else {
-            onSecondInit()//暂时未用到
+
+//    companion object {
+//
+//        private val ARG_PARAM1 = "param1"
+//        private val ARG_PARAM2 = "param2"
+//
+//        fun newInstance(param1: String?, param2: String?): BaseFragment {
+//            val fragment = BaseFragment()
+//            val args = Bundle()
+//            args.putString(ARG_PARAM1, param1)
+//            args.putString(ARG_PARAM2, param2)
+//            fragment.arguments = args
+//            return fragment
+//        }
+//    }
+
+    //只有在add模式下有用
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        fragmentHidden = hidden
+        if (!hidden) {
+            delayInit()
+            fragmentShow()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!fragmentHidden && !shouldLazyLoad || isFragmentVisibleInVP)//add模式下页面每次显示加载
+        {
+            fragmentShow()
         }
     }
 
 
-    //初始化相关参数
-    abstract fun initArgs(bundle: Bundle?)
+    //add模式下延时加载
+    private fun delayInit() {
 
-    //得到当前界面的资源文件Id @return 资源文件Id
-    @LayoutRes
-    protected abstract fun getContentLayoutId(): Int
+        if (!shouldLazyLoad) {
+            return
+        }
+        shouldLazyLoad = false
+        onFirstInit()
+    }
 
 
-    //初始化ToolBar
-    abstract fun initToolBar(root: View)
 
-    //初始化控件
-    abstract fun initWidget(root: View)
+    override fun onDestroyView() {
+        super.onDestroyView()
+        if(!isReuseView)
+        {
+            initVariable()
+        }
+    }
 
-    //延迟加载
-    abstract fun onFirstInit()
+    override fun onDestroy() {
+        super.onDestroy()
+        initVariable()
+    }
 
-    open fun onSecondInit() {
+
+    //-------------------------------------FragmentViewPage中懒加载----------------------------------------------
+    //ViewPage模式下
+    private val TAG = BaseFragment::class.java.simpleName
+    private var isFragmentVisibleInVP: Boolean = false//是否可见(在ViewPage中)
+    private var isReuseView: Boolean = true//是否View复用 默认复用
+    private var isFirstVisible: Boolean = true//是否第一次可见
+    private var rootView: View? = null
+
+    //setUserVisibleHint()在Fragment创建时会先被调用一次，传入isVisibleToUser = false
+    //如果当前Fragment可见，那么setUserVisibleHint()会再次被调用一次，传入isVisibleToUser = true
+    //如果Fragment从可见->不可见，那么setUserVisibleHint()也会被调用，传入isVisibleToUser = false
+    //总结：setUserVisibleHint()除了Fragment的可见状态发生变化时会被回调外，在new Fragment()时也会被回调
+    //如果我们需要在 Fragment 可见与不可见时干点事，用这个的话就会有多余的回调了，那么就需要重新封装一个
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isFragmentVisibleInVP) {
+            isFragmentVisibleInVP = false
+            onFragmentVisibleChange(false)
+        }
+        isFragmentVisibleInVP = isVisibleToUser//可见性
+        //setUserVisibleHint()有可能在fragment的生命周期外被调用
+        if (rootView == null) {
+            return
+        }
+        if (isFirstVisible && isVisibleToUser) {
+            onFirstInit()
+            isFirstVisible = false
+        }
+        if (isVisibleToUser) {
+            onFragmentVisibleChange(true)
+            fragmentShow()
+            isFragmentVisibleInVP = true
+            return
+        }
 
     }
 
-    //初始化数据
-    abstract fun initData()
 
+    private fun initVariable() {
+        isFirstVisible = true//第一次可见
+        isFragmentVisibleInVP = false//Fragment可见标志
+        rootView = null
+        isReuseView = true
+    }
+
+
+    //-------------------------------对外开放-----------------------------------
     /**
      * 设置占位布局
      *
@@ -87,43 +161,57 @@ public abstract class BaseFragment : SupportFragment() {
         this.mPlaceHolderView = placeHolderView
     }
 
-    //延迟加载
-    private fun firstInit() {
-        mRoot?.let {
-            initToolBar(it)
-            initWidget(it)//初始化toolbar等
-            onFirstInit()//初始化控件  其实都可以在onFirstInit或initWidget()中延时加载 分开是为了代码清晰些
-            initData()// 当View创建完成后初始化数据
-        }
 
+
+    /**
+     * 设置是否使用 view 的复用，默认开启
+     * view 的复用是指，ViewPager 在销毁和重建 Fragment 时会不断调用 onCreateView() -> onDestroyView()
+     * 之间的生命函数，这样可能会出现重复创建 view 的情况，导致界面上显示多个相同的 Fragment
+     * view 的复用其实就是指保存第一次创建的 view，后面再 onCreateView() 时直接返回第一次创建的 view
+     *
+     * @param isReuse
+     */
+    protected fun reuseView(isReuse: Boolean) {
+        isReuseView = isReuse
     }
 
-    /*
-    该函数系统不会自动调用（即单纯的Fragment显示 隐藏不能用该方法） 而在ViewPage PagerFragmentAdapter中会被自动调用
-    *  判断界面切换显示时加载，但界面由隐藏—》显示时不会调用， 一般在if (isAdded && isVisibleToUser){
-           refresh()
-       }中刷新界面
-    */
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
+    /**
+     * 去除setUserVisibleHint()多余的回调场景，保证只有当fragment可见状态发生变化时才回调
+     * 回调时机在view创建完后，所以支持ui操作，解决在setUserVisibleHint()里进行ui操作有可能报null异常的问题
+     *
+     * 可在该回调方法里进行一些ui显示与隐藏，比如加载框的显示和隐藏
+     *
+     * @param isVisible true  不可见 -> 可见
+     * false 可见  -> 不可见
+     */
+    protected fun onFragmentVisibleChange(isVisible: Boolean) {
+       // Logger.d( mParam1 + "：状态 " + isVisible)
     }
 
-
-    /*------------------------------------以下不常用---------------------------------*/
-
-    /*
-    * 若需求是每次显示都要刷新，比如界面不可见-》可见就要刷新用这个 注意第一次显示时在onLazyInitView之前
-    */
-    override fun onSupportVisible() {
-        super.onSupportVisible()
+    protected fun isFragmentVisibleInVP(): Boolean {
+        return isFragmentVisibleInVP
     }
 
-    /*
-    * 延迟加载 界面创建并显示后加载 不建议用此函数
-    * 如果要用这个来延迟加载 则offscreenPageLimit=fragment个数，否则onDestroyView之后 View会重新创建而其不执行
-    */
-    override fun onLazyInitView(savedInstanceState: Bundle?) {
-        super.onLazyInitView(savedInstanceState)
-        firstInit()
+    //得到当前界面的资源文件Id @return 资源文件Id
+    @LayoutRes
+    protected abstract fun getContentLayoutId(): Int
+
+    //初始化相关参数
+    abstract fun initArgs(bundle: Bundle?)
+
+
+    /** 初始化延时加载 add模式下只加载一次
+     * 在ViewPager模式下 fragment首次可见时回调，可在这里进行加载数据，保证只在第一次打开Fragment时才会加载数据，
+     * 这样就可以防止每次进入都重复加载数据
+     * 该方法会在 onFragmentVisibleChange() 之前调用，所以第一次打开时，可以用一个全局变量表示数据下载状态，
+     * 然后在该方法内将状态设置为下载状态，接着去执行下载的任务
+     * 最后在 onFragmentVisibleChange() 里根据数据下载状态来控制下载进度ui控件的显示与隐藏
+     */
+    open fun onFirstInit() {
     }
+
+    //每次显示加载 第一次加载时会显示2次 以后正常
+    open fun fragmentShow() {
+    }
+
 }

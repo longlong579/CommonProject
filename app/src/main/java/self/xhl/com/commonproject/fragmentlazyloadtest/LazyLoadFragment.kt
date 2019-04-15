@@ -144,12 +144,16 @@ class LazyLoadFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        initVariable()
+        if(!isReuseView)
+        {
+            initVariable()
+        }
         //Logger.d( mParam1 + "：onDestroyView")
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        initVariable()
         //Logger.d(mParam1 + "：OnDestroy")
     }
 

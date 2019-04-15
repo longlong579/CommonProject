@@ -1,5 +1,6 @@
 package self.xhl.com.common.baseui.baseFragment
 
+import android.os.Bundle
 import android.support.annotation.ColorRes
 import android.support.annotation.DrawableRes
 import android.support.annotation.LayoutRes
@@ -48,7 +49,7 @@ public abstract class ToolbarFragment : BaseFragment() {
     open fun initToolbarNav(toolbar: Toolbar) {
         toolbar.setNavigationIcon(toolBarBackDrawableRes)
         toolbar.setNavigationOnClickListener {
-            _mActivity.onBackPressed()
+           activity?.onBackPressed()
         }
     }
 
@@ -56,7 +57,12 @@ public abstract class ToolbarFragment : BaseFragment() {
     open fun onMenuClick(menuId: Int) {
     }
 
-    override fun initToolBar(root: View) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initToolBar(view)
+    }
+
+    open fun initToolBar(root: View) {
         initToolBarPre()
         initToolbarHere(root)
     }

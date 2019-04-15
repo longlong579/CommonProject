@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.annotation.DrawableRes
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import com.blankj.utilcode.util.SizeUtils
 import com.blankj.utilcode.util.ToastUtils
@@ -16,11 +15,13 @@ import kotlinx.android.synthetic.main.activity_mainhome.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import self.xhl.com.common.baseui.baseActivity.BaseActivity
+import self.xhl.com.commonproject.H5.EasyWebActivity
 import self.xhl.com.commonproject.adapter.MainActivityAdapter
 import self.xhl.com.commonproject.fragmentlazyloadtest.FragmentLazyLoadActivity
 
 
-class MainhomeActivity : AppCompatActivity() {
+class MainhomeActivity : BaseActivity() {
 
     data class ItemBean(@DrawableRes var  imageId: Int, var title:String, var activityClass: Class<*>)
     var dataList= mutableListOf<ItemBean>()
@@ -32,9 +33,13 @@ class MainhomeActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun getContentLayoutId(): Int {
+       return R.layout.activity_mainhome
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_mainhome)
         EventBus.getDefault().register(this)
         initToolBar()
         initdata()
@@ -43,7 +48,8 @@ class MainhomeActivity : AppCompatActivity() {
 
     private fun initToolBar()
     {
-        StatusBarCompat.translucentStatusBar(this,true)
+        StatusBarCompat.setStatusBarColor(this,Color.GREEN)
+        //StatusBarCompat.translucentStatusBar(this,true)
         StatusBarCompat.setStatusBarDarkFont(this,true)
     }
     fun initdata()
@@ -51,8 +57,8 @@ class MainhomeActivity : AppCompatActivity() {
         dataList.add(ItemBean(R.drawable.circle_dynamic_generation_code,"二维码", ZingScannerActivity::class.java))
         dataList.add(ItemBean(R.drawable.circle_gps_icon,"高德定位",GdLocationActivity::class.java))
         dataList.add(ItemBean(R.drawable.circle_captcha,"Fragment懒加载", FragmentLazyLoadActivity::class.java))
-        dataList.add(ItemBean(R.drawable.ic_pic_placehold_default,"自定义View",SlefViewTestActivity::class.java))
-        dataList.add(ItemBean(R.drawable.ic_pic_placehold_default,"自定义View",SlefViewTestActivity::class.java))
+        dataList.add(ItemBean(R.drawable.circle_clound,"EasyWebActivity",EasyWebActivity::class.java))
+        dataList.add(ItemBean(R.drawable.ic_pic_placehold_default,"EasyWebActivity",EasyWebActivity::class.java))
         dataList.add(ItemBean(R.drawable.ic_pic_placehold_default,"自定义View",SlefViewTestActivity::class.java))
         dataList.add(ItemBean(R.drawable.ic_pic_placehold_default,"自定义View",SlefViewTestActivity::class.java))
         dataList.add(ItemBean(R.drawable.ic_pic_placehold_default,"自定义View",SlefViewTestActivity::class.java))

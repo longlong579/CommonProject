@@ -25,14 +25,22 @@ public class GdLocationActivity extends PermissionBaseActivity {
 
     @Override
     protected int getContentLayoutId() {
-        return R.layout.activity_main4;
+        return R.layout.activity_location;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void initToolBarPre() {
+        super.initToolBarPre();
+        build().setHasToolBar(true).setToolBarTitle("高德定位测试");
+    }
+
+    @Override
+    public void initWidget() {
+        super.initWidget();
+        StatusBarCompat.setOffsetPaddingView(this, getToorBar());//不要放在initToolBarPre里初始化
         StatusBarCompat.translucentStatusBar(this,true);
         StatusBarCompat.setStatusBarDarkFont(this,true);
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,29 +50,40 @@ public class GdLocationActivity extends PermissionBaseActivity {
             }
         });
 
-        checkForcePermissions(new OnPermissionResultListener() {
-                                  @Override
-                                  public void onAllow() {
-                                      GDLocationClient.newBuilder(GdLocationActivity.this).build()
-                                              .locate(new IGdLocationListener() {
-                                                  @Override
-                                                  public void gdLocationReceive(GdLocationResult gdLocationInfo) {
-                                                      ToastUtils.showLong("定位成功"+gdLocationInfo.getPoiName());
-                                                  }
+        findViewById(R.id.textLoaction).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkForcePermissions(new OnPermissionResultListener() {
+                                          @Override
+                                          public void onAllow() {
+                                              GDLocationClient.newBuilder(GdLocationActivity.this).build()
+                                                      .locate(new IGdLocationListener() {
+                                                          @Override
+                                                          public void gdLocationReceive(GdLocationResult gdLocationInfo) {
+                                                              ToastUtils.showLong("定位成功"+gdLocationInfo.getPoiName());
+                                                          }
 
-                                                  @Override
-                                                  public void onFail(int errCode, String errInfo) {
+                                                          @Override
+                                                          public void onFail(int errCode, String errInfo) {
 
-                                                  }
-                                              });
-                                  }
+                                                          }
+                                                      });
+                                          }
 
-                                  @Override
-                                  public void onReject() {
+                                          @Override
+                                          public void onReject() {
 
-                                  }
-                              }
-                , Manifest.permission.ACCESS_FINE_LOCATION);
+                                          }
+                                      }
+                        , Manifest.permission.ACCESS_FINE_LOCATION);
+            }
+        });
+
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
 }

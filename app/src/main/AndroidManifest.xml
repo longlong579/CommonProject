@@ -62,6 +62,7 @@
             <!--</intent-filter>-->
         </activity>
         <activity android:name=".MainActivity" />
+        <activity android:name=".H5.EasyWebActivity"/>
 
         <service android:name="com.amap.api.location.APSService" />
 

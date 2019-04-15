@@ -107,4 +107,20 @@
         <attr name="addTail" format="boolean"/>
     </declare-styleable>
     <declare-styleable name="FlowLayout"><attr format="dimension" name="fl_horizontalChildGap"/><attr format="dimension" name="fl_verticalChildGap"/><attr format="boolean" name="fl_isDistributionWhiteSpacing"/></declare-styleable>
+
+    <style name="toolBar">
+        <item name="colorControlNormal">#ffffff</item>
+        <item name="android:homeAsUpIndicator">@drawable/cha</item>
+        <item name="android:titleTextStyle">@style/titlestyle</item>
+    </style>
+ <style name="common_toolBar_style">
+        <item name="colorControlNormal">#ffffff</item>
+        <item name="android:homeAsUpIndicator">@drawable/abc_ic_ab_back_material</item>
+        <item name="android:titleTextStyle">@style/titlestyle</item>
+    </style>
+
+    <style name="titlestyle">
+
+        <item name="android:textSize">12sp</item>
+    </style>
 </resources>

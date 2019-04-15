@@ -41,5 +41,6 @@ dependencies {
 
     //gson
     compileOnly "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
+
     implementation project(':base')
 }
