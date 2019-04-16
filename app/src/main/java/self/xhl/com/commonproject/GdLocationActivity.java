@@ -12,7 +12,8 @@ import com.xhl.gdlocation.GdLocationResult;
 import com.xhl.gdlocation.IGdLocationListener;
 import com.xhl.statusbarcompatutil.StatusBarCompat;
 
-import self.xhl.com.common.baseuiFragmention.baseActivity.PermissionBaseActivity;
+import self.xhl.com.common.baseui.baseactivity.PermissionBaseActivity;
+
 
 /**
  *  * 高德定位 注意：在主项目AndroidMainifest中添加： 服务 和 key:（去申请）
@@ -30,7 +31,6 @@ public class GdLocationActivity extends PermissionBaseActivity {
 
     @Override
     public void initToolBarPre() {
-        super.initToolBarPre();
         build().setHasToolBar(true).setToolBarTitle("高德定位测试");
     }
 

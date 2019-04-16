@@ -15,13 +15,14 @@ import kotlinx.android.synthetic.main.activity_mainhome.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import self.xhl.com.common.baseui.baseActivity.BaseActivity
+import self.xhl.com.common.baseui.baseactivity.ToolbarActivity
 import self.xhl.com.commonproject.H5.EasyWebActivity
+import self.xhl.com.commonproject.H5.WebTestActivity
 import self.xhl.com.commonproject.adapter.MainActivityAdapter
 import self.xhl.com.commonproject.fragmentlazyloadtest.FragmentLazyLoadActivity
 
 
-class MainhomeActivity : BaseActivity() {
+class MainhomeActivity : ToolbarActivity() {
 
     data class ItemBean(@DrawableRes var  imageId: Int, var title:String, var activityClass: Class<*>)
     var dataList= mutableListOf<ItemBean>()
@@ -34,40 +35,26 @@ class MainhomeActivity : BaseActivity() {
         }
     }
 
-    override fun getContentLayoutId(): Int {
-       return R.layout.activity_mainhome
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         EventBus.getDefault().register(this)
-        initToolBar()
-        initdata()
-        initView()
+    }
+    override fun getContentLayoutId(): Int {
+        return R.layout.activity_mainhome
     }
 
-    private fun initToolBar()
-    {
-        StatusBarCompat.setStatusBarColor(this,Color.GREEN)
-        //StatusBarCompat.translucentStatusBar(this,true)
+    override fun initToolBarPre() {
+        ToolBarBuild(this).setShowCenterTitle(false).setToolBarTitle("自己的封装框架")
+                .setToolbarBackGround(Color.argb(127, 255, 0, 255))
+    }
+
+    override fun initWidget() {
+        super.initWidget()
+        StatusBarCompat.setOffsetPaddingView(this,getToorBar())
+        StatusBarCompat.translucentStatusBar(this,true)
         StatusBarCompat.setStatusBarDarkFont(this,true)
-    }
-    fun initdata()
-    {
-        dataList.add(ItemBean(R.drawable.circle_dynamic_generation_code,"二维码", ZingScannerActivity::class.java))
-        dataList.add(ItemBean(R.drawable.circle_gps_icon,"高德定位",GdLocationActivity::class.java))
-        dataList.add(ItemBean(R.drawable.circle_captcha,"Fragment懒加载", FragmentLazyLoadActivity::class.java))
-        dataList.add(ItemBean(R.drawable.circle_clound,"EasyWebActivity",EasyWebActivity::class.java))
-        dataList.add(ItemBean(R.drawable.ic_pic_placehold_default,"EasyWebActivity",EasyWebActivity::class.java))
-        dataList.add(ItemBean(R.drawable.ic_pic_placehold_default,"自定义View",SlefViewTestActivity::class.java))
-        dataList.add(ItemBean(R.drawable.ic_pic_placehold_default,"自定义View",SlefViewTestActivity::class.java))
-        dataList.add(ItemBean(R.drawable.ic_pic_placehold_default,"自定义View",SlefViewTestActivity::class.java))
-        dataList.add(ItemBean(R.drawable.ic_pic_placehold_default,"自定义View",SlefViewTestActivity::class.java))
-        dataList.add(ItemBean(R.drawable.ic_pic_placehold_default,"自定义View",SlefViewTestActivity::class.java))
-    }
 
-    fun initView()
-    {
         recyclerView.apply {
             layoutManager=GridLayoutManager(context,3)
             addItemDecoration(object :UniversalItemDecoration()
@@ -87,6 +74,21 @@ class MainhomeActivity : BaseActivity() {
             adapter=mAdapter
         }
     }
+
+    override fun initData() {
+        dataList.add(ItemBean(R.drawable.circle_dynamic_generation_code,"二维码", ZingScannerActivity::class.java))
+        dataList.add(ItemBean(R.drawable.circle_gps_icon,"高德定位",GdLocationActivity::class.java))
+        dataList.add(ItemBean(R.drawable.circle_captcha,"Fragment懒加载", FragmentLazyLoadActivity::class.java))
+        dataList.add(ItemBean(R.drawable.circle_clound,"WebActivity",WebTestActivity::class.java))
+        dataList.add(ItemBean(R.drawable.ic_pic_placehold_default,"EasyWebActivity",EasyWebActivity::class.java))
+        dataList.add(ItemBean(R.drawable.ic_pic_placehold_default,"自定义View",SlefViewTestActivity::class.java))
+        dataList.add(ItemBean(R.drawable.ic_pic_placehold_default,"自定义View",SlefViewTestActivity::class.java))
+        dataList.add(ItemBean(R.drawable.ic_pic_placehold_default,"自定义View",SlefViewTestActivity::class.java))
+        dataList.add(ItemBean(R.drawable.ic_pic_placehold_default,"自定义View",SlefViewTestActivity::class.java))
+        dataList.add(ItemBean(R.drawable.ic_pic_placehold_default,"自定义View",SlefViewTestActivity::class.java))
+    }
+
+
 
 
     @Subscribe(threadMode = ThreadMode.MAIN) //在ui线程执行

@@ -87,7 +87,8 @@ public abstract class PermissionBaseActivity extends ToolbarActivity {
      */
     private String strBtnCancel = "取消";
     private String strMsg;
-    private void showTipDialog(String permission, final OnPermissionResultListener onPermissionResultListener) {
+    //外部可复写
+    protected void showTipDialog(String permission, final OnPermissionResultListener onPermissionResultListener) {
         if (!flagIsForcePermission) {
             strBtnCancel = "确定";
             strMsg="相应功能需要本权限,您确定不授权?";

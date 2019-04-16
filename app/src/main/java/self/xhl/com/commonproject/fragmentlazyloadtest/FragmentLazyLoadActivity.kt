@@ -6,9 +6,8 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
-import com.xhl.gdlocation.GDLocationClient
 import kotlinx.android.synthetic.main.activity_main2.*
-import self.xhl.com.common.baseui.baseActivity.PermissionBaseActivity
+import self.xhl.com.common.baseui.baseactivity.PermissionBaseActivity
 import self.xhl.com.commonproject.MainActivity
 import self.xhl.com.commonproject.R
 
@@ -34,6 +33,12 @@ class FragmentLazyLoadActivity : PermissionBaseActivity() {
      return  R.layout.activity_main2
     }
 
+    override fun initToolBarPre() {
+
+    }
+    override fun initData() {
+
+    }
     //此模式适合activity+Fragment
     //hide 和 show才能触发onHidden add不能触发
     //所以要想做延迟加载 在onHidden里面处理的话 需要初始化的时候就把所有的fragment都add

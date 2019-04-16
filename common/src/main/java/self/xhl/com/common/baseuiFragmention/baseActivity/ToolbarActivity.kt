@@ -50,7 +50,7 @@ public abstract class ToolbarActivity : BaseActivity() {
     }
 
     private fun initToolbar(root: View) {
-        val toolbar = root.findViewById<View>(R.id.toolbar)
+        val toolbar = root.findViewById<View>(R.id.commonToolbar)
         if (hasBar) {
             when (toolbar) {
                 null -> throw RuntimeException("该布局不包含toolBar,请添加toolBar或复写hasToolBar")

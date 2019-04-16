@@ -1,4 +1,4 @@
-package self.xhl.com.common.baseui.baseActivity;
+package self.xhl.com.common.baseui.baseactivity;
 
 /**
  * @author xhl
@@ -10,12 +10,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.util.SparseArray;
 
-import self.xhl.com.common.baseuiFragmention.baseActivity.ToolbarActivity;
 import self.xhl.com.common.utils.PermissionUtil;
 
 public abstract class PermissionBaseActivity extends ToolbarActivity {

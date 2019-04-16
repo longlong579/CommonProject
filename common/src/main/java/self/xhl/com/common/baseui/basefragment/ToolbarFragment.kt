@@ -1,4 +1,4 @@
-package self.xhl.com.common.baseui.baseFragment
+package self.xhl.com.common.baseui.basefragment
 
 import android.os.Bundle
 import android.support.annotation.ColorRes

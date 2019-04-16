@@ -24,9 +24,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme"
         tools:replace="android:name">
-        <activity android:name=".SlefViewTestActivity">
-        </activity>
-        <activity android:name=".MainhomeActivity"
+        <activity android:name=".H5.WebTestActivity"></activity>
+        <activity android:name=".SlefViewTestActivity"></activity>
+        <activity
+            android:name=".MainhomeActivity"
             android:label="CommonActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -54,15 +55,18 @@
             <!-- </intent-filter> -->
         </activity>
         <activity android:name=".fragmentlazyloadtest.FragmentLazyLoadActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.VIEW" />-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.VIEW" /> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".H5.EasyWebActivity"/>
+        <activity android:name=".H5.EasyWebActivity" />
+        <activity android:name=".H5.CommonActivity" />
 
         <service android:name="com.amap.api.location.APSService" />
 

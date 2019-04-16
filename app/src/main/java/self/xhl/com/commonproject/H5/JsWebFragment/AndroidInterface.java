@@ -12,6 +12,7 @@ import com.just.agentweb.AgentWeb;
 /**
  * Created by cenxiaozhong on 2017/5/14.
  *  source code  https://github.com/Justson/AgentWeb
+ *  js调android端接口
  */
 
 public class AndroidInterface {

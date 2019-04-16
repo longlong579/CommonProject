@@ -1,10 +1,9 @@
-package self.xhl.com.common.baseui.baseActivity
+package self.xhl.com.common.baseui.baseactivity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.AppCompatDelegate
 import android.view.Window
-import me.yokeyword.fragmentation.SupportActivity
 import self.xhl.com.common.widget.emptyview.PlaceHolderView
 
 
@@ -30,9 +29,6 @@ public abstract class BaseActivity: AppCompatActivity()
             if (layId != KEY_NOT_USE) {
                 setContentView(layId)
             }
-
-            initBefore()
-            initToolBarPre()
             initWidget()
             initData()
         } else {
@@ -64,30 +60,14 @@ public abstract class BaseActivity: AppCompatActivity()
     protected abstract fun getContentLayoutId(): Int
 
     /**
-     * 初始化控件调用之前
-     */
-    open fun initBefore() {
-
-    }
-    /**
-     * 初始化控件调用之前
-     */
-    open fun initToolBarPre() {
-
-    }
-    /**
      * 初始化控件
      */
-    open fun initWidget() {
-
-    }
+    protected abstract fun initWidget()
 
     /**
      * 初始化数据
      */
-    open fun initData() {
-
-    }
+    protected abstract fun initData()
 
 
     /**
