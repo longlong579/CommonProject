@@ -147,7 +147,7 @@ dependencies {
     api 'com.just.agentweb:agentweb:4.0.2'
     api 'com.just.agentweb:filechooser:4.0.2'// (可选)
     api 'com.just.agentweb:download:4.0.2' // (可选)
-    api files('libs/alipaysdk-20170922.jar')//AgentWeb调用支付宝支付
+    //compileOnly files('libs/alipaysdk-20170922.jar')//AgentWeb调用支付宝支付
     //api 'com.github.Justson:Downloader:v4.0.3'// (可选)
 
     api 'com.lcodecorex:tkrefreshlayout:1.0.7'

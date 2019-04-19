@@ -1,9 +1,9 @@
-package self.xhl.com.common.baseui.baseactivity
+package self.xhl.com.common.baseuifragmention.baseactivity
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.AppCompatDelegate
 import android.view.Window
+import me.yokeyword.fragmentation.SupportActivity
 import self.xhl.com.common.widget.emptyview.PlaceHolderView
 
 
@@ -13,7 +13,7 @@ import self.xhl.com.common.widget.emptyview.PlaceHolderView
  * 2018/7/27 16:13
  * 沉浸式状态栏 配置在 shouldDisableLightStatusBarMode
  */
-public abstract class BaseActivity: AppCompatActivity()
+public abstract class BaseActivity:SupportActivity()
 {
     protected var mPlaceHolderView: PlaceHolderView?=null
 
@@ -29,9 +29,11 @@ public abstract class BaseActivity: AppCompatActivity()
             if (layId != KEY_NOT_USE) {
                 setContentView(layId)
             }
+
+            initBefore()
+            initToolBarPre()
             initWidget()
             initData()
-            closeAndroidPDialog()
         } else {
             finish()
         }
@@ -61,14 +63,30 @@ public abstract class BaseActivity: AppCompatActivity()
     protected abstract fun getContentLayoutId(): Int
 
     /**
+     * 初始化控件调用之前
+     */
+    open fun initBefore() {
+
+    }
+    /**
+     * 初始化控件调用之前
+     */
+    open fun initToolBarPre() {
+
+    }
+    /**
      * 初始化控件
      */
-    protected abstract fun initWidget()
+    open fun initWidget() {
+
+    }
 
     /**
      * 初始化数据
      */
-    protected abstract fun initData()
+    open fun initData() {
+
+    }
 
 
     /**
@@ -83,32 +101,5 @@ public abstract class BaseActivity: AppCompatActivity()
 
     companion object {
          val KEY_NOT_USE = -1
-    }
-
-    /**
-     * 解决AndroidP 打包勾选Debug时 弹出“Detectedproblems with API compatibility”问题
-     * 原因：Debug调用了隐藏的API
-     */
-    private fun closeAndroidPDialog() {
-        try {
-            val aClass = Class.forName("android.content.pm.PackageParser\$Package")
-            val declaredConstructor = aClass.getDeclaredConstructor(String::class.java)
-            declaredConstructor.isAccessible = true
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-        try {
-            val cls = Class.forName("android.app.ActivityThread")
-            val declaredMethod = cls.getDeclaredMethod("currentActivityThread")
-            declaredMethod.isAccessible = true
-            val activityThread = declaredMethod.invoke(null)
-            val mHiddenApiWarningShown = cls.getDeclaredField("mHiddenApiWarningShown")
-            mHiddenApiWarningShown.isAccessible = true
-            mHiddenApiWarningShown.setBoolean(activityThread, true)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
     }
 }

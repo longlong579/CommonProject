@@ -7,7 +7,7 @@ import com.orhanobut.logger.*
 import com.squareup.leakcanary.LeakCanary
 import retrofit2.Retrofit
 import self.xhl.com.commonproject.BuildConfig
-import self.xhl.com.commonproject.StartServiceReceiver
+import self.xhl.com.commonproject.Receiver.StartServiceReceiver
 import self.xhl.com.net.app.BaseApp
 import self.xhl.com.net.makeRetrofit
 import self.xhl.com.net.netParams.INetExternalParams

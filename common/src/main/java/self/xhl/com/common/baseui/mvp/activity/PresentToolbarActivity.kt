@@ -3,8 +3,8 @@ package self.xhl.com.common.baseui.mvp.activity
 import android.widget.TextView
 import android.widget.Toast
 import com.timmy.tdialog.TDialog
-import self.xhl.com.common.baseuiFragmention.baseActivity.PermissionBaseActivity
-import self.xhl.com.common.baseuiFragmention.mvp.presenter.BaseContract
+import self.xhl.com.common.baseuifragmention.baseactivity.PermissionBaseActivity
+import self.xhl.com.common.baseuifragmention.mvp.presenter.BaseContract
 import self.xhl.com.common.dialog.dialogfragment.LoadingDialog
 
 /**

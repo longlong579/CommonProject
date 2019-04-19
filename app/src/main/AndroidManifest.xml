@@ -24,8 +24,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme"
         tools:replace="android:name">
-        <activity android:name=".H5.WebTestActivity"></activity>
-        <activity android:name=".SlefViewTestActivity"></activity>
+        <activity android:name=".fragmentlazyload.LazyloadMainActivity"></activity>
+        <activity android:name=".H5.WebTestActivity" />
+        <activity android:name=".SlefViewTestActivity" />
         <activity
             android:name=".MainhomeActivity"
             android:label="CommonActivity">
@@ -36,13 +37,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".fragmentlazyloadtest.ViewPageActivity" />
+        <activity android:name=".fragmentlazyload.ViewPageModuleLazyLoadActivity" />
         <activity
-            android:name=".LocationTest.GdLocationActivity"
-            android:label="@string/title_activity_gd_location"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".GdLocationActivity"
+            android:name=".location_map.GdLocationActivity"
             android:label="@string/title_activity_main4"
             android:theme="@style/AppTheme.NoActionBar">
 
@@ -54,7 +51,7 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".fragmentlazyloadtest.FragmentLazyLoadActivity">
+        <activity android:name=".fragmentlazyload.AddModuleLazyLoadActivity">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.VIEW" /> -->
@@ -64,7 +61,7 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".fragmention_test.SupportLoginActivity" />
         <activity android:name=".H5.EasyWebActivity" />
         <activity android:name=".H5.CommonActivity" />
 

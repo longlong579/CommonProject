@@ -1,28 +1,25 @@
-package self.xhl.com.common.baseui.mvp.fragment
+package self.xhl.com.common.baseuifragmention.mvp.activity
 
-import android.content.Context
 import android.widget.TextView
 import android.widget.Toast
 import com.timmy.tdialog.TDialog
-import self.xhl.com.common.baseuifragmention.baseFragment.ToolbarFragment
+import self.xhl.com.common.baseuifragmention.baseactivity.PermissionBaseActivity
 import self.xhl.com.common.baseuifragmention.mvp.presenter.BaseContract
 import self.xhl.com.common.dialog.dialogfragment.LoadingDialog
 
 /**
  * @author xhl
- * @desc  基本的带网络请求的Fragment toolBar可有可无 默认无
- * 2018/7/25 17:02
+ * @desc
+ * 2018/7/27 17:27
  */
-public abstract class PresenterFragment<Presenter : BaseContract.Presenter> : ToolbarFragment(),BaseContract.View<Presenter>
-{
+
+ abstract class PresentToolbarActivity<Presenter : BaseContract.Presenter> : PermissionBaseActivity(), BaseContract.View<Presenter> {
     protected var mPresenter: Presenter? = null
     protected var mLoadingDialog: TDialog? = null
-    var tv_load_dialog: TextView?=null
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-
-        // 在界面onAttach之后就触发初始化Presenter
+    override fun initBefore() {
+        super.initBefore()
+        // 初始化Presenter
         initPresenter()
     }
 
@@ -38,7 +35,7 @@ public abstract class PresenterFragment<Presenter : BaseContract.Presenter> : To
         if (mPlaceHolderView != null) {
             mPlaceHolderView!!.triggerError(str)
         } else {
-            Toast.makeText(context, str, Toast.LENGTH_LONG).show()
+            Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -48,25 +45,22 @@ public abstract class PresenterFragment<Presenter : BaseContract.Presenter> : To
         if (mPlaceHolderView != null) {
             mPlaceHolderView!!.triggerError(str)
         } else {
-            Toast.makeText(context, str, Toast.LENGTH_LONG).show()
+            Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
         }
     }
 
 
-    override fun showLoading()
-    {
+    override fun showLoading() {
         if (mPlaceHolderView != null) {
             mPlaceHolderView!!.triggerLoading()
-        }
-        else
-            showDialogLoading(null,false)
+        } else
+            showDialogLoading(null,true)
     }
 
     override fun hideLoading() {
         if (mPlaceHolderView != null) {
             mPlaceHolderView!!.triggerOk()
-        }
-        else
+        } else
             hideDialogLoading()
     }
 
@@ -84,19 +78,19 @@ public abstract class PresenterFragment<Presenter : BaseContract.Presenter> : To
         }
     }
 
+    var tv_load_dialog:TextView?=null
     override fun showDialogLoading(msg: String?,cancelAble:Boolean?) {
-        var mdialog: TDialog? = mLoadingDialog
-        if (mdialog == null) {
-            mdialog = LoadingDialog.instance(_mActivity,msg)
-            mLoadingDialog = mdialog
+        var dialog: TDialog? = mLoadingDialog
+        if (dialog == null) {
+            dialog = LoadingDialog.instance(this, msg)
+            mLoadingDialog = dialog
             if(cancelAble!=null)
-                mLoadingDialog?.isCancelable=cancelAble
+                mLoadingDialog?.isCancelable = cancelAble
+            dialog.show()
         }
-        mdialog.show()
     }
 
-
-   override fun onDestroy() {
+    override fun onDestroy() {
         super.onDestroy()
         if (mPresenter != null)
             mPresenter!!.destroy()

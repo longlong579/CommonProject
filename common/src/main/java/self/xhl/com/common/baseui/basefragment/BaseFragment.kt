@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import self.xhl.com.common.baseuiFragmention.baseFragment.BaseFragment
+import self.xhl.com.common.baseuifragmention.baseFragment.BaseFragment
 import self.xhl.com.common.widget.emptyview.PlaceHolderView
 
 
@@ -35,15 +35,18 @@ abstract class BaseFragment : Fragment() {
             // 初始化当前的跟布局，但是不在创建时就添加到container里边
             rootView = inflater.inflate(layId, container, false)
         }
+        return rootView
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         if (isFragmentVisibleInVP && isFirstVisible)//ViewPagem模式下 只有当VIewPageAdapter 调用了setUserVisibleHint（）才有效
         {
             onFirstInit()
             fragmentShow()
             isFirstVisible = false
         }
-        return rootView
     }
-
 
 //    companion object {
 //

@@ -1,13 +1,11 @@
-package self.xhl.com.common.baseui.mvp.presenter;
-
-import self.xhl.com.common.baseuifragmention.mvp.presenter.BaseContract;
+package self.xhl.com.common.baseuifragmention.mvp.presenter;
 
 /**
  * @author bingo
  * @version 1.0.0
  */
 
-public class BasePresenter<T extends self.xhl.com.common.baseuifragmention.mvp.presenter.BaseContract.View> implements BaseContract.Presenter {
+public class BasePresenter<T extends BaseContract.View> implements BaseContract.Presenter {
     protected int currentPage;
     protected int totalPage;
 
